@@ -5,6 +5,10 @@
 #include <d3dx9.h>
 #include <iostream>
 
+#include "Entity.h"
+#include "Hero.h"
+#include "Enemy.h"
+#include "Bullet.h"
 // define the screen resolution and keyboard macros
 #define SCREEN_WIDTH  960
 #define SCREEN_HEIGHT 640
@@ -13,7 +17,6 @@
 
 #define ENEMY_NUM 10 
 
-//명현쓰
 // include the Direct3D Library file
 #pragma comment (lib, "d3d9.lib")
 #pragma comment (lib, "d3dx9.lib")
@@ -52,16 +55,7 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 enum { MOVE_UP, MOVE_DOWN, MOVE_LEFT, MOVE_RIGHT };
 
 
-//기본 클래스 
-class entity {
 
-public:
-	float x_pos;
-	float y_pos;
-	int status;
-	int HP;
-
-};
 
 
 bool sphere_collision_check(float x0, float y0, float size0, float x1, float y1, float size1)
@@ -73,162 +67,6 @@ bool sphere_collision_check(float x0, float y0, float size0, float x1, float y1,
 		return false;
 
 }
-
-
-
-//주인공 클래스 
-class Hero :public entity {
-
-public:
-	void fire();
-	void super_fire();
-	void move(int i);
-	void init(float x, float y);
-
-
-};
-
-void Hero::init(float x, float y)
-{
-
-	x_pos = x;
-	y_pos = y;
-
-}
-
-void Hero::move(int i)
-{
-	switch (i)
-	{
-	case MOVE_UP:
-		y_pos -= 3;
-		break;
-
-	case MOVE_DOWN:
-		y_pos += 3;
-		break;
-
-
-	case MOVE_LEFT:
-		x_pos -= 3;
-		break;
-
-
-	case MOVE_RIGHT:
-		x_pos += 3;
-		break;
-
-	}
-
-}
-
-
-
-
-// 적 클래스 
-class Enemy :public entity {
-
-public:
-	void fire();
-	void init(float x, float y);
-	void move();
-
-};
-
-void Enemy::init(float x, float y)
-{
-
-	x_pos = x;
-	y_pos = y;
-
-}
-
-
-void Enemy::move()
-{
-	y_pos += 2;
-
-}
-
-
-
-
-
-
-// 총알 클래스 
-class Bullet :public entity {
-
-public:
-	bool bShow;
-
-	void init(float x, float y);
-	void move();
-	bool show();
-	void hide();
-	void active();
-	bool check_collision(float x, float y);
-
-
-};
-
-
-bool Bullet::check_collision(float x, float y)
-{
-
-	//충돌 처리 시 
-	if (sphere_collision_check(x_pos, y_pos, 32, x, y, 32) == true)
-	{
-		bShow = false;
-		return true;
-
-	}
-	else {
-
-		return false;
-	}
-}
-
-
-
-
-void Bullet::init(float x, float y)
-{
-	x_pos = x;
-	y_pos = y;
-
-}
-
-
-
-bool Bullet::show()
-{
-	return bShow;
-
-}
-
-
-void Bullet::active()
-{
-	bShow = true;
-
-}
-
-
-
-void Bullet::move()
-{
-	y_pos -= 8;
-}
-
-void Bullet::hide()
-{
-	bShow = false;
-
-}
-
-
-
-
 
 
 //객체 생성 
@@ -443,16 +281,16 @@ void do_game_logic(void)
 {
 
 	//주인공 처리 
-	if (KEY_DOWN(VK_UP))
+	if (KEY_DOWN(0x57))
 		hero.move(MOVE_UP);
 
-	if (KEY_DOWN(VK_DOWN))
+	if (KEY_DOWN(0x53))
 		hero.move(MOVE_DOWN);
 
-	if (KEY_DOWN(VK_LEFT))
+	if (KEY_DOWN(0x41))
 		hero.move(MOVE_LEFT);
 
-	if (KEY_DOWN(VK_RIGHT))
+	if (KEY_DOWN(0x44))
 		hero.move(MOVE_RIGHT);
 
 
@@ -469,7 +307,7 @@ void do_game_logic(void)
 	//총알 처리 
 	if (bullet.show() == false)
 	{
-		if (KEY_DOWN(VK_SPACE))
+		if (KEY_DOWN(VK_LBUTTON))
 		{
 			bullet.active();
 			bullet.init(hero.x_pos, hero.y_pos);

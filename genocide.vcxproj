@@ -376,11 +376,18 @@
     <None Include="DXUT\Optional\directx.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Hero.cpp" />
     <ClCompile Include="Matrices49860489.cpp" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bullet.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Entity.h" />
+    <ClInclude Include="Hero.h" />
     <CLInclude Include="resource.h" />
     <ResourceCompile Include="Matrices49860489.rc" />
   </ItemGroup>
