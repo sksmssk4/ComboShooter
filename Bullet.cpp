@@ -8,7 +8,7 @@ bool Bullet::check_collision(float x, float y)
 	//충돌 처리 시 
 	if (sphere_collision_check(x_pos, y_pos, 32, x, y, 32) == true)
 	{
-		bShow = false;
+		bShow = true;
 		return true;
 
 	}
@@ -47,7 +47,7 @@ void Bullet::active()
 
 void Bullet::move()
 {
-	y_pos -= 20;
+	x_pos += 40;
 }
 
 void Bullet::hide()

@@ -1,11 +1,8 @@
-﻿  Bullet.cpp
-  Matrices49860489.cpp
+﻿  Matrices49860489.cpp
 c:\users\이명현\desktop\졸작파이팅!\genocide\matrices49860489.cpp(82): warning C4100: 'lpCmdLine': 참조되지 않은 정식 매개 변수입니다.
 c:\users\이명현\desktop\졸작파이팅!\genocide\matrices49860489.cpp(81): warning C4100: 'hPrevInstance': 참조되지 않은 정식 매개 변수입니다.
-c:\users\이명현\desktop\졸작파이팅!\genocide\matrices49860489.cpp(271): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\이명현\desktop\졸작파이팅!\genocide\matrices49860489.cpp(301): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\이명현\desktop\졸작파이팅!\genocide\matrices49860489.cpp(333): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  코드를 생성하고 있습니다...
-Bullet.obj : warning LNK4075: '/EDITANDCONTINUE'이(가) '/SAFESEH' 사양으로 인해 무시됩니다.
+c:\users\이명현\desktop\졸작파이팅!\genocide\matrices49860489.cpp(266): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\이명현\desktop\졸작파이팅!\genocide\matrices49860489.cpp(296): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\이명현\desktop\졸작파이팅!\genocide\matrices49860489.cpp(328): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   genocide.vcxproj -> C:\Users\이명현\Desktop\졸작파이팅!\Genocide\Debug\Matrices49860489.exe
   genocide.vcxproj -> C:\Users\이명현\Desktop\졸작파이팅!\Genocide\Debug\Matrices49860489.pdb (Full PDB)

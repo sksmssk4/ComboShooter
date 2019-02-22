@@ -13,6 +13,6 @@ void Enemy::init(float x, float y)
 
 void Enemy::move()
 {
-	y_pos += 2;
+	y_pos -= 4;
 
 }
