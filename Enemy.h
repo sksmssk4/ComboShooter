@@ -11,6 +11,10 @@ public:
 	void init(float x, float y);
 	void move();
 
+	void Update(float time);
+	void OnJumpkeyPressed();
+	void OnJumpKeyReleased();
+
 };
 
 #endif

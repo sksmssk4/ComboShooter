@@ -262,8 +262,9 @@ void init_game(void)
 	//적들 초기화 
 	for (int i = 0; i<ENEMY_NUM; i++)
 	{
-
-		enemy[i].init((float)(rand() % 300), rand() % 900);
+		enemy[i].Update(1.0f);
+		enemy[i].init((float)(rand() % 300), 600);
+		enemy[i].OnJumpkeyPressed();
 	}
 
 	//총알 초기화 
@@ -293,12 +294,12 @@ void do_game_logic(void)
 	for (int i = 0; i<ENEMY_NUM; i++)
 	{
 		if (enemy[i].y_pos < 0)
-			enemy[i].init((float)(rand() % 300), rand() % 900);
-		else
-			enemy[i].move();
+			enemy[i].init((float)(rand() % 300), 640);
+		/*else
+			enemy[i].move();*/
+			
 	}
-
-
+	
 	//총알 처리 
 	if (bullet.show() == false)
 	{
@@ -310,7 +311,6 @@ void do_game_logic(void)
 
 
 	}
-
 
 	if (bullet.show() == true)
 	{
@@ -325,7 +325,7 @@ void do_game_logic(void)
 		{
 			if (bullet.check_collision(enemy[i].x_pos, enemy[i].y_pos) == true)
 			{
-				enemy[i].init((float)(rand() % 300), rand() % 900);
+				enemy[i].init((float)(rand() % 300),640);
 
 			}
 		}
