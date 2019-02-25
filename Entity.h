@@ -12,6 +12,9 @@ public:
 	int status;
 	int HP;
 
+	float velocityX, velocityY;
+	float gravity = 0.5f;
+
 };
 
 #endif

@@ -12,8 +12,9 @@ public:
 	void move();
 
 	void Update(float time);
-	void OnJumpkeyPressed();
+	void OnJumpKeyPressed();
 	void OnJumpKeyReleased();
+
 
 };
 

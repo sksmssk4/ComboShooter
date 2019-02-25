@@ -75,7 +75,6 @@ Enemy enemy[ENEMY_NUM];
 Bullet bullet;
 
 
-
 // the entry point for any Windows program
 int WINAPI WinMain(HINSTANCE hInstance,
 	HINSTANCE hPrevInstance,
@@ -259,13 +258,13 @@ void init_game(void)
 	//객체 초기화 
 	hero.init(150, 300);
 
-	//적들 초기화 
-	for (int i = 0; i<ENEMY_NUM; i++)
-	{
-		enemy[i].Update(1.0f);
-		enemy[i].init((float)(rand() % 300), 600);
-		enemy[i].OnJumpkeyPressed();
-	}
+	//적들 초기화
+
+		for (int i = 0; i < ENEMY_NUM; i++)
+		{
+			enemy[i].init((float)(rand() % 500), 600);
+		}
+
 
 	//총알 초기화 
 	bullet.init(hero.x_pos, hero.y_pos);
@@ -280,6 +279,7 @@ void do_game_logic(void)
 	if (KEY_DOWN(0x57))
 		hero.move(MOVE_UP);
 
+
 	if (KEY_DOWN(0x53))
 		hero.move(MOVE_DOWN);
 
@@ -291,14 +291,21 @@ void do_game_logic(void)
 
 
 	//적들 처리 
-	for (int i = 0; i<ENEMY_NUM; i++)
+	for (int i = 0; i < ENEMY_NUM; i++)
 	{
-		if (enemy[i].y_pos < 0)
-			enemy[i].init((float)(rand() % 300), 640);
-		/*else
-			enemy[i].move();*/
-			
+		if (enemy[i].y_pos < 200)
+		{
+			enemy[i].init((float)(rand() % 500), 600);
+		}
+		else
+		{
+			enemy[i].Update(0.5);
+			enemy[i].OnJumpKeyReleased();
+			enemy[i].OnJumpKeyPressed();
+		}
 	}
+	
+
 	
 	//총알 처리 
 	if (bullet.show() == false)
@@ -325,12 +332,9 @@ void do_game_logic(void)
 		{
 			if (bullet.check_collision(enemy[i].x_pos, enemy[i].y_pos) == true)
 			{
-				enemy[i].init((float)(rand() % 300),640);
-
+				enemy[i].init((float)(rand() % 300),600);
 			}
 		}
-
-
 
 	}
 
