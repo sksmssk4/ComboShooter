@@ -7,13 +7,9 @@
 class Enemy :public Entity {
 
 public:
-	void fire();
 	void init(float x, float y);
-	void move();
-
 	void Update(float time);
-	void OnJumpKeyPressed();
-	void OnJumpKeyReleased();
+	void Jump();
 
 
 };

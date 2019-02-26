@@ -1,7 +1,5 @@
-﻿  Enemy.cpp
-  Main.cpp
-c:\users\이명현\desktop\졸작파이팅!\genocide\main.cpp(82): warning C4100: 'lpCmdLine': 참조되지 않은 정식 매개 변수입니다.
-c:\users\이명현\desktop\졸작파이팅!\genocide\main.cpp(81): warning C4100: 'hPrevInstance': 참조되지 않은 정식 매개 변수입니다.
-  코드를 생성하고 있습니다...
+﻿  Main.cpp
+c:\users\이명현\desktop\졸작파이팅!\genocide\main.cpp(80): warning C4100: 'lpCmdLine': 참조되지 않은 정식 매개 변수입니다.
+c:\users\이명현\desktop\졸작파이팅!\genocide\main.cpp(79): warning C4100: 'hPrevInstance': 참조되지 않은 정식 매개 변수입니다.
   genocide.vcxproj -> C:\Users\이명현\Desktop\졸작파이팅!\Genocide\Debug\Matrices49860489.exe
   genocide.vcxproj -> C:\Users\이명현\Desktop\졸작파이팅!\Genocide\Debug\Matrices49860489.pdb (Full PDB)

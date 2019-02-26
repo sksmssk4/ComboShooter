@@ -15,7 +15,6 @@
 #define KEY_DOWN(vk_code) ((GetAsyncKeyState(vk_code) & 0x8000) ? 1 : 0)
 #define KEY_UP(vk_code) ((GetAsyncKeyState(vk_code) & 0x8000) ? 0 : 1)
 
-#define ENEMY_NUM 10 
 
 // include the Direct3D Library file
 #pragma comment (lib, "d3d9.lib")
@@ -71,7 +70,7 @@ bool sphere_collision_check(float x0, float y0, float size0, float x1, float y1,
 
 //按眉 积己 
 Hero hero;
-Enemy enemy[ENEMY_NUM];
+Enemy enemy;
 Bullet bullet;
 
 
@@ -259,11 +258,7 @@ void init_game(void)
 	hero.init(150, 300);
 
 	//利甸 檬扁拳
-
-		for (int i = 0; i < ENEMY_NUM; i++)
-		{
-			enemy[i].init((float)(rand() % 500), 600);
-		}
+	enemy.init((float)(200 + rand() % 600), 650);
 
 
 	//醚舅 檬扁拳 
@@ -289,22 +284,10 @@ void do_game_logic(void)
 	if (KEY_DOWN(0x44))
 		hero.move(MOVE_RIGHT);
 
-
-	//利甸 贸府 
-	for (int i = 0; i < ENEMY_NUM; i++)
-	{
-		if (enemy[i].y_pos < 200)
-		{
-			enemy[i].init((float)(rand() % 500), 600);
-		}
-		else
-		{
-			enemy[i].Update(0.5);
-			enemy[i].OnJumpKeyReleased();
-			enemy[i].OnJumpKeyPressed();
-		}
-	}
 	
+	//利甸 贸府 
+	enemy.Update(1.0);
+	enemy.Jump();
 
 	
 	//醚舅 贸府 
@@ -328,14 +311,10 @@ void do_game_logic(void)
 
 
 		//面倒 贸府 
-		for (int i = 0; i<ENEMY_NUM; i++)
+		if (bullet.check_collision(enemy.x_pos, enemy.y_pos) == true)
 		{
-			if (bullet.check_collision(enemy[i].x_pos, enemy[i].y_pos) == true)
-			{
-				enemy[i].init((float)(rand() % 300),600);
-			}
+			enemy.init((float)(200 + rand() % 300), 650);
 		}
-
 	}
 
 
@@ -392,13 +371,9 @@ void render_frame(void)
 	RECT part2;
 	SetRect(&part2, 0, 0, 64, 64);
 	D3DXVECTOR3 center2(0.0f, 0.0f, 0.0f);    // center at the upper-left corner
-
-	for (int i = 0; i<ENEMY_NUM; i++)
-	{
-
-		D3DXVECTOR3 position2(enemy[i].x_pos, enemy[i].y_pos, 0.0f);    // position at 50, 50 with no depth
-		d3dspt->Draw(sprite_enemy, &part2, &center2, &position2, D3DCOLOR_ARGB(255, 255, 255, 255));
-	}
+	D3DXVECTOR3 position2(enemy.x_pos, enemy.y_pos, 0.0f);    // position at 50, 50 with no depth
+	d3dspt->Draw(sprite_enemy, &part2, &center2, &position2, D3DCOLOR_ARGB(255, 255, 255, 255));
+	
 
 
 

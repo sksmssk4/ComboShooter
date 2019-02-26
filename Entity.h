@@ -11,9 +11,9 @@ public:
 	float y_pos;
 	int status;
 	int HP;
-
-	float velocityX, velocityY;
-	float gravity = 0.5f;
+	float velocityX;
+	float velocityY = 0.0f;
+	float gravity = 0.15f;
 
 };
 

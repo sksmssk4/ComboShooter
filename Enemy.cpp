@@ -2,44 +2,34 @@
 
 
 bool ground = false;
-
 void Enemy::init(float x, float y)
 {
 	x_pos = x;
 	y_pos = y;
-
-}
-
-void Enemy::move()
-{
-	y_pos -= 1;
 }
 
 void Enemy::Update(float time)
 {
+	
+	velocityY += gravity * time;
 	x_pos += velocityX * time;
 	y_pos += velocityY * time;
-	velocityY += gravity * time;
-	if (y_pos >= 600)
+	if (y_pos > 600)
 	{
 		y_pos = 600;
-		velocityY = 0.0f;
+		velocityY = 0.0;
 		ground = true;
 	}
+	
 }
 
-void Enemy::OnJumpKeyPressed()
+void Enemy::Jump()
 {
 	if (ground)
 	{
-		velocityY -= 700.0f;
+		velocityY = -12.0;
 		ground = false;
 	}
-}
-
-void Enemy::OnJumpKeyReleased()
-{
-	if (velocityY < -6.0f)
-		velocityY = -6.0f;
+	
 }
 
