@@ -13,6 +13,9 @@
     <ClCompile Include="Main.cpp">
       <Filter>소스파일</Filter>
     </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h" />
@@ -26,6 +29,9 @@
       <Filter>헤더파일</Filter>
     </ClInclude>
     <ClInclude Include="Hero.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
       <Filter>헤더파일</Filter>
     </ClInclude>
   </ItemGroup>
