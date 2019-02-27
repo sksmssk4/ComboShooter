@@ -1,8 +1,3 @@
 ﻿  Game.cpp
-  Main.cpp
-c:\users\이명현\desktop\졸작파이팅!\genocide\main.cpp(19): warning C4100: 'lpCmdLine': 참조되지 않은 정식 매개 변수입니다.
-c:\users\이명현\desktop\졸작파이팅!\genocide\main.cpp(18): warning C4100: 'hPrevInstance': 참조되지 않은 정식 매개 변수입니다.
-  코드를 생성하고 있습니다...
-Bullet.obj : warning LNK4075: '/EDITANDCONTINUE'이(가) '/SAFESEH' 사양으로 인해 무시됩니다.
   genocide.vcxproj -> C:\Users\이명현\Desktop\졸작파이팅!\Genocide\Debug\Matrices49860489.exe
   genocide.vcxproj -> C:\Users\이명현\Desktop\졸작파이팅!\Genocide\Debug\Matrices49860489.pdb (Full PDB)

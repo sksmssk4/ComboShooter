@@ -1,4 +1,4 @@
-#include <windows.h>
+
 #include "Game.h"
 
 bool sphere_collision_check(float x0, float y0, float size0, float x1, float y1, float size1);
@@ -19,7 +19,6 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	LPSTR lpCmdLine,
 	int nCmdShow)
 {
-	
 	HWND hWnd;
 	WNDCLASSEX wc;
 
@@ -31,7 +30,6 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	wc.hInstance = hInstance;
 	wc.hCursor = LoadCursor(NULL, IDC_ARROW);
 	wc.lpszClassName = L"WindowClass";
-
 	RegisterClassEx(&wc);
 
 	hWnd = CreateWindowEx(NULL, L"WindowClass", L"Genocide",
@@ -62,7 +60,6 @@ int WINAPI WinMain(HINSTANCE hInstance,
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
-
 		game.do_game_logic();
 
 		game.render_frame();
@@ -73,7 +70,6 @@ int WINAPI WinMain(HINSTANCE hInstance,
 
 		while ((GetTickCount() - starting_point) < 25);
 	}
-
 	// clean up DirectX and COM
 	game.cleanD3D();
 
