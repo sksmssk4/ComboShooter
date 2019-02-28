@@ -1,11 +1,12 @@
 #include "Enemy.h"
 
 
-bool ground = false;
+bool jump = false;
 void Enemy::init(float x, float y)
 {
 	x_pos = x;
 	y_pos = y;
+	jump = true;
 }
 
 void Enemy::Update(float time)
@@ -14,21 +15,16 @@ void Enemy::Update(float time)
 	velocityY += gravity * time;
 	x_pos += velocityX * time;
 	y_pos += velocityY * time;
-	if (y_pos > 600)
-	{
-		y_pos = 600;
-		velocityY = 0.0;
-		ground = true;
-	}
 	
 }
 
 void Enemy::Jump()
 {
-	if (ground)
+	if (jump)
 	{
+		velocityX = -1.0;
 		velocityY = -12.0;
-		ground = false;
+		jump = false;
 	}
 	
 }
