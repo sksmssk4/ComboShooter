@@ -15,8 +15,8 @@
 #include "Enemy.h"
 #include "Bullet.h"
 // define the screen resolution and keyboard macros
-#define SCREEN_WIDTH 960
-#define SCREEN_HEIGHT 640
+#define SCREEN_WIDTH 2000
+#define SCREEN_HEIGHT 1080
 #define KEY_DOWN(vk_code) ((GetAsyncKeyState(vk_code) & 0x8000) ? 1 : 0)
 #define KEY_UP(vk_code) ((GetAsyncKeyState(vk_code) & 0x8000) ? 0 : 1)
 
@@ -29,14 +29,15 @@ using namespace std;
 
 // global declarations
 
-
 class Game
 {
 private:
-
+	FLOAT angle;
+	UINT iTime;
 	LPDIRECT3D9 d3d;    // LP_3D
 	LPDIRECT3DDEVICE9 d3ddev;    // LP_3DDEVICE
 	LPD3DXSPRITE d3dspt;    // LP_SPRITE
+	LPD3DXSPRITE espt;
 
 	LPDIRECT3DTEXTURE9 sprite_bg; //LP_TEXTURE
 	LPDIRECT3DTEXTURE9 sprite_score0;
@@ -67,6 +68,8 @@ public:
 
 	void init_game(void);
 	void do_game_logic(void);
+
+	LPD3DXSPRITE getSprite() { return d3dspt; }
 	
 };
 
