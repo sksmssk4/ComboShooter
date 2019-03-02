@@ -460,15 +460,40 @@ void Game::render_frame(void)
 		D3DXVECTOR3 position1(bullet.x_pos, bullet.y_pos, 0.0f);   
 		d3dspt->Draw(sprite_bullet, &part1, &center1, &position1, D3DCOLOR_ARGB(255, 255, 255, 255));
 	}
-
-
 	////에네미 
 	RECT part2;
 	SetRect(&part2, 0, 0, 64, 64);
-	D3DXVECTOR3 center2(0.0f, 0.0f, 0.0f);  
-	D3DXVECTOR3 position2(enemy.x_pos, enemy.y_pos, 0.0f);   
-	d3dspt->Draw(sprite_enemy, &part2, &center2, &position2, D3DCOLOR_ARGB(255, 255, 255, 255));
+	D3DXVECTOR3 center2(0.0f, 0.0f, 0.0f);
+	D3DXVECTOR3 position2(enemy.x_pos, enemy.y_pos, 0.0f);
 
+	D3DXVECTOR2 spriteCenter = D3DXVECTOR2(32.0f, 32.0f); 
+	// Screen position of the sprite
+	D3DXVECTOR2 translate = D3DXVECTOR2(enemy.x_pos,enemy.y_pos);
+	// Scaling X,Y
+	UINT iTime = timeGetTime() % 1000;
+	FLOAT angle = iTime * (2.0f * D3DX_PI) / 1000.0f;
+	D3DXVECTOR2 scaling(enemy.scale, enemy.scale);
+	D3DXMATRIX matrix,matrix1,matrix2,matrix3;
+	D3DXMatrixTransformation2D(
+		&matrix,                // 행렬
+		NULL,                   // 크기를 조정할 때 기준을 왼쪽 상단으로 유지
+		0.0f,                   // 크기 조정 회전 없음
+		&scaling,               // 크기 조정 값
+		&spriteCenter,          // 회전 중심
+		(float)(angle),  // 회전 각도
+		&translate);            // X,Y위치
+
+								// Tell the sprite about the matrix "Hello Neo"
+	//UINT iTime = timeGetTime() % 1000;
+	//FLOAT fAngle = iTime * (2.0f * D3DX_PI) / 1000.0f;
+	//d3dxmatrixtranslation
+	//D3DXMatrixRotationZ(&matrix1, fAngle);
+	//D3DXMatrixRotationZ(&matrix, fAngle);
+	//d3dspt->SetTransform(&matrix);
+	// Draw the sprite
+	d3dspt->Draw(sprite_enemy, NULL, NULL, &position2, D3DCOLOR_ARGB(255, 255, 255, 255));
+	
+	
 
 
 
@@ -500,7 +525,6 @@ void Game::do_game_logic(void)
 	//주인공 처리 
 	if (KEY_DOWN(0x57))
 		hero.move(MOVE_UP);
-
 
 	if (KEY_DOWN(0x53))
 		hero.move(MOVE_DOWN);

@@ -34,11 +34,11 @@ class Game
 {
 private:
 
-	LPDIRECT3D9 d3d;    // the pointer to our Direct3D interface
-	LPDIRECT3DDEVICE9 d3ddev;    // the pointer to the device class
-	LPD3DXSPRITE d3dspt;    // the pointer to our Direct3D Sprite interface
+	LPDIRECT3D9 d3d;    // LP_3D
+	LPDIRECT3DDEVICE9 d3ddev;    // LP_3DDEVICE
+	LPD3DXSPRITE d3dspt;    // LP_SPRITE
 
-	LPDIRECT3DTEXTURE9 sprite_bg;
+	LPDIRECT3DTEXTURE9 sprite_bg; //LP_TEXTURE
 	LPDIRECT3DTEXTURE9 sprite_score0;
 	LPDIRECT3DTEXTURE9 sprite_score1;
 	LPDIRECT3DTEXTURE9 sprite_score2;
