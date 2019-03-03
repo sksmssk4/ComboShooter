@@ -69,7 +69,7 @@ public:
 	void init_game(void);
 	void do_game_logic(void);
 
-	LPD3DXSPRITE getSprite() { return d3dspt; }
+	void setDegrees(float deg) { angle = deg*((float)PI / 180.0f); }
 	
 };
 

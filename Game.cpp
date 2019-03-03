@@ -466,17 +466,20 @@ void Game::render_frame(void)
 		
 		RECT part2;
 		SetRect(&part2, 0, 0, 64, 64);
-		D3DXVECTOR3 center2(0.0f, 0.0f, 0.0f);
-		D3DXVECTOR3 position2(enemy.x_pos, enemy.y_pos, 0.0f);
+		//D3DXVECTOR3 center2(0.0f, 0.0f, 0.0f);
+		//D3DXVECTOR3 position2(enemy.x_pos, enemy.y_pos, 0.0f);
 
 		D3DXVECTOR2 spriteCenter = D3DXVECTOR2(32/enemy.scale, 32/enemy.scale);
 		// Screen position of the sprite
-		D3DXVECTOR2 translate = D3DXVECTOR2(0, 0);
+		D3DXVECTOR2 translate = D3DXVECTOR2(enemy.x_pos, enemy.y_pos);
 		// Scaling X,Y
 		iTime = timeGetTime() % 1000;
-		angle = iTime*(20.0f *PI) / 1000.0f;
+		angle = iTime * (2.0f * D3DX_PI) / 1000.0f;
+		
+		
 		D3DXVECTOR2 scaling(enemy.scale, enemy.scale);
 		D3DXMATRIX matrix;
+		
 		D3DXMatrixTransformation2D(
 			&matrix,                // 행렬
 			NULL,                   // 크기를 조정할 때 기준을 왼쪽 상단으로 유지
@@ -485,12 +488,11 @@ void Game::render_frame(void)
 			&spriteCenter,          // 회전 중심
 			(float)(angle),  // 회전 각도
 			&translate);            // X,Y위치
-
-									// Tell the sprite about the matrix "Hello Neo"
+      
 		
 		espt->SetTransform(&matrix);
 		// Draw the sprite
-		espt->Draw(sprite_enemy, NULL, NULL, &position2, D3DCOLOR_ARGB(255, 255, 255, 255));
+		espt->Draw(sprite_enemy, NULL, NULL, NULL , D3DCOLOR_ARGB(255, 255, 255, 255));
 
 		
 
