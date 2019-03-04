@@ -15,8 +15,8 @@
 #include "Enemy.h"
 #include "Bullet.h"
 // define the screen resolution and keyboard macros
-#define SCREEN_WIDTH 2000
-#define SCREEN_HEIGHT 1080
+#define SCREEN_WIDTH 960
+#define SCREEN_HEIGHT 640
 #define KEY_DOWN(vk_code) ((GetAsyncKeyState(vk_code) & 0x8000) ? 1 : 0)
 #define KEY_UP(vk_code) ((GetAsyncKeyState(vk_code) & 0x8000) ? 0 : 1)
 

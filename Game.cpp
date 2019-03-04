@@ -254,9 +254,9 @@ void Game::render_frame(void)
 	
 	//배경
 	RECT part0;
-	SetRect(&part0, 0, 0, 960, 640);
+	SetRect(&part0, 0, 0, 840, 480);
 	D3DXVECTOR3 center0(0.0f, 0.0f, 0.0f);
-	D3DXVECTOR3 position0(0.0f, 0.0f, 0.0f);
+	D3DXVECTOR3 position0(120.0f, 160.0f, 0.0f);
 	d3dspt->Draw(sprite_bg, &part0, &center0, &position0, D3DCOLOR_ARGB(255, 255, 255, 255));
 	//기본
 	RECT Spart;
@@ -447,7 +447,7 @@ void Game::render_frame(void)
 	}
 	//주인공 
 	RECT part;
-	SetRect(&part, 0, 0, 64, 64);
+	SetRect(&part, 0, 0, 100, 63);
 	D3DXVECTOR3 center(0.0f, 0.0f, 0.0f);    // center at the upper-left corner
 	D3DXVECTOR3 position(hero.x_pos, hero.y_pos, 0.0f);    // position at 50, 50 with no depth
 	d3dspt->Draw(sprite_hero, &part, &center, &position, D3DCOLOR_ARGB(255, 255, 255, 255));
@@ -456,7 +456,7 @@ void Game::render_frame(void)
 	if (bullet.bShow == true)
 	{
 		RECT part1;
-		SetRect(&part1, 0, 0, 64, 64);
+		SetRect(&part1, 0, 0, 30, 14);
 		D3DXVECTOR3 center1(0.0f, 0.0f, 0.0f);   
 		D3DXVECTOR3 position1(bullet.x_pos, bullet.y_pos, 0.0f);   
 		d3dspt->Draw(sprite_bullet, &part1, &center1, &position1, D3DCOLOR_ARGB(255, 255, 255, 255));

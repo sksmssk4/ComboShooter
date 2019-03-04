@@ -38,7 +38,7 @@ void Bullet::active()
 
 void Bullet::move()
 {
-	x_pos += 40;
+	x_pos += 60;
 }
 
 void Bullet::hide()
