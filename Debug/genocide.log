@@ -1,3 +1,4 @@
 ﻿  Game.cpp
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(612): warning C4553: '==': 의미 없는 연산자입니다. '='을(를) 사용하려고 했습니까?
   genocide.vcxproj -> C:\Users\이명현\Desktop\졸작파이팅!\Genocide\Debug\Matrices49860489.exe
   genocide.vcxproj -> C:\Users\이명현\Desktop\졸작파이팅!\Genocide\Debug\Matrices49860489.pdb (Full PDB)

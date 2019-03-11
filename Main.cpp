@@ -32,7 +32,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	wc.lpszClassName = L"WindowClass";
 	RegisterClassEx(&wc);
 
-	hWnd = CreateWindowEx(NULL, L"WindowClass", L"Genocide",
+	hWnd = CreateWindowEx(NULL, L"WindowClass", L"Shooting Master",
 		WS_EX_DLGMODALFRAME | WS_BORDER, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, //TOPMOST->DLGMODALFRAME, POPUP -> BORDER
 		NULL, NULL, hInstance, NULL);
 

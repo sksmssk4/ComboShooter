@@ -377,19 +377,19 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bullet.cpp" />
-    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Bottle.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Hero.cpp" />
+    <ClCompile Include="Pistol.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
-    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Bottle.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="Hero.h" />
+    <ClInclude Include="Pistol.h" />
     <CLInclude Include="resource.h" />
     <ResourceCompile Include="Matrices49860489.rc" />
   </ItemGroup>

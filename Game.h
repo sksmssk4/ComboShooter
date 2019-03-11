@@ -11,10 +11,10 @@
 #include <stdio.h>
 
 #include "Entity.h"
-#include "Hero.h"
-#include "Enemy.h"
+#include "Pistol.h"
+#include "Bottle.h"
 #include "Bullet.h"
-// define the screen resolution and keyboard macros
+
 #define SCREEN_WIDTH 960
 #define SCREEN_HEIGHT 640
 #define KEY_DOWN(vk_code) ((GetAsyncKeyState(vk_code) & 0x8000) ? 1 : 0)
@@ -50,13 +50,20 @@ private:
 	LPDIRECT3DTEXTURE9 sprite_score7;
 	LPDIRECT3DTEXTURE9 sprite_score8;
 	LPDIRECT3DTEXTURE9 sprite_score9;
-	LPDIRECT3DTEXTURE9 sprite;    
-	LPDIRECT3DTEXTURE9 sprite_hero;    
-	LPDIRECT3DTEXTURE9 sprite_enemy;    
+	LPDIRECT3DTEXTURE9 sprite;
+	
+	LPDIRECT3DTEXTURE9 sprite_pistol;   
+	LPDIRECT3DTEXTURE9 sprite_pistol2;	//pistol animation 
+	LPDIRECT3DTEXTURE9 sprite_bottle;
+	LPDIRECT3DTEXTURE9 sprite_bBreak;	//bottle breaking animation
+	LPDIRECT3DTEXTURE9 sprite_bBreak2;
+	LPDIRECT3DTEXTURE9 sprite_bBreak3;
+	LPDIRECT3DTEXTURE9 sprite_bBreak4;
+
 	LPDIRECT3DTEXTURE9 sprite_bullet;    
 
-	Hero hero;
-	Enemy enemy;
+	Pistol pistol;
+	Bottle bottle;
 	Bullet bullet;
 
 	int score = 0;
