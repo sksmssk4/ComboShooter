@@ -1,7 +1,7 @@
 #include "Pistol.h"
 
 enum { MOVE_UP, MOVE_DOWN, MOVE_LEFT, MOVE_RIGHT };
-bool sphere_collision_check(float x0, float y0, float size0, float x1, float y1, float size1);
+
 
 void Pistol::init(float x, float y)
 {

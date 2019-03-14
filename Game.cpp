@@ -1,10 +1,22 @@
 #include "Game.h"
+POINT pt;
 
 enum { MOVE_UP, MOVE_DOWN, MOVE_LEFT, MOVE_RIGHT };
 
 
-void Game::initD3D(HWND hWnd)
+bool sphere_collision_check(float x0, float y0, float size0, float x1, float y1, float size1);
+
+bool sphere_collision_check(float x0, float y0, float size0, float x1, float y1, float size1)
 {
+	if ((x0 - x1)*(x0 - x1) + (y0 - y1)*(y0 - y1) < (size0 + size1) * (size0 + size1))
+		return true;
+	else
+		return false;
+}
+
+
+void Game::initD3D(HWND hWnd)
+{		
 
 	d3d = Direct3DCreate9(D3D_SDK_VERSION);
 
@@ -208,7 +220,7 @@ void Game::initD3D(HWND hWnd)
 		NULL,  
 		NULL,  
 		&sprite_pistol);   
-
+	
 	D3DXCreateTextureFromFileEx(d3ddev,
 		L"pistol2.png",	
 		D3DX_DEFAULT,
@@ -226,8 +238,8 @@ void Game::initD3D(HWND hWnd)
 
 	D3DXCreateTextureFromFileEx(d3ddev,   
 		L"bottle.png",    
-		D3DX_DEFAULT,    
-		D3DX_DEFAULT,    
+		64,    
+		64,    
 		D3DX_DEFAULT,    
 		NULL,    
 		D3DFMT_A8R8G8B8, 
@@ -318,7 +330,8 @@ void Game::initD3D(HWND hWnd)
 }
 void Game::render_frame(void)
 {
-
+	GetCursorPos(&pt);
+	ScreenToClient(hWnd, &pt);
 	// clear the window to a deep blue
 	d3ddev->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 0, 0), -1.0f, 0);
 
@@ -589,9 +602,9 @@ void Game::render_frame(void)
 		RECT part1;
 		SetRect(&part1, 0, 0, 64, 64);
 		D3DXVECTOR3 center1(0.0f, 0.0f, 0.0f);
-		D3DXVECTOR3 position1(bottle.x_pos, bottle.y_pos, 0.0f);
+		D3DXVECTOR3 position1(pt.x, pt.y, 0.0f);
 		static int acounter = 0;
-		acounter += 1;
+		acounter += 10;
 		if (acounter >= 20) acounter = 0;
 
 		switch (acounter / 5)
@@ -609,38 +622,38 @@ void Game::render_frame(void)
 			d3dspt->Draw(sprite_bBreak4, &part1, &center1, &position1, D3DCOLOR_ARGB(255, 255, 255, 255));
 			break;
 		}
-		bottle.breaking == false;
 	}
-	////bottle	
-	RECT part2;
-	SetRect(&part2, 0, 0, 64, 64);
-	//D3DXVECTOR3 center2(0.0f, 0.0f, 0.0f);
-	//D3DXVECTOR3 position2(enemy.x_pos, enemy.y_pos, 0.0f);
+	
+		////bottle	
+		RECT rc;
+		SetRect(&rc, 0, 0, 64, 64);
+		
+		D3DXVECTOR2 spriteCenter = D3DXVECTOR2(32 / bottle.scale, 32 / bottle.scale);
+		// Screen position of the sprite
+		D3DXVECTOR2 translate = D3DXVECTOR2(bottle.x_pos, bottle.y_pos);
+		// Scaling X,Y
+		iTime = timeGetTime() % 1000;
+		angle = iTime * (2.0f * D3DX_PI) / 1000.0f;
+		
+		D3DXVECTOR2 scaling(bottle.scale, bottle.scale);
+		D3DXMATRIX matrix;
 
-	D3DXVECTOR2 spriteCenter = D3DXVECTOR2(32/bottle.scale, 32/bottle.scale);
-	// Screen position of the sprite
-	D3DXVECTOR2 translate = D3DXVECTOR2(bottle.x_pos, bottle.y_pos);
-	// Scaling X,Y
-	iTime = timeGetTime() % 1000;
-	angle = iTime * (2.0f * D3DX_PI) / 1000.0f;
-	
-	D3DXVECTOR2 scaling(bottle.scale, bottle.scale);
-	D3DXMATRIX matrix;
-	
-	D3DXMatrixTransformation2D(
-		&matrix,                // 행렬
-		NULL,                   // 크기를 조정할 때 기준을 왼쪽 상단으로 유지
-		0.0f,                   // 크기 조정 회전 없음
-		&scaling,               // 크기 조정 값
-		&spriteCenter,          // 회전 중심
-		(float)(angle),			// 회전 각도
-		&translate);            // X,Y위치
-      
-	
-	espt->SetTransform(&matrix);
-	// Draw the sprite
-	espt->Draw(sprite_bottle, NULL, NULL, NULL , D3DCOLOR_ARGB(255, 255, 255, 255));
+		D3DXMatrixTransformation2D(
+			&matrix,                // 행렬
+			NULL,                   // 크기를 조정할 때 기준을 왼쪽 상단으로 유지
+			0.0f,                   // 크기 조정 회전 없음
+			&scaling,               // 크기 조정 값
+			&spriteCenter,          // 회전 중심
+			(float)(angle),			// 회전 각도
+			&translate);            // X,Y위치
 
+
+		espt->SetTransform(&matrix);
+		// Draw the sprite
+		espt->Draw(sprite_bottle, NULL, NULL, NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+	
+	
+	
 		
 	
 	d3dspt->End();    
@@ -662,6 +675,8 @@ void Game::init_game(void)
 
 	//총알 초기화 
 	bullet.init(pistol.x_pos, pistol.y_pos);
+
+	
 }
 void Game::do_game_logic(void)
 {
@@ -681,19 +696,21 @@ void Game::do_game_logic(void)
 
 
 	//오브젝트 처리
-	if (bottle.x_pos < 0 || bottle.y_pos > 655)
+	if (bottle.x_pos < 0 || bottle.y_pos > 755)
 	{
 		bottle.init((float)(200 + rand() % 600), 650);
 	}
 	else
 	{
+		bottle.breaking = false;
 		bottle.Update(1.0);
 		bottle.Jump();
 	}
+	
 	//총알 처리 
 	if (bullet.show() == false)
 	{
-		if (KEY_DOWN(VK_LBUTTON))
+		if (KEY_DOWN(VK_SPACE))
 		{
 			pistol.pShow = false;
 			bullet.active();
@@ -708,16 +725,31 @@ void Game::do_game_logic(void)
 		else
 			bullet.move();
 	
-
 		//충돌 처리 
 		if (bullet.check_collision(bottle.x_pos, bottle.y_pos) == true)
 		{
 			bottle.breaking = true;
-			bottle.init((float)(200 + rand() % 300), 650);
+			bottle.init((float)(200 + rand() % 300), 750);
+			score++;
+		}	
+	}
+	GetCursorPos(&pt);
+
+	ScreenToClient(hWnd, &pt);
+
+	if(pt.x >= bottle.x_pos && pt.x <= bottle.x_pos+64 && pt.y >= bottle.y_pos && pt.y <=bottle.y_pos+64 )
+	{
+		if (KEY_DOWN(VK_LBUTTON))
+		{
+			bottle.breaking = true;
+			bottle.init((float)(200 + rand() % 300), 750);
 			score++;
 		}
 	}
+
+
 }
+
 
 void Game::cleanD3D(void)
 {

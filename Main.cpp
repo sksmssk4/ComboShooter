@@ -1,18 +1,12 @@
 
 #include "Game.h"
 
-bool sphere_collision_check(float x0, float y0, float size0, float x1, float y1, float size1);
 
-bool sphere_collision_check(float x0, float y0, float size0, float x1, float y1, float size1)
-{
-	if ((x0 - x1)*(x0 - x1) + (y0 - y1)*(y0 - y1) < (size0 + size1) * (size0 + size1))
-		return true;
-	else
-		return false;
-}
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 Game game;
+
+
 // the entry point for any Windows program
 int WINAPI WinMain(HINSTANCE hInstance,
 	HINSTANCE hPrevInstance,
@@ -28,7 +22,8 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	wc.style = CS_HREDRAW | CS_VREDRAW;
 	wc.lpfnWndProc = (WNDPROC)WindowProc;
 	wc.hInstance = hInstance;
-	wc.hCursor = LoadCursor(NULL, IDC_ARROW);
+	wc.hCursor = LoadCursorFromFileA("C:\\Users\\이명현\\Desktop\\aim.ani"); //커서 파일위치
+
 	wc.lpszClassName = L"WindowClass";
 	RegisterClassEx(&wc);
 
@@ -61,7 +56,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 			DispatchMessage(&msg);
 		}
 		game.do_game_logic();
-
+		
 		game.render_frame();
 
 		// check the 'escape' key
@@ -78,9 +73,8 @@ int WINAPI WinMain(HINSTANCE hInstance,
 
 // this is the main message handler for the program
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
-{
-	switch (message)
-	{
+{	
+	switch (message){
 	case WM_DESTROY:
 	{
 		PostQuitMessage(0);

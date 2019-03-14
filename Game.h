@@ -14,7 +14,6 @@
 #include "Pistol.h"
 #include "Bottle.h"
 #include "Bullet.h"
-
 #define SCREEN_WIDTH 960
 #define SCREEN_HEIGHT 640
 #define KEY_DOWN(vk_code) ((GetAsyncKeyState(vk_code) & 0x8000) ? 1 : 0)
@@ -65,9 +64,10 @@ private:
 	Pistol pistol;
 	Bottle bottle;
 	Bullet bullet;
-
 	int score = 0;
 	
+	HWND hWnd;
+
 public:
 	void initD3D(HWND hWnd);    // sets up and initializes Direct3D
 	void render_frame(void);    // renders a single frame
@@ -75,8 +75,6 @@ public:
 
 	void init_game(void);
 	void do_game_logic(void);
-
-	void setDegrees(float deg) { angle = deg*((float)PI / 180.0f); }
 	
 };
 
