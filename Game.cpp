@@ -1,5 +1,5 @@
 #include "Game.h"
-POINT pt;
+POINT pt; //마우스 포인트
 
 enum { MOVE_UP, MOVE_DOWN, MOVE_LEFT, MOVE_RIGHT };
 
@@ -330,8 +330,11 @@ void Game::initD3D(HWND hWnd)
 }
 void Game::render_frame(void)
 {
+	//마우스 좌표얻기
 	GetCursorPos(&pt);
+	//윈도우화면 마우스 좌표
 	ScreenToClient(hWnd, &pt);
+
 	// clear the window to a deep blue
 	d3ddev->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 0, 0), -1.0f, 0);
 
@@ -573,8 +576,8 @@ void Game::render_frame(void)
 	{
 		RECT part;
 		SetRect(&part, 0, 0, 100, 63);
-		D3DXVECTOR3 center(0.0f, 0.0f, 0.0f);    // center at the upper-left corner
-		D3DXVECTOR3 position(pistol.x_pos, pistol.y_pos, 0.0f);    // position at 50, 50 with no depth
+		D3DXVECTOR3 center(0.0f, 0.0f, 0.0f);    
+		D3DXVECTOR3 position(pistol.x_pos, pistol.y_pos, 0.0f);
 		d3dspt->Draw(sprite_pistol, &part, &center, &position, D3DCOLOR_ARGB(255, 255, 255, 255));
 	}
 	//Pistol Fire!
@@ -582,8 +585,8 @@ void Game::render_frame(void)
 	{
 		RECT part;
 		SetRect(&part, 0, 0, 115, 63);
-		D3DXVECTOR3 center(0.0f, 0.0f, 0.0f);    // center at the upper-left corner
-		D3DXVECTOR3 position(pistol.x_pos, pistol.y_pos, 0.0f);    // position at 50, 50 with no depth
+		D3DXVECTOR3 center(0.0f, 0.0f, 0.0f);    
+		D3DXVECTOR3 position(pistol.x_pos, pistol.y_pos, 0.0f);   
 		d3dspt->Draw(sprite_pistol2, &part, &center, &position, D3DCOLOR_ARGB(255, 255, 255, 255));
 		pistol.pShow = true;
 	}
@@ -602,11 +605,10 @@ void Game::render_frame(void)
 		RECT part1;
 		SetRect(&part1, 0, 0, 64, 64);
 		D3DXVECTOR3 center1(0.0f, 0.0f, 0.0f);
-		D3DXVECTOR3 position1(pt.x, pt.y, 0.0f);
+		D3DXVECTOR3 position1(pt.x, pt.y, 0.0f); //애니메이션 좌표 = 마우스좌표
 		static int acounter = 0;
 		acounter += 10;
 		if (acounter >= 20) acounter = 0;
-
 		switch (acounter / 5)
 		{
 		case 0:
@@ -628,13 +630,14 @@ void Game::render_frame(void)
 		RECT rc;
 		SetRect(&rc, 0, 0, 64, 64);
 		
-		D3DXVECTOR2 spriteCenter = D3DXVECTOR2(32 / bottle.scale, 32 / bottle.scale);
+		D3DXVECTOR2 spriteCenter = D3DXVECTOR2(32 /bottle.scale, 32 /bottle.scale);
 		// Screen position of the sprite
 		D3DXVECTOR2 translate = D3DXVECTOR2(bottle.x_pos, bottle.y_pos);
 		// Scaling X,Y
+
 		iTime = timeGetTime() % 1000;
 		angle = iTime * (2.0f * D3DX_PI) / 1000.0f;
-		
+
 		D3DXVECTOR2 scaling(bottle.scale, bottle.scale);
 		D3DXMATRIX matrix;
 
@@ -652,10 +655,6 @@ void Game::render_frame(void)
 		// Draw the sprite
 		espt->Draw(sprite_bottle, NULL, NULL, NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
 	
-	
-	
-		
-	
 	d3dspt->End();    
 	espt->End();
 	d3ddev->EndScene();
@@ -668,7 +667,7 @@ void Game::render_frame(void)
 void Game::init_game(void)
 {
 	//총 초기화 
-	pistol.init(150, 300);
+	pistol.init(80, 60);
 
 	//오브젝트 초기화
 	bottle.init((float)(200 + rand() % 600), 650);
@@ -682,16 +681,16 @@ void Game::do_game_logic(void)
 {
 
 	//총 처리 
-	if (KEY_DOWN(0x57))
-		pistol.move(MOVE_UP);
+	//if (KEY_DOWN(0x57))
+	//	pistol.move(MOVE_UP);
+	//
+	//if (KEY_DOWN(0x53))
+	//	pistol.move(MOVE_DOWN);
+	//
+	//if (KEY_DOWN(0x41))
+	//	pistol.move(MOVE_LEFT);
 
-	if (KEY_DOWN(0x53))
-		pistol.move(MOVE_DOWN);
-
-	if (KEY_DOWN(0x41))
-		pistol.move(MOVE_LEFT);
-
-	if (KEY_DOWN(0x44))
+	//if (KEY_DOWN(0x44))
 		pistol.move(MOVE_RIGHT);
 
 
@@ -706,7 +705,7 @@ void Game::do_game_logic(void)
 		bottle.Update(1.0);
 		bottle.Jump();
 	}
-	
+
 	//총알 처리 
 	if (bullet.show() == false)
 	{
@@ -724,29 +723,39 @@ void Game::do_game_logic(void)
 			bullet.hide();
 		else
 			bullet.move();
-	
+
 		//충돌 처리 
 		if (bullet.check_collision(bottle.x_pos, bottle.y_pos) == true)
 		{
 			bottle.breaking = true;
 			bottle.init((float)(200 + rand() % 300), 750);
 			score++;
-		}	
+		}
 	}
+	//마우스 좌표얻기
 	GetCursorPos(&pt);
-
+	//윈도우화면 마우스 좌표
 	ScreenToClient(hWnd, &pt);
 
-	if(pt.x >= bottle.x_pos && pt.x <= bottle.x_pos+64 && pt.y >= bottle.y_pos && pt.y <=bottle.y_pos+64 )
+	//마우스 충돌 구현
+	
+	if (KEY_DOWN(VK_LBUTTON))
 	{
-		if (KEY_DOWN(VK_LBUTTON))
+		sound.Shot();
+		if (pt.x >= bottle.x_pos && pt.x <= bottle.x_pos + (64*bottle.scale) && pt.y >= bottle.y_pos && pt.y <= bottle.y_pos + (64 * bottle.scale))
 		{
 			bottle.breaking = true;
 			bottle.init((float)(200 + rand() % 300), 750);
 			score++;
 		}
+		else if (pt.x >= pistol.x_pos && pt.x <= pistol.x_pos + 64 && pt.y >= pistol.y_pos && pt.y <= pistol.y_pos + 64)
+		{
+			sound.HitShot();
+		}
 	}
-
+		
+	
+	
 
 }
 

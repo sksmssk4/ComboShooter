@@ -16,6 +16,9 @@
     <ClCompile Include="Bottle.cpp">
       <Filter>소스파일</Filter>
     </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h" />
@@ -32,6 +35,9 @@
       <Filter>헤더파일</Filter>
     </ClInclude>
     <ClInclude Include="Bottle.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
       <Filter>헤더파일</Filter>
     </ClInclude>
   </ItemGroup>

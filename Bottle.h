@@ -8,8 +8,6 @@
 class Bottle :public Entity {
 
 public:
-	float scale = 1.0;
-
 	bool jump = false;
 	bool breaking = false;
 	void init(float x, float y);

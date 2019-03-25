@@ -10,6 +10,7 @@
 
 #include <stdio.h>
 
+#include "Sound.h"
 #include "Entity.h"
 #include "Pistol.h"
 #include "Bottle.h"
@@ -31,8 +32,7 @@ using namespace std;
 class Game
 {
 private:
-	FLOAT angle;
-	UINT iTime;
+
 	LPDIRECT3D9 d3d;    // LP_3D
 	LPDIRECT3DDEVICE9 d3ddev;    // LP_3DDEVICE
 	LPD3DXSPRITE d3dspt;    // LP_SPRITE
@@ -61,12 +61,17 @@ private:
 
 	LPDIRECT3DTEXTURE9 sprite_bullet;    
 
+	UINT iTime;
+	FLOAT angle;
+
 	Pistol pistol;
 	Bottle bottle;
 	Bullet bullet;
+	Sound sound;
+	HWND hWnd;
 	int score = 0;
 	
-	HWND hWnd;
+	
 
 public:
 	void initD3D(HWND hWnd);    // sets up and initializes Direct3D

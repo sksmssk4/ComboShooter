@@ -381,6 +381,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Pistol.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Sound.cpp" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
@@ -391,6 +392,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="Pistol.h" />
     <CLInclude Include="resource.h" />
+    <ClInclude Include="Sound.h" />
     <ResourceCompile Include="Matrices49860489.rc" />
   </ItemGroup>
   <ItemGroup>

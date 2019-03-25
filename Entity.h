@@ -1,4 +1,3 @@
-#pragma once
 
 #ifndef ENTITY_H
 #define ENTITY_H
@@ -7,6 +6,8 @@
 class Entity {
 
 public:
+	float scale = 1.0;
+
 	float x_pos;
 	float y_pos;
 	int status;
