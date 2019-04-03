@@ -21,8 +21,8 @@ void Bottle::Jump()
 {
 	if (jump)
 	{
-		velocityX = -1.0;
-		velocityY = -12.0;
+		velocityX = -2.0;
+		velocityY = -13.0;
 		jump = false;
 	}
 	

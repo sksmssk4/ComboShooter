@@ -11,10 +11,13 @@ class Sound
 private:
 	MCI_OPEN_PARMS mci_open; // 배경음전용
 	MCI_PLAY_PARMS mci_play; // 배경음전용
+	int dwID;
 
 public:
-	bool check = true;
+	void Bgm();
 	void Shot();
 	void HitShot();
+	void Gird();
+	void Reload();
 };
 #endif

@@ -1,12 +1,35 @@
 #include "Sound.h"
+//배경음
 
+void Sound::Bgm()
+{
+	//배경음
+	mci_open.lpstrElementName = L"bgm1.mp3";
+	mci_open.lpstrDeviceType = L"MPEGvideo";//wav 파일일 경우 WaveAudio
+	//배경음 재생
+	mciSendCommand(NULL, MCI_OPEN, MCI_OPEN_ELEMENT | MCI_OPEN_TYPE, (DWORD)(LPVOID)&mci_open);
+	dwID = mci_open.wDeviceID;
+	mciSendCommand(dwID, MCI_PLAY, MCI_NOTIFY, (DWORD)(LPVOID)&mci_play);
+	//음악재생끄기//mciSendCommand(3, MCI_SEEK, MCI_SEEK_TO_START, (DWORD)(LPVOID)NULL);
+}
 //허공샷
 void Sound::Shot()
 {
-	sndPlaySoundA("C:\\Users\\이명현\\Desktop\\졸작파이팅!\\sound\\gun1", SND_ASYNC | SND_NODEFAULT | SND_ASYNC );		
+	sndPlaySoundA("C:\\Users\\이명현\\Desktop\\졸작파이팅!\\sound\\gun2", SND_ASYNC | SND_NODEFAULT | SND_ASYNC);
+		
 }
 //명중샷
 void Sound::HitShot()
 {	
-	sndPlaySoundA("C:\\Users\\이명현\\Desktop\\졸작파이팅!\\sound\\gun2", SND_ASYNC | SND_NODEFAULT | SND_ASYNC);
+	sndPlaySoundA("C:\\Users\\이명현\\Desktop\\졸작파이팅!\\sound\\glass_break", SND_ASYNC | SND_NODEFAULT | SND_ASYNC);
+}
+//총알 없을 때 발사
+void Sound::Gird()
+{
+	sndPlaySoundA("C:\\Users\\이명현\\Desktop\\졸작파이팅!\\sound\\gird", SND_ASYNC | SND_NODEFAULT | SND_ASYNC);
+}
+//재장전
+void Sound::Reload()
+{
+	sndPlaySoundA("C:\\Users\\이명현\\Desktop\\졸작파이팅!\\sound\\reload", SND_ASYNC | SND_NODEFAULT | SND_ASYNC);
 }

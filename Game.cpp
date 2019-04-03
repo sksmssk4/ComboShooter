@@ -253,8 +253,8 @@ void Game::initD3D(HWND hWnd)
 
 	D3DXCreateTextureFromFileEx(d3ddev,
 		L"bBreak.png",
-		D3DX_DEFAULT,
-		D3DX_DEFAULT,
+		64,
+		64,
 		D3DX_DEFAULT,
 		NULL,
 		D3DFMT_A8R8G8B8,
@@ -268,8 +268,8 @@ void Game::initD3D(HWND hWnd)
 
 	D3DXCreateTextureFromFileEx(d3ddev,
 		L"bBreak2.png",
-		D3DX_DEFAULT,
-		D3DX_DEFAULT,
+		64,
+		64,
 		D3DX_DEFAULT,
 		NULL,
 		D3DFMT_A8R8G8B8,
@@ -283,8 +283,8 @@ void Game::initD3D(HWND hWnd)
 
 	D3DXCreateTextureFromFileEx(d3ddev,
 		L"bBreak3.png",
-		D3DX_DEFAULT,
-		D3DX_DEFAULT,
+		64,
+		64,
 		D3DX_DEFAULT,
 		NULL,
 		D3DFMT_A8R8G8B8,
@@ -298,8 +298,8 @@ void Game::initD3D(HWND hWnd)
 
 	D3DXCreateTextureFromFileEx(d3ddev,
 		L"bBreak4.png",
-		D3DX_DEFAULT,
-		D3DX_DEFAULT,
+		64,
+		64,
 		D3DX_DEFAULT,
 		NULL,
 		D3DFMT_A8R8G8B8,
@@ -310,6 +310,129 @@ void Game::initD3D(HWND hWnd)
 		NULL,
 		NULL,
 		&sprite_bBreak4);	//bottle breaking animation
+
+	//이펙트 애니메이션
+	D3DXCreateTextureFromFileEx(d3ddev,
+		L"effect1.png",
+		50,
+		50,
+		D3DX_DEFAULT,
+		NULL,
+		D3DFMT_A8R8G8B8,
+		D3DPOOL_MANAGED,
+		D3DX_DEFAULT,
+		D3DX_DEFAULT,
+		D3DCOLOR_XRGB(255, 0, 255),
+		NULL,
+		NULL,
+		&sprite_effect1);
+
+	D3DXCreateTextureFromFileEx(d3ddev,
+		L"effect2.png",
+		50,
+		50,
+		D3DX_DEFAULT,
+		NULL,
+		D3DFMT_A8R8G8B8,
+		D3DPOOL_MANAGED,
+		D3DX_DEFAULT,
+		D3DX_DEFAULT,
+		D3DCOLOR_XRGB(255, 0, 255),
+		NULL,
+		NULL,
+		&sprite_effect2);
+
+	D3DXCreateTextureFromFileEx(d3ddev,
+		L"effect3.png",
+		50,
+		50,
+		D3DX_DEFAULT,
+		NULL,
+		D3DFMT_A8R8G8B8,
+		D3DPOOL_MANAGED,
+		D3DX_DEFAULT,
+		D3DX_DEFAULT,
+		D3DCOLOR_XRGB(255, 0, 255),
+		NULL,
+		NULL,
+		&sprite_effect3);
+
+	D3DXCreateTextureFromFileEx(d3ddev,
+		L"effect4.png",
+		50,
+		50,
+		D3DX_DEFAULT,
+		NULL,
+		D3DFMT_A8R8G8B8,
+		D3DPOOL_MANAGED,
+		D3DX_DEFAULT,
+		D3DX_DEFAULT,
+		D3DCOLOR_XRGB(255, 0, 255),
+		NULL,
+		NULL,
+		&sprite_effect4);
+
+	//총알갯수판
+	D3DXCreateTextureFromFileEx(d3ddev,
+		L"line.png",
+		80,
+		50,
+		D3DX_DEFAULT,
+		NULL,
+		D3DFMT_A8R8G8B8,
+		D3DPOOL_MANAGED,
+		D3DX_DEFAULT,
+		D3DX_DEFAULT,
+		D3DCOLOR_XRGB(255, 0, 255),
+		NULL,
+		NULL,
+		&sprite_line);
+
+	//총 아이템 
+	D3DXCreateTextureFromFileEx(d3ddev,
+		L"itemG.png",
+		64,
+		64,
+		D3DX_DEFAULT,
+		NULL,
+		D3DFMT_A8R8G8B8,
+		D3DPOOL_MANAGED,
+		D3DX_DEFAULT,
+		D3DX_DEFAULT,
+		D3DCOLOR_XRGB(255, 0, 255),
+		NULL,
+		NULL,
+		&sprite_itemG);
+	//증가 아이템
+	D3DXCreateTextureFromFileEx(d3ddev,
+		L"itemP.png",
+		64,
+		64,
+		D3DX_DEFAULT,
+		NULL,
+		D3DFMT_A8R8G8B8,
+		D3DPOOL_MANAGED,
+		D3DX_DEFAULT,
+		D3DX_DEFAULT,
+		D3DCOLOR_XRGB(255, 0, 255),
+		NULL,
+		NULL,
+		&sprite_itemP);
+	//감소 아이템
+	D3DXCreateTextureFromFileEx(d3ddev,
+		L"itemM.png",
+		64,
+		64,
+		D3DX_DEFAULT,
+		NULL,
+		D3DFMT_A8R8G8B8,
+		D3DPOOL_MANAGED,
+		D3DX_DEFAULT,
+		D3DX_DEFAULT,
+		D3DCOLOR_XRGB(255, 0, 255),
+		NULL,
+		NULL,
+		&sprite_itemM);
 
 	D3DXCreateTextureFromFileEx(d3ddev,   
 		L"bullet.png",  
@@ -364,6 +487,68 @@ void Game::render_frame(void)
 	SetRect(&Spart10, 0, 0, 25, 40);
 	D3DXVECTOR3 Scenter10(0.0f, 0.0f, 0.0f);
 	D3DXVECTOR3 Sposition10(875, 100, 0.0f);
+	//총알갯수판
+	RECT Bpart0;
+	SetRect(&Bpart0, 0, 0, 80, 50);
+	D3DXVECTOR3 Bcenter0(0.0f, 0.0f, 0.0f);
+	D3DXVECTOR3 Bposition0(410, 520, 0.0f);
+	d3dspt->Draw(sprite_line, &Bpart0, &Bcenter0, &Bposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+	//총알 갯수
+	RECT Bpart;
+	SetRect(&Bpart, 0, 0, 25, 40);
+	D3DXVECTOR3 Bcenter(0.0f, 0.0f, 0.0f);
+	D3DXVECTOR3 Bposition(415, 525, 0.0f);
+
+	RECT Bpart1;
+	SetRect(&Bpart1, 0, 0, 25, 40);
+	D3DXVECTOR3 Bcenter1(0.0f, 0.0f, 0.0f);
+	D3DXVECTOR3 Bposition1(455, 525, 0.0f);
+	d3dspt->Draw(sprite_score5, &Bpart1, &Bcenter1, &Bposition1, D3DCOLOR_ARGB(255, 255, 255, 255));
+	//switch (bCounter)
+	//{
+	//case 0:
+	//	d3dspt->Draw(sprite_score0, &Bpart, &Bcenter, &Bposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+	//	break;
+	//case 2:
+	//	d3dspt->Draw(sprite_score1, &Bpart, &Bcenter, &Bposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+	//	break;
+	//case 4:
+	//	d3dspt->Draw(sprite_score2, &Bpart, &Bcenter, &Bposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+	//	break;
+	//case 6:
+	//	d3dspt->Draw(sprite_score3, &Bpart, &Bcenter, &Bposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+	//	break;
+	//case 8:
+	//	d3dspt->Draw(sprite_score4, &Bpart, &Bcenter, &Bposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+	//	break;
+	//case 10:
+	//	d3dspt->Draw(sprite_score5, &Bpart, &Bcenter, &Bposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+	//	break;
+	//}
+	if (bCounter == 0)
+	{
+		d3dspt->Draw(sprite_score0, &Bpart, &Bcenter, &Bposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
+	else if (bCounter > 0 && bCounter <= 2)
+	{
+		d3dspt->Draw(sprite_score1, &Bpart, &Bcenter, &Bposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
+	else if (bCounter > 2 && bCounter <= 4)
+	{
+		d3dspt->Draw(sprite_score2, &Bpart, &Bcenter, &Bposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
+	else if (bCounter > 4 && bCounter <= 6)
+	{
+		d3dspt->Draw(sprite_score3, &Bpart, &Bcenter, &Bposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
+	else if (bCounter > 6 && bCounter <= 8)
+	{
+		d3dspt->Draw(sprite_score4, &Bpart, &Bcenter, &Bposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
+	else if (bCounter > 8 && bCounter <= 10)
+	{
+		d3dspt->Draw(sprite_score5, &Bpart, &Bcenter, &Bposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
 	switch (score)
 	{
 	case 1:
@@ -571,74 +756,147 @@ void Game::render_frame(void)
 		break;
 	}
 
-	//Pistol
-	if (pistol.pShow == true)
+	//이펙트 애니메이션
+	if (effecting == true)
 	{
-		RECT part;
-		SetRect(&part, 0, 0, 100, 63);
-		D3DXVECTOR3 center(0.0f, 0.0f, 0.0f);    
-		D3DXVECTOR3 position(pistol.x_pos, pistol.y_pos, 0.0f);
-		d3dspt->Draw(sprite_pistol, &part, &center, &position, D3DCOLOR_ARGB(255, 255, 255, 255));
-	}
-	//Pistol Fire!
-	if (pistol.pShow == false)
-	{
-		RECT part;
-		SetRect(&part, 0, 0, 115, 63);
-		D3DXVECTOR3 center(0.0f, 0.0f, 0.0f);    
-		D3DXVECTOR3 position(pistol.x_pos, pistol.y_pos, 0.0f);   
-		d3dspt->Draw(sprite_pistol2, &part, &center, &position, D3DCOLOR_ARGB(255, 255, 255, 255));
-		pistol.pShow = true;
-	}
-	////bullet
-	if (bullet.bShow == true)
-	{
-		RECT part1;
-		SetRect(&part1, 0, 0, 30, 14);
-		D3DXVECTOR3 center1(0.0f, 0.0f, 0.0f);   
-		D3DXVECTOR3 position1(bullet.x_pos, bullet.y_pos, 0.0f);   
-		d3dspt->Draw(sprite_bullet, &part1, &center1, &position1, D3DCOLOR_ARGB(255, 255, 255, 255));
-	}
-	//bottle animation;
-	if (bottle.breaking == true)
-	{
-		RECT part1;
-		SetRect(&part1, 0, 0, 64, 64);
-		D3DXVECTOR3 center1(0.0f, 0.0f, 0.0f);
-		D3DXVECTOR3 position1(pt.x, pt.y, 0.0f); //애니메이션 좌표 = 마우스좌표
-		static int acounter = 0;
-		acounter += 10;
-		if (acounter >= 20) acounter = 0;
-		switch (acounter / 5)
+		RECT Epart;
+		SetRect(&Epart, 0, 0, 50, 50);
+		D3DXVECTOR3 Ecenter(0.0f, 0.0f, 0.0f);
+		D3DXVECTOR3 Eposition(pt.x-10, pt.y-15, 0.0f);
+		static int ecounter = 0;
+		ecounter++;
+		if (ecounter >= 4)
+		{
+			ecounter = 0;
+			effecting = false;
+		}
+		switch (ecounter)
 		{
 		case 0:
-			d3dspt->Draw(sprite_bBreak, &part1, &center1, &position1, D3DCOLOR_ARGB(255, 255, 255, 255));
+			d3dspt->Draw(sprite_effect1, &Epart, &Ecenter, &Eposition, D3DCOLOR_ARGB(255, 255, 255, 255));
 			break;
 		case 1:
-			d3dspt->Draw(sprite_bBreak2, &part1, &center1, &position1, D3DCOLOR_ARGB(255, 255, 255, 255));
+			d3dspt->Draw(sprite_effect2, &Epart, &Ecenter, &Eposition, D3DCOLOR_ARGB(255, 255, 255, 255));
 			break;
 		case 2:
-			d3dspt->Draw(sprite_bBreak3, &part1, &center1, &position1, D3DCOLOR_ARGB(255, 255, 255, 255));
+			d3dspt->Draw(sprite_effect3, &Epart, &Ecenter, &Eposition, D3DCOLOR_ARGB(255, 255, 255, 255));
 			break;
 		case 3:
-			d3dspt->Draw(sprite_bBreak4, &part1, &center1, &position1, D3DCOLOR_ARGB(255, 255, 255, 255));
+			d3dspt->Draw(sprite_effect4, &Epart, &Ecenter, &Eposition, D3DCOLOR_ARGB(255, 255, 255, 255));
 			break;
 		}
 	}
-	
-		////bottle	
+	if (pistol.pCheck == true)
+	{
+		//Pistol
+		if (pistol.pShow == true)
+		{
+			RECT part;
+			SetRect(&part, 0, 0, 100, 63);
+			D3DXVECTOR3 center(0.0f, 0.0f, 0.0f);
+			D3DXVECTOR3 position(pistol.x_pos, pistol.y_pos, 0.0f);
+			d3dspt->Draw(sprite_pistol, &part, &center, &position, D3DCOLOR_ARGB(255, 255, 255, 255));
+		}
+		//Pistol Fire!
+		if (pistol.pShow == false)
+		{
+			RECT part;
+			SetRect(&part, 0, 0, 115, 63);
+			D3DXVECTOR3 center(0.0f, 0.0f, 0.0f);
+			D3DXVECTOR3 position(pistol.x_pos, pistol.y_pos, 0.0f);
+			d3dspt->Draw(sprite_pistol2, &part, &center, &position, D3DCOLOR_ARGB(255, 255, 255, 255));
+			pistol.pShow = true;
+		}
+		////bullet
+		if (bullet.bShow == true)
+		{
+			RECT part1;
+			SetRect(&part1, 0, 0, 30, 14);
+			D3DXVECTOR3 center1(0.0f, 0.0f, 0.0f);
+			D3DXVECTOR3 position1(bullet.x_pos, bullet.y_pos, 0.0f);
+			d3dspt->Draw(sprite_bullet, &part1, &center1, &position1, D3DCOLOR_ARGB(255, 255, 255, 255));
+		}
+	}
+	////Item
+	if (item.disAppear == false)
+	{
 		RECT rc;
 		SetRect(&rc, 0, 0, 64, 64);
-		
-		D3DXVECTOR2 spriteCenter = D3DXVECTOR2(32 /bottle.scale, 32 /bottle.scale);
+
+		D3DXVECTOR2 spriteCenter = D3DXVECTOR2(32, 32);
 		// Screen position of the sprite
-		D3DXVECTOR2 translate = D3DXVECTOR2(bottle.x_pos, bottle.y_pos);
+		D3DXVECTOR2 translate = D3DXVECTOR2(item.x_pos, item.y_pos);
 		// Scaling X,Y
 
 		iTime = timeGetTime() % 1000;
 		angle = iTime * (2.0f * D3DX_PI) / 1000.0f;
 
-		D3DXVECTOR2 scaling(bottle.scale, bottle.scale);
+		D3DXVECTOR2 scaling(1, 1);
+		D3DXMATRIX matrix;
+
+		D3DXMatrixTransformation2D(
+			&matrix,                // 행렬
+			NULL,                   // 크기를 조정할 때 기준을 왼쪽 상단으로 유지
+			0.0f,                   // 크기 조정 회전 없음
+			&scaling,               // 크기 조정 값
+			&spriteCenter,          // 회전 중심
+			(float)(angle),			// 회전 각도
+			&translate);            // X,Y위치
+
+
+		espt->SetTransform(&matrix);
+		// Draw the sprite
+		espt->Draw(sprite_itemG, NULL, NULL, NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
+	
+
+	//bottle animation;
+	for (int i = 0; i < BOTTLE_NUM-dNum; i++)
+	{
+		if (bottle[i].breaking == true)
+		{
+			RECT part1;
+			SetRect(&part1, 0, 0, 64*(bottle[i].scale), 64 * (bottle[i].scale));
+			D3DXVECTOR3 center1(0.0f,0.0f, 0.0f);
+			D3DXVECTOR3 position1(pt.x, pt.y, 0.0f); //애니메이션 좌표 = 마우스좌표
+
+			static int acounter = 0;
+			acounter++;
+			if (acounter >= 4)
+			{
+				acounter = 0;
+				bottle[i].breaking = false;
+			}
+			switch (acounter)
+			{
+			case 0:
+				d3dspt->Draw(sprite_bBreak, &part1, &center1, &position1, D3DCOLOR_ARGB(255, 255, 255, 255));
+				break;
+			case 1:
+				d3dspt->Draw(sprite_bBreak2, &part1, &center1, &position1, D3DCOLOR_ARGB(255, 255, 255, 255));
+				break;
+			case 2:
+				d3dspt->Draw(sprite_bBreak3, &part1, &center1, &position1, D3DCOLOR_ARGB(255, 255, 255, 255));
+				break;
+			case 3:
+				d3dspt->Draw(sprite_bBreak4, &part1, &center1, &position1, D3DCOLOR_ARGB(255, 255, 255, 255));
+				break;
+			}
+
+		}
+		////bottle	
+		RECT rc;
+		SetRect(&rc, 0, 0, 64*(bottle[i].scale), 64 * (bottle[i].scale));
+
+		D3DXVECTOR2 spriteCenter = D3DXVECTOR2(32 * (bottle[i].scale) / bottle[i].scale* (bottle[i].scale), 32 * (bottle[i].scale) / bottle[i].scale* (bottle[i].scale));
+		// Screen position of the sprite
+		D3DXVECTOR2 translate = D3DXVECTOR2(bottle[i].x_pos, bottle[i].y_pos);
+		// Scaling X,Y
+
+		iTime = timeGetTime() % 1000;
+		angle = iTime * (2.0f * D3DX_PI) / 1000.0f;
+
+		D3DXVECTOR2 scaling(bottle[i].scale, bottle[i].scale);
 		D3DXMATRIX matrix;
 
 		D3DXMatrixTransformation2D(
@@ -654,7 +912,7 @@ void Game::render_frame(void)
 		espt->SetTransform(&matrix);
 		// Draw the sprite
 		espt->Draw(sprite_bottle, NULL, NULL, NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
-	
+	}
 	d3dspt->End();    
 	espt->End();
 	d3ddev->EndScene();
@@ -666,70 +924,116 @@ void Game::render_frame(void)
 
 void Game::init_game(void)
 {
-	//총 초기화 
-	pistol.init(80, 60);
-
-	//오브젝트 초기화
-	bottle.init((float)(200 + rand() % 600), 650);
-
+	for (int i = 0; i < BOTTLE_NUM-dNum; i++)
+	{
+		//오브젝트 초기화
+		bottle[i].init((float)(200 + rand() % 600), 650);
+	}
 	//총알 초기화 
 	bullet.init(pistol.x_pos, pistol.y_pos);
 
+	item.init(600, 650);
 	
 }
 void Game::do_game_logic(void)
 {
+	//배경음악 켜기
+	sound.Bgm();
+	//점수에 따른 오브젝트 갯수변화
+	if (score == 3)
+		dNum = 8;
+	else if (score == 5)
+		dNum = 7;
+	else if (score == 10)
+		dNum = 6;
+	else if (score == 15)
+		dNum = 5;
+	else if (score == 20)
+		dNum = 4;
+	else if (score == 25)
+		dNum = 3;
+	else if (score == 30)
+		dNum = 2;
+	else if (score == 35)
+		dNum = 1;
 
-	//총 처리 
-	//if (KEY_DOWN(0x57))
-	//	pistol.move(MOVE_UP);
-	//
-	//if (KEY_DOWN(0x53))
-	//	pistol.move(MOVE_DOWN);
-	//
-	//if (KEY_DOWN(0x41))
-	//	pistol.move(MOVE_LEFT);
-
-	//if (KEY_DOWN(0x44))
-		pistol.move(MOVE_RIGHT);
-
-
-	//오브젝트 처리
-	if (bottle.x_pos < 0 || bottle.y_pos > 755)
+	//총알 개수 0일 때
+	if (bCounter == 0)
 	{
-		bottle.init((float)(200 + rand() % 600), 650);
-	}
-	else
-	{
-		bottle.breaking = false;
-		bottle.Update(1.0);
-		bottle.Jump();
-	}
-
-	//총알 처리 
-	if (bullet.show() == false)
-	{
-		if (KEY_DOWN(VK_SPACE))
+		if (KEY_DOWN(VK_LBUTTON))
 		{
-			pistol.pShow = false;
-			bullet.active();
-			bullet.init(pistol.x_pos, pistol.y_pos);
+			sound.Gird();
+		}
+	}
+	if (KEY_DOWN(VK_SPACE))
+	{
+		sound.Reload();
+		bCounter = 10;
+	}
+	//총아이템 처리
+	if (score >= 5 )
+	{
+		item.disAppear = false;
+		if (item.x_pos < 0 || item.y_pos > 755)
+		{
+			
+			item.disAppear = true;
+		}
+		else
+		{
+			item.Update(1.0);
+			item.Jump();
+		}
+	}
+	for (int i = 0; i < BOTTLE_NUM-dNum; i++)
+	{
+		//오브젝트 처리
+		if (bottle[i].x_pos < 0 || bottle[i].y_pos > 755)
+		{
+			bottle[i].init((float)(200 + rand() % 600), 750);
+		}
+		else
+		{
+			bottle[i].breaking = false;
+			bottle[i].Update(1.0);
+			bottle[i].Jump();
 		}
 	}
 
+	//총아이템 처리
+	if (pistol.pCheck == true)
+	{
+		pistol.move(MOVE_DOWN);
+		if (bullet.show() == false)
+		{
+			if (KEY_UP(VK_TAB))
+			{
+				pistol.pShow = false;
+				bullet.active();
+				bullet.init(pistol.x_pos, pistol.y_pos);
+			}
+		}
+	}
+	if (pistol.y_pos >= 750)
+		pistol.pCheck = false;
+
+	//총아이템 총 처리
 	if (bullet.show() == true)
 	{
 		if (bullet.x_pos > SCREEN_WIDTH)
 			bullet.hide();
 		else
 			bullet.move();
-
-		//충돌 처리 
-		if (bullet.check_collision(bottle.x_pos, bottle.y_pos) == true)
+		for (int i = 0; i < BOTTLE_NUM-dNum; i++)
 		{
-			bottle.breaking = true;
-			bottle.init((float)(200 + rand() % 300), 750);
-			score++;
+			//충돌 처리 
+			if (bullet.check_collision(bottle[i].x_pos, bottle[i].y_pos) == true)
+			{
+				sound.HitShot();
+				bottle[i].breaking = true;
+				bottle[i].init((float)(200 + rand() % 300), 750);
+				score++;
+			}
 		}
 	}
 	//마우스 좌표얻기
@@ -738,24 +1042,33 @@ void Game::do_game_logic(void)
 	ScreenToClient(hWnd, &pt);
 
 	//마우스 충돌 구현
-	
-	if (KEY_DOWN(VK_LBUTTON))
+	if (bCounter > 0)
 	{
-		sound.Shot();
-		if (pt.x >= bottle.x_pos && pt.x <= bottle.x_pos + (64*bottle.scale) && pt.y >= bottle.y_pos && pt.y <= bottle.y_pos + (64 * bottle.scale))
+		if (KEY_DOWN(VK_LBUTTON))
 		{
-			bottle.breaking = true;
-			bottle.init((float)(200 + rand() % 300), 750);
-			score++;
-		}
-		else if (pt.x >= pistol.x_pos && pt.x <= pistol.x_pos + 64 && pt.y >= pistol.y_pos && pt.y <= pistol.y_pos + 64)
-		{
-			sound.HitShot();
+			bCounter--;
+			sound.Shot();
+			for (int i = 0; i < BOTTLE_NUM - dNum; i++)
+			{
+				if (pt.x >= bottle[i].x_pos && pt.x <= bottle[i].x_pos + (64 * bottle[i].scale) && pt.y >= bottle[i].y_pos && pt.y <= bottle[i].y_pos + (64 * bottle[i].scale))
+				{
+					pistol.pCheck = false;
+					effecting = false;
+					bottle[i].breaking = true;
+					bottle[i].init((float)(200 + rand() % 300), 750);
+					score++;
+				}
+				else if (pt.x >= item.x_pos && pt.x <= item.x_pos + 64 && pt.y >= item.y_pos && pt.y <= item.y_pos + 64)
+				{
+					pistol.pCheck = true;
+					pistol.init(80, 60);
+				}
+				else
+					pistol.pCheck = false;
+					effecting = true;
+			}
 		}
 	}
-		
-	
-	
 
 }
 

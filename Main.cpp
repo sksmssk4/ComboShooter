@@ -22,12 +22,12 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	wc.style = CS_HREDRAW | CS_VREDRAW;
 	wc.lpfnWndProc = (WNDPROC)WindowProc;
 	wc.hInstance = hInstance;
-	wc.hCursor = LoadCursorFromFileA("C:\\Users\\이명현\\Desktop\\aim.ani"); //커서 파일위치
+	wc.hCursor = LoadCursorFromFileA("C:\\Users\\이명현\\Desktop\\졸작파이팅!\\aim.ani"); //커서 파일위치
 
 	wc.lpszClassName = L"WindowClass";
 	RegisterClassEx(&wc);
 
-	hWnd = CreateWindowEx(NULL, L"WindowClass", L"Shooting Master",
+	hWnd = CreateWindowEx(NULL, L"WindowClass", L"Genocide",
 		WS_EX_DLGMODALFRAME | WS_BORDER, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, //TOPMOST->DLGMODALFRAME, POPUP -> BORDER
 		NULL, NULL, hInstance, NULL);
 

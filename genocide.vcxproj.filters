@@ -19,6 +19,7 @@
     <ClCompile Include="Sound.cpp">
       <Filter>소스파일</Filter>
     </ClCompile>
+    <ClCompile Include="Item.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h" />
@@ -40,6 +41,7 @@
     <ClInclude Include="Sound.h">
       <Filter>헤더파일</Filter>
     </ClInclude>
+    <ClInclude Include="Item.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Matrices49860489.rc" />

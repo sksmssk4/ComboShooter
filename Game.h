@@ -11,6 +11,7 @@
 #include <stdio.h>
 
 #include "Sound.h"
+#include "Item.h"
 #include "Entity.h"
 #include "Pistol.h"
 #include "Bottle.h"
@@ -59,21 +60,39 @@ private:
 	LPDIRECT3DTEXTURE9 sprite_bBreak3;
 	LPDIRECT3DTEXTURE9 sprite_bBreak4;
 
+	LPDIRECT3DTEXTURE9 sprite_effect1; //effect animation
+	LPDIRECT3DTEXTURE9 sprite_effect2;
+	LPDIRECT3DTEXTURE9 sprite_effect3;
+	LPDIRECT3DTEXTURE9 sprite_effect4;
+
+	LPDIRECT3DTEXTURE9 sprite_line; //√—æÀ∞πºˆ∆«
+
+	LPDIRECT3DTEXTURE9 sprite_itemG; //æ∆¿Ã≈€
+	LPDIRECT3DTEXTURE9 sprite_itemP;
+	LPDIRECT3DTEXTURE9 sprite_itemM;
+
 	LPDIRECT3DTEXTURE9 sprite_bullet;    
 
 	UINT iTime;
 	FLOAT angle;
 
 	Pistol pistol;
-	Bottle bottle;
+	Bottle bottle[BOTTLE_NUM];
 	Bullet bullet;
 	Sound sound;
+	Item item;
+
 	HWND hWnd;
 	int score = 0;
-	
+	int dNum = 9;
+
+	int bCounter = 10;
+
+	bool effecting = false;
 	
 
 public:
+	
 	void initD3D(HWND hWnd);    // sets up and initializes Direct3D
 	void render_frame(void);    // renders a single frame
 	void cleanD3D(void);		// closes Direct3D and releases memory

@@ -3,7 +3,7 @@
 #include "Entity.h"
 #ifndef BOTTLE_H
 #define BOTTLE_H
-
+#define BOTTLE_NUM 10
 
 class Bottle :public Entity {
 
@@ -13,7 +13,7 @@ public:
 	void init(float x, float y);
 	void Update(float time);
 	void Jump();
-
+	void BottleScale();
 };
 
 #endif

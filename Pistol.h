@@ -7,6 +7,7 @@
 class Pistol :public Entity {
 
 public:
+	bool pCheck = false;
 	bool pShow = true;
 	void fire();
 	void super_fire();

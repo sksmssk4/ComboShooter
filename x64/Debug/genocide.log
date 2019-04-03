@@ -1,0 +1,8 @@
+﻿  Game.cpp
+Game.cpp(18): warning C4458: 'hWnd' 선언은 클래스 멤버를 숨깁니다.
+  c:\users\administrator.msdn-special\desktop\포트폴리오\4학년 졸업작품(directx)\shooting-master-master\Game.h(71): note: 'Game::hWnd' 선언을 참조하십시오.
+Game.cpp(608): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+Game.cpp(610): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+Game.cpp(634): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  genocide.vcxproj -> C:\Users\Administrator.MSDN-SPECIAL\Desktop\포트폴리오\4학년 졸업작품(DirectX)\Shooting-Master-master\x64\Debug\Matrices49860489.exe
+  genocide.vcxproj -> C:\Users\Administrator.MSDN-SPECIAL\Desktop\포트폴리오\4학년 졸업작품(DirectX)\Shooting-Master-master\x64\Debug\Matrices49860489.pdb (Full PDB)
