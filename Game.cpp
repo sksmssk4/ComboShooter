@@ -314,8 +314,8 @@ void Game::initD3D(HWND hWnd)
 	//이펙트 애니메이션
 	D3DXCreateTextureFromFileEx(d3ddev,
 		L"effect1.png",
-		50,
-		50,
+		150,
+		150,
 		D3DX_DEFAULT,
 		NULL,
 		D3DFMT_A8R8G8B8,
@@ -329,8 +329,8 @@ void Game::initD3D(HWND hWnd)
 
 	D3DXCreateTextureFromFileEx(d3ddev,
 		L"effect2.png",
-		50,
-		50,
+		150,
+		150,
 		D3DX_DEFAULT,
 		NULL,
 		D3DFMT_A8R8G8B8,
@@ -344,8 +344,8 @@ void Game::initD3D(HWND hWnd)
 
 	D3DXCreateTextureFromFileEx(d3ddev,
 		L"effect3.png",
-		50,
-		50,
+		150,
+		150,
 		D3DX_DEFAULT,
 		NULL,
 		D3DFMT_A8R8G8B8,
@@ -359,8 +359,8 @@ void Game::initD3D(HWND hWnd)
 
 	D3DXCreateTextureFromFileEx(d3ddev,
 		L"effect4.png",
-		50,
-		50,
+		150,
+		150,
 		D3DX_DEFAULT,
 		NULL,
 		D3DFMT_A8R8G8B8,
@@ -475,18 +475,18 @@ void Game::render_frame(void)
 	RECT Spart;
 	SetRect(&Spart, 0, 0, 25, 40);
 	D3DXVECTOR3 Scenter(0.0f, 0.0f, 0.0f);
-	D3DXVECTOR3 Sposition(925, 100, 0.0f);
+	D3DXVECTOR3 Sposition(score.x_pos+25, score.y_pos, 0.0f);
 	d3dspt->Draw(sprite_score0, &Spart, &Scenter, &Sposition, D3DCOLOR_ARGB(255, 255, 255, 255));
 	//1의자리
 	RECT Spart0;
 	SetRect(&Spart0, 0, 0, 25, 40);
 	D3DXVECTOR3 Scenter0(0.0f, 0.0f, 0.0f);
-	D3DXVECTOR3 Sposition0(900, 100, 0.0f);
+	D3DXVECTOR3 Sposition0(score.x_pos, score.y_pos, 0.0f);
 	//10의 자리
 	RECT Spart10;
 	SetRect(&Spart10, 0, 0, 25, 40);
 	D3DXVECTOR3 Scenter10(0.0f, 0.0f, 0.0f);
-	D3DXVECTOR3 Sposition10(875, 100, 0.0f);
+	D3DXVECTOR3 Sposition10(score.x_pos-25, score.y_pos, 0.0f);
 	//총알갯수판
 	RECT Bpart0;
 	SetRect(&Bpart0, 0, 0, 80, 50);
@@ -504,7 +504,7 @@ void Game::render_frame(void)
 	D3DXVECTOR3 Bcenter1(0.0f, 0.0f, 0.0f);
 	D3DXVECTOR3 Bposition1(455, 525, 0.0f);
 	d3dspt->Draw(sprite_score5, &Bpart1, &Bcenter1, &Bposition1, D3DCOLOR_ARGB(255, 255, 255, 255));
-	//switch (bCounter)
+	//switch (remainbullet.GetCounter())
 	//{
 	//case 0:
 	//	d3dspt->Draw(sprite_score0, &Bpart, &Bcenter, &Bposition, D3DCOLOR_ARGB(255, 255, 255, 255));
@@ -525,31 +525,32 @@ void Game::render_frame(void)
 	//	d3dspt->Draw(sprite_score5, &Bpart, &Bcenter, &Bposition, D3DCOLOR_ARGB(255, 255, 255, 255));
 	//	break;
 	//}
-	if (bCounter == 0)
+	if (remainbullet.GetCounter() == 0)
 	{
 		d3dspt->Draw(sprite_score0, &Bpart, &Bcenter, &Bposition, D3DCOLOR_ARGB(255, 255, 255, 255));
 	}
-	else if (bCounter > 0 && bCounter <= 2)
+	else if (remainbullet.GetCounter() > 0 && remainbullet.GetCounter() <= 2)
 	{
 		d3dspt->Draw(sprite_score1, &Bpart, &Bcenter, &Bposition, D3DCOLOR_ARGB(255, 255, 255, 255));
 	}
-	else if (bCounter > 2 && bCounter <= 4)
+	else if (remainbullet.GetCounter() > 2 && remainbullet.GetCounter() <= 4)
 	{
 		d3dspt->Draw(sprite_score2, &Bpart, &Bcenter, &Bposition, D3DCOLOR_ARGB(255, 255, 255, 255));
 	}
-	else if (bCounter > 4 && bCounter <= 6)
+	else if (remainbullet.GetCounter() > 4 && remainbullet.GetCounter() <= 6)
 	{
 		d3dspt->Draw(sprite_score3, &Bpart, &Bcenter, &Bposition, D3DCOLOR_ARGB(255, 255, 255, 255));
 	}
-	else if (bCounter > 6 && bCounter <= 8)
+	else if (remainbullet.GetCounter() > 6 && remainbullet.GetCounter() <= 8)
 	{
 		d3dspt->Draw(sprite_score4, &Bpart, &Bcenter, &Bposition, D3DCOLOR_ARGB(255, 255, 255, 255));
 	}
-	else if (bCounter > 8 && bCounter <= 10)
+	else if (remainbullet.GetCounter() > 8 && remainbullet.GetCounter() <= 10)
 	{
 		d3dspt->Draw(sprite_score5, &Bpart, &Bcenter, &Bposition, D3DCOLOR_ARGB(255, 255, 255, 255));
 	}
-	switch (score)
+	
+	switch (score.GetNum())
 	{
 	case 1:
 		d3dspt->Draw(sprite_score1, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
@@ -760,9 +761,9 @@ void Game::render_frame(void)
 	if (effecting == true)
 	{
 		RECT Epart;
-		SetRect(&Epart, 0, 0, 50, 50);
+		SetRect(&Epart, 0, 0, 150, 150);
 		D3DXVECTOR3 Ecenter(0.0f, 0.0f, 0.0f);
-		D3DXVECTOR3 Eposition(pt.x-10, pt.y-15, 0.0f);
+		D3DXVECTOR3 Eposition(pt.x-60, pt.y-75, 0.0f);
 		static int ecounter = 0;
 		ecounter++;
 		if (ecounter >= 4)
@@ -818,14 +819,14 @@ void Game::render_frame(void)
 		}
 	}
 	////Item
-	if (item.disAppear == false)
+	if (summonitem.Appear == true)
 	{
 		RECT rc;
 		SetRect(&rc, 0, 0, 64, 64);
 
 		D3DXVECTOR2 spriteCenter = D3DXVECTOR2(32, 32);
 		// Screen position of the sprite
-		D3DXVECTOR2 translate = D3DXVECTOR2(item.x_pos, item.y_pos);
+		D3DXVECTOR2 translate = D3DXVECTOR2(summonitem.x_pos, summonitem.y_pos);
 		// Scaling X,Y
 
 		iTime = timeGetTime() % 1000;
@@ -924,6 +925,9 @@ void Game::render_frame(void)
 
 void Game::init_game(void)
 {
+	//스코어 초기화
+	score.init(900, 100);
+	pistol.init(80, 60);
 	for (int i = 0; i < BOTTLE_NUM-dNum; i++)
 	{
 		//오브젝트 초기화
@@ -932,33 +936,32 @@ void Game::init_game(void)
 	//총알 초기화 
 	bullet.init(pistol.x_pos, pistol.y_pos);
 
-	item.init(600, 650);
-	
+	summonitem.init(600, 750);
 }
 void Game::do_game_logic(void)
 {
 	//배경음악 켜기
 	sound.Bgm();
 	//점수에 따른 오브젝트 갯수변화
-	if (score == 3)
+	if (score.GetNum() == 3)
 		dNum = 8;
-	else if (score == 5)
+	else if (score.GetNum() == 5)
 		dNum = 7;
-	else if (score == 10)
+	else if (score.GetNum() == 10)
 		dNum = 6;
-	else if (score == 15)
+	else if (score.GetNum() == 15)
 		dNum = 5;
-	else if (score == 20)
+	else if (score.GetNum() == 20)
 		dNum = 4;
-	else if (score == 25)
+	else if (score.GetNum() == 25)
 		dNum = 3;
-	else if (score == 30)
+	else if (score.GetNum() == 30)
 		dNum = 2;
-	else if (score == 35)
+	else if (score.GetNum() == 35)
 		dNum = 1;
 
 	//총알 개수 0일 때
-	if (bCounter == 0)
+	if (remainbullet.GetCounter() == 0)
 	{
 		if (KEY_DOWN(VK_LBUTTON))
 		{
@@ -968,23 +971,34 @@ void Game::do_game_logic(void)
 	if (KEY_DOWN(VK_SPACE))
 	{
 		sound.Reload();
-		bCounter = 10;
+		remainbullet.SetCounter(10);
 	}
 	//총아이템 처리
-	if (score >= 5 )
+	if (score.GetNum() >= 5)
 	{
-		item.disAppear = false;
-		if (item.x_pos < 0 || item.y_pos > 755)
+		summonitem.Appear = true;
+	}
+	else if (score.GetNum() >= 15 && summonitem.Appear == false)
+	{
+		summonitem.Appear = true;
+		summonitem.init(600, 750);
+	}
+	
+	if (summonitem.Appear == true)
+	{
+		if (summonitem.x_pos < 0 || summonitem.y_pos > 755)
 		{
-			
-			item.disAppear = true;
+			summonitem.Appear = false;
 		}
 		else
 		{
-			item.Update(1.0);
-			item.Jump();
+			summonitem.Update(1.0);
+			summonitem.Jump();
 		}
 	}
+	
+	
+	
 	for (int i = 0; i < BOTTLE_NUM-dNum; i++)
 	{
 		//오브젝트 처리
@@ -1017,7 +1031,7 @@ void Game::do_game_logic(void)
 	if (pistol.y_pos >= 750)
 		pistol.pCheck = false;
 
-	//총아이템 총 처리
+	//총아이템 총알 처리
 	if (bullet.show() == true)
 	{
 		if (bullet.x_pos > SCREEN_WIDTH)
@@ -1032,7 +1046,8 @@ void Game::do_game_logic(void)
 				sound.HitShot();
 				bottle[i].breaking = true;
 				bottle[i].init((float)(200 + rand() % 300), 750);
-				score++;
+				
+				score.SetNum(score.GetNum() + 1);
 			}
 		}
 	}
@@ -1042,29 +1057,29 @@ void Game::do_game_logic(void)
 	ScreenToClient(hWnd, &pt);
 
 	//마우스 충돌 구현
-	if (bCounter > 0)
+	if (remainbullet.GetCounter() > 0)
 	{
 		if (KEY_DOWN(VK_LBUTTON))
 		{
-			bCounter--;
+			remainbullet.SetCounter(remainbullet.GetCounter()-1);
 			sound.Shot();
 			for (int i = 0; i < BOTTLE_NUM - dNum; i++)
 			{
 				if (pt.x >= bottle[i].x_pos && pt.x <= bottle[i].x_pos + (64 * bottle[i].scale) && pt.y >= bottle[i].y_pos && pt.y <= bottle[i].y_pos + (64 * bottle[i].scale))
 				{
-					pistol.pCheck = false;
 					effecting = false;
 					bottle[i].breaking = true;
 					bottle[i].init((float)(200 + rand() % 300), 750);
-					score++;
+					score.SetNum(score.GetNum() + 1);
 				}
-				else if (pt.x >= item.x_pos && pt.x <= item.x_pos + 64 && pt.y >= item.y_pos && pt.y <= item.y_pos + 64)
+				else if (pt.x >= summonitem.x_pos && pt.x <= summonitem.x_pos + 64 && pt.y >= summonitem.y_pos && pt.y <= summonitem.y_pos + 64)
 				{
+					summonitem.Appear = false;
+					summonitem.init(600, 900);
 					pistol.pCheck = true;
 					pistol.init(80, 60);
 				}
 				else
-					pistol.pCheck = false;
 					effecting = true;
 			}
 		}

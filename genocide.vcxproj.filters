@@ -19,7 +19,12 @@
     <ClCompile Include="Sound.cpp">
       <Filter>소스파일</Filter>
     </ClCompile>
-    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="SummonItem.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Score.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h" />
@@ -41,7 +46,15 @@
     <ClInclude Include="Sound.h">
       <Filter>헤더파일</Filter>
     </ClInclude>
-    <ClInclude Include="Item.h" />
+    <ClInclude Include="SummonItem.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Score.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Remainbullet.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Matrices49860489.rc" />

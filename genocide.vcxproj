@@ -31,7 +31,6 @@
     <ProjectGuid>{D3D09003-96D0-4629-88B8-122C0256058C}</ProjectGuid>
     <RootNamespace>Matrices49860489</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -379,7 +378,8 @@
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Bottle.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="Score.cpp" />
+    <ClCompile Include="SummonItem.cpp" />
     <ClCompile Include="Pistol.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Sound.cpp" />
@@ -391,7 +391,9 @@
     <ClInclude Include="Bottle.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="Item.h" />
+    <ClInclude Include="Remainbullet.h" />
+    <ClInclude Include="Score.h" />
+    <ClInclude Include="SummonItem.h" />
     <ClInclude Include="Pistol.h" />
     <CLInclude Include="resource.h" />
     <ClInclude Include="Sound.h" />

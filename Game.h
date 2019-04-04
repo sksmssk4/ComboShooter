@@ -10,8 +10,10 @@
 
 #include <stdio.h>
 
+#include "Remainbullet.h"
+#include "Score.h"
 #include "Sound.h"
-#include "Item.h"
+#include "SummonItem.h"
 #include "Entity.h"
 #include "Pistol.h"
 #include "Bottle.h"
@@ -50,6 +52,7 @@ private:
 	LPDIRECT3DTEXTURE9 sprite_score7;
 	LPDIRECT3DTEXTURE9 sprite_score8;
 	LPDIRECT3DTEXTURE9 sprite_score9;
+
 	LPDIRECT3DTEXTURE9 sprite;
 	
 	LPDIRECT3DTEXTURE9 sprite_pistol;   
@@ -80,14 +83,11 @@ private:
 	Bottle bottle[BOTTLE_NUM];
 	Bullet bullet;
 	Sound sound;
-	Item item;
-
+	SummonItem summonitem;
+	Score score;
+	Remainbullet remainbullet;
 	HWND hWnd;
-	int score = 0;
 	int dNum = 9;
-
-	int bCounter = 10;
-
 	bool effecting = false;
 	
 
