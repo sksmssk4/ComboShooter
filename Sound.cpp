@@ -12,6 +12,10 @@ void Sound::Bgm()
 	mciSendCommand(dwID, MCI_PLAY, MCI_NOTIFY, (DWORD)(LPVOID)&mci_play);
 	//À½¾ÇÀç»ý²ô±â//mciSendCommand(3, MCI_SEEK, MCI_SEEK_TO_START, (DWORD)(LPVOID)NULL);
 }
+void Sound::bgmEnd()
+{
+	mciSendCommand(dwID, MCI_SEEK, MCI_SEEK_TO_START, (DWORD)(LPVOID)NULL);
+}
 //Çã°ø¼¦
 void Sound::Shot()
 {

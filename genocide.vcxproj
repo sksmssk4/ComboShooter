@@ -377,6 +377,8 @@
   <ItemGroup>
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Bottle.cpp" />
+    <ClCompile Include="SummonItem2.cpp" />
+    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Score.cpp" />
     <ClCompile Include="SummonItem.cpp" />
@@ -389,6 +391,8 @@
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Bottle.h" />
+    <ClInclude Include="SummonItem2.h" />
+    <ClInclude Include="Timer.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Remainbullet.h" />

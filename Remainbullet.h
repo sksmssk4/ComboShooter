@@ -3,8 +3,10 @@
 class Remainbullet
 {
 private:
-	int bCounter = 10;
+	int bCounter = 5;
+	
 public:
+	bool isShooting = false;
 	int GetCounter() { return bCounter; }
 	void SetCounter(int counter) { bCounter = counter; }
 

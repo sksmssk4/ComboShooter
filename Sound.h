@@ -15,6 +15,7 @@ private:
 
 public:
 	void Bgm();
+	void bgmEnd();
 	void Shot();
 	void HitShot();
 	void Gird();

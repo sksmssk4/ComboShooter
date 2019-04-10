@@ -7,13 +7,15 @@
 #include <d3dx9.h>
 #include <iostream>
 #include <stdlib.h>
-
+#include <time.h>
 #include <stdio.h>
 
+#include "Timer.h"
 #include "Remainbullet.h"
 #include "Score.h"
 #include "Sound.h"
 #include "SummonItem.h"
+#include "SummonItem2.h"
 #include "Entity.h"
 #include "Pistol.h"
 #include "Bottle.h"
@@ -40,6 +42,11 @@ private:
 	LPDIRECT3DDEVICE9 d3ddev;    // LP_3DDEVICE
 	LPD3DXSPRITE d3dspt;    // LP_SPRITE
 	LPD3DXSPRITE espt;
+
+	LPDIRECT3DTEXTURE9 sprite_ending;
+
+	LPDIRECT3DTEXTURE9 sprite_dz;
+	LPDIRECT3DTEXTURE9 sprite_dz2;
 
 	LPDIRECT3DTEXTURE9 sprite_bg; //LP_TEXTURE
 	LPDIRECT3DTEXTURE9 sprite_score0;
@@ -79,16 +86,20 @@ private:
 	UINT iTime;
 	FLOAT angle;
 
+	Timer timer;
 	Pistol pistol;
 	Bottle bottle[BOTTLE_NUM];
 	Bullet bullet;
 	Sound sound;
 	SummonItem summonitem;
+	SummonItem2 summonitem2;
 	Score score;
 	Remainbullet remainbullet;
 	HWND hWnd;
 	int dNum = 9;
 	bool effecting = false;
+	bool ingame = true;
+	bool ending = false;
 	
 
 public:

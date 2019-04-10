@@ -25,6 +25,12 @@
     <ClCompile Include="Score.cpp">
       <Filter>소스파일</Filter>
     </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
+    <ClCompile Include="SummonItem2.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h" />
@@ -53,6 +59,12 @@
       <Filter>헤더파일</Filter>
     </ClInclude>
     <ClInclude Include="Remainbullet.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="SummonItem2.h">
       <Filter>헤더파일</Filter>
     </ClInclude>
   </ItemGroup>
