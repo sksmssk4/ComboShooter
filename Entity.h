@@ -6,7 +6,7 @@
 class Entity {
 
 public:
-	float scale = 1.0;
+
 
 	float x_pos;
 	float y_pos;

@@ -31,6 +31,7 @@
     <ProjectGuid>{D3D09003-96D0-4629-88B8-122C0256058C}</ProjectGuid>
     <RootNamespace>Matrices49860489</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -376,7 +377,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bullet.cpp" />
-    <ClCompile Include="Bottle.cpp" />
+    <ClCompile Include="Enemy1.cpp" />
+    <ClCompile Include="Enemy2.cpp" />
+    <ClCompile Include="Enemy3.cpp" />
+    <ClCompile Include="lEnemy1.cpp" />
     <ClCompile Include="SummonItem2.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -390,7 +394,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
-    <ClInclude Include="Bottle.h" />
+    <ClInclude Include="Enemy1.h" />
+    <ClInclude Include="Enemy2.h" />
+    <ClInclude Include="Enemy3.h" />
+    <ClInclude Include="lEnemy1.h" />
     <ClInclude Include="SummonItem2.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Entity.h" />

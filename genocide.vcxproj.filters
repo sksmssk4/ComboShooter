@@ -13,9 +13,6 @@
     <ClCompile Include="Pistol.cpp">
       <Filter>소스파일</Filter>
     </ClCompile>
-    <ClCompile Include="Bottle.cpp">
-      <Filter>소스파일</Filter>
-    </ClCompile>
     <ClCompile Include="Sound.cpp">
       <Filter>소스파일</Filter>
     </ClCompile>
@@ -31,6 +28,16 @@
     <ClCompile Include="SummonItem2.cpp">
       <Filter>소스파일</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy1.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
+    <ClCompile Include="lEnemy1.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy2.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h" />
@@ -44,9 +51,6 @@
       <Filter>헤더파일</Filter>
     </ClInclude>
     <ClInclude Include="Pistol.h">
-      <Filter>헤더파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Bottle.h">
       <Filter>헤더파일</Filter>
     </ClInclude>
     <ClInclude Include="Sound.h">
@@ -67,6 +71,16 @@
     <ClInclude Include="SummonItem2.h">
       <Filter>헤더파일</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy1.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="lEnemy1.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy2.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy3.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Matrices49860489.rc" />

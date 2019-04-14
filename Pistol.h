@@ -11,8 +11,8 @@ public:
 	bool pCheck = false;
 	//Pistol 등장 유무
 	bool pShow = true;
-	void move(int i);
 	void init(float x, float y);
+	void move();
 
 };
 

@@ -19,21 +19,21 @@ void Sound::bgmEnd()
 //허공샷
 void Sound::Shot()
 {
-	sndPlaySoundA("C:\\Users\\Administrator.MSDN-SPECIAL\\Downloads\\Shooting-Master-master\\sound\\gun2", SND_ASYNC | SND_NODEFAULT | SND_ASYNC);
+	sndPlaySoundA("C:\\Users\\이명현\\Desktop\\졸작파이팅!\\Shooting-Master-master\\sound\\gun2", SND_ASYNC | SND_NODEFAULT | SND_ASYNC);
 		
 }
 //명중샷
 void Sound::HitShot()
 {	
-	sndPlaySoundA("C:\\Users\\Administrator.MSDN-SPECIAL\\Downloads\\Shooting-Master-master\\sound\\glass_break", SND_ASYNC | SND_NODEFAULT | SND_ASYNC);
+	sndPlaySoundA("C:\\Users\\이명현\\Desktop\\졸작파이팅!\\Shooting-Master-master\\sound\\glass_break", SND_ASYNC | SND_NODEFAULT | SND_ASYNC);
 }
 //총알 없을 때 발사
 void Sound::Gird()
 {
-	sndPlaySoundA("C:\\Users\\Administrator.MSDN-SPECIAL\\Downloads\\Shooting-Master-master\\sound\\gird", SND_ASYNC | SND_NODEFAULT | SND_ASYNC);
+	sndPlaySoundA("C:\\Users\\이명현\\Desktop\\졸작파이팅!\\Shooting-Master-master\\sound\\gird", SND_ASYNC | SND_NODEFAULT | SND_ASYNC);
 }
 //재장전
 void Sound::Reload()
 {
-	sndPlaySoundA("C:\\Users\\Administrator.MSDN-SPECIAL\\Downloads\\Shooting-Master-master\\sound\\reload", SND_ASYNC | SND_NODEFAULT | SND_ASYNC);
+	sndPlaySoundA("C:\\Users\\이명현\\Desktop\\졸작파이팅!\\Shooting-Master-master\\sound\\reload", SND_ASYNC | SND_NODEFAULT | SND_ASYNC);
 }

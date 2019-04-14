@@ -22,7 +22,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	wc.style = CS_HREDRAW | CS_VREDRAW;
 	wc.lpfnWndProc = (WNDPROC)WindowProc;
 	wc.hInstance = hInstance;
-	wc.hCursor = LoadCursorFromFileA("C:\\Users\\Administrator.MSDN-SPECIAL\\Downloads\\Shooting-Master-master\\aim.ani"); //커서 파일위치
+	wc.hCursor = LoadCursorFromFileA("C:\\Users\\이명현\\Desktop\\졸작파이팅!\\Shooting-Master-master\\aim.ani"); //커서 파일위치
 
 	wc.lpszClassName = L"WindowClass";
 	RegisterClassEx(&wc);

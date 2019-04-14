@@ -18,7 +18,10 @@
 #include "SummonItem2.h"
 #include "Entity.h"
 #include "Pistol.h"
-#include "Bottle.h"
+#include "lEnemy1.h"
+#include "Enemy1.h"
+#include "Enemy2.h"
+#include "Enemy3.h"
 #include "Bullet.h"
 #define SCREEN_WIDTH 960
 #define SCREEN_HEIGHT 640
@@ -64,20 +67,44 @@ private:
 	
 	LPDIRECT3DTEXTURE9 sprite_pistol;   
 	LPDIRECT3DTEXTURE9 sprite_pistol2;	//pistol animation 
-	LPDIRECT3DTEXTURE9 sprite_bottle;
-	LPDIRECT3DTEXTURE9 sprite_bBreak;	//bottle breaking animation
+	
+	
+	///////////////////////////enemy1
+	LPDIRECT3DTEXTURE9 sprite_enemy1;
+	LPDIRECT3DTEXTURE9 sprite_enemy2;
+	LPDIRECT3DTEXTURE9 sprite_enemy3;
+	LPDIRECT3DTEXTURE9 sprite_enemy4;
+
+	LPDIRECT3DTEXTURE9 sprite_lenemy1;
+	LPDIRECT3DTEXTURE9 sprite_lenemy2;
+	LPDIRECT3DTEXTURE9 sprite_lenemy3;
+	LPDIRECT3DTEXTURE9 sprite_lenemy4;
+	///////////////////////////enemy2
+	LPDIRECT3DTEXTURE9 sprite_enemy2_1;
+	LPDIRECT3DTEXTURE9 sprite_enemy2_2;
+	///////////////////////////enemy3
+	LPDIRECT3DTEXTURE9 sprite_enemy3_1;
+	LPDIRECT3DTEXTURE9 sprite_enemy3_2;
+	//bottle breaking animation
 	LPDIRECT3DTEXTURE9 sprite_bBreak2;
+	LPDIRECT3DTEXTURE9 sprite_bBreak;	
 	LPDIRECT3DTEXTURE9 sprite_bBreak3;
 	LPDIRECT3DTEXTURE9 sprite_bBreak4;
-
-	LPDIRECT3DTEXTURE9 sprite_effect1; //effect animation
+	//effect animation
+	LPDIRECT3DTEXTURE9 sprite_effect1; 
 	LPDIRECT3DTEXTURE9 sprite_effect2;
 	LPDIRECT3DTEXTURE9 sprite_effect3;
 	LPDIRECT3DTEXTURE9 sprite_effect4;
-
-	LPDIRECT3DTEXTURE9 sprite_line; //√—æÀ∞πºˆ∆«
-
-	LPDIRECT3DTEXTURE9 sprite_itemG; //æ∆¿Ã≈€
+	//attack animation
+	LPDIRECT3DTEXTURE9 sprite_attack1;
+	LPDIRECT3DTEXTURE9 sprite_attack2;
+	LPDIRECT3DTEXTURE9 sprite_attack3;
+	LPDIRECT3DTEXTURE9 sprite_attack4;
+	LPDIRECT3DTEXTURE9 sprite_attack5;
+	//√—æÀ∞πºˆ∆«
+	LPDIRECT3DTEXTURE9 sprite_line; 
+	//æ∆¿Ã≈€
+	LPDIRECT3DTEXTURE9 sprite_itemG;
 	LPDIRECT3DTEXTURE9 sprite_itemP;
 	LPDIRECT3DTEXTURE9 sprite_itemM;
 
@@ -88,7 +115,10 @@ private:
 
 	Timer timer;
 	Pistol pistol;
-	Bottle bottle[BOTTLE_NUM];
+	lEnemy1 lenemy1[ENEMY1_NUM];
+	Enemy1 enemy1[LENEMY1_NUM];
+	Enemy2 enemy2[ENEMY2_NUM];
+	Enemy3 enemy3;
 	Bullet bullet;
 	Sound sound;
 	SummonItem summonitem;
@@ -96,8 +126,11 @@ private:
 	Score score;
 	Remainbullet remainbullet;
 	HWND hWnd;
-	int dNum = 9;
+
+	int dNum = 5;
+	int dNum2 = 5;
 	bool effecting = false;
+	bool breaking = false;
 	bool ingame = true;
 	bool ending = false;
 	
