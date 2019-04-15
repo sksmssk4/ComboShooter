@@ -101,6 +101,9 @@ private:
 	LPDIRECT3DTEXTURE9 sprite_attack3;
 	LPDIRECT3DTEXTURE9 sprite_attack4;
 	LPDIRECT3DTEXTURE9 sprite_attack5;
+	//skill animation
+	LPDIRECT3DTEXTURE9 sprite_deathshower1;
+	LPDIRECT3DTEXTURE9 sprite_deathshower2;
 	//√—æÀ∞πºˆ∆«
 	LPDIRECT3DTEXTURE9 sprite_line; 
 	//æ∆¿Ã≈€
@@ -133,6 +136,8 @@ private:
 	bool breaking = false;
 	bool ingame = true;
 	bool ending = false;
+	bool skill = false;
+	bool machinegun = false;
 	
 
 public:

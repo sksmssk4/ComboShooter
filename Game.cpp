@@ -547,7 +547,35 @@ void Game::initD3D(HWND hWnd)
 		NULL,    
 		NULL,    
 		&sprite_bullet);   
-
+	///////////////////////////스킬발동애니메이션
+	D3DXCreateTextureFromFileEx(d3ddev,
+		L"death_shower.png",
+		400,
+		400,
+		D3DX_DEFAULT,
+		NULL,
+		D3DFMT_A8R8G8B8,
+		D3DPOOL_MANAGED,
+		D3DX_DEFAULT,
+		D3DX_DEFAULT,
+		D3DCOLOR_XRGB(255, 0, 255),
+		NULL,
+		NULL,
+		&sprite_deathshower1);
+	D3DXCreateTextureFromFileEx(d3ddev,
+		L"death_shower2.png",
+		400,
+		400,
+		D3DX_DEFAULT,
+		NULL,
+		D3DFMT_A8R8G8B8,
+		D3DPOOL_MANAGED,
+		D3DX_DEFAULT,
+		D3DX_DEFAULT,
+		D3DCOLOR_XRGB(255, 0, 255),
+		NULL,
+		NULL,
+		&sprite_deathshower2);
 	return;
 }
 void Game::render_frame(void)
@@ -619,6 +647,7 @@ void Game::render_frame(void)
 		SetRect(&Bpart1, 0, 0, 25, 40);
 		D3DXVECTOR3 Bcenter1(0.0f, 0.0f, 0.0f);
 		D3DXVECTOR3 Bposition1(455, 525, 0.0f);
+		
 		//Max bullet
 		d3dspt->Draw(sprite_score5, &Bpart1, &Bcenter1, &Bposition1, D3DCOLOR_ARGB(255, 255, 255, 255));
 		//Remain bullet
@@ -881,7 +910,52 @@ void Game::render_frame(void)
 			d3dspt->Draw(sprite_score0, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
 			break;
 		}
+		//is SKill
+		if (skill == true )
+		{
+			RECT Spart;
+			SetRect(&Spart, 0, 0, 400, 400);
+			D3DXVECTOR3 Scenter(0.0f, 0.0f, 0.0f);
+			D3DXVECTOR3 Sposition(260.0f, 0.0f, 0.0f);
+			static int sEcounter = 0;
+			sEcounter++;
+			if (sEcounter >= 50)
+			{
+				sEcounter = 0;
+				skill = false;
+				machinegun = true;
+			}
+				switch (sEcounter)
+				{
+				case 1:case 5:
+					d3dspt->Draw(sprite_deathshower1, &Spart, &Scenter, &Sposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+					break;
+				case 10:case 15:
+					d3dspt->Draw(sprite_deathshower2, &Spart, &Scenter, &Sposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+					break;
+				case 20:case 25:
+					d3dspt->Draw(sprite_deathshower1, &Spart, &Scenter, &Sposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+					break;
+				case 30:case 35:
+					d3dspt->Draw(sprite_deathshower2, &Spart, &Scenter, &Sposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+					break;
+				case 40:case 45:
+					d3dspt->Draw(sprite_deathshower1, &Spart, &Scenter, &Sposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+					break;
+				case 46:case 49:
+					d3dspt->Draw(sprite_deathshower2, &Spart, &Scenter, &Sposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+				}
 
+		}
+		//machinegun mode
+		if(machinegun == true)
+		{
+			RECT Mpart;
+			SetRect(&Mpart, 0, 0, 960, 640);
+			D3DXVECTOR3 Mcenter(0.0f, 0.0f, 0.0f);
+			D3DXVECTOR3 Mposition(0.0f, 0.0f, 0.0f);
+			d3dspt->Draw(sprite_attack5, &Mpart, &Mcenter, &Mposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+		}
 		//이펙트 애니메이션
 		if (effecting == true)
 		{
@@ -1041,7 +1115,7 @@ void Game::render_frame(void)
 			D3DXVECTOR3 Aposition4(0.0f, 0.0f, 0.0f);
 			static int aAcounter = 0;
 			aAcounter++;
-			if (aAcounter >= 25)
+			if (aAcounter >= 31)
 			{
 				aAcounter = 0;
 				enemy3.attack = false;
@@ -1060,7 +1134,7 @@ void Game::render_frame(void)
 			case 9:case 10:case 11:case 12:case 13:
 				d3dspt->Draw(sprite_attack4, &Apart4, &Acenter, &Aposition4, D3DCOLOR_ARGB(255, 255, 255, 255));
 				break;
-			case 14:case 15:case 16:case 17:case 18:case 19:case 20:case 21: case 22: case 23: case 24:
+			case 14:case 15:case 16:case 17:case 18:case 19:case 20:case 21: case 22: case 23: case 24: case 25: case 26: case 27: case 28: case 29: case 30:
 				d3dspt->Draw(sprite_attack5, &Apart4, &Acenter, &Aposition4, D3DCOLOR_ARGB(255, 255, 255, 255));
 				break;
 			}
@@ -1192,13 +1266,13 @@ void Game::render_frame(void)
 				}
 
 			}
-			d3dspt->End();
-			espt->End();
-			d3ddev->EndScene();
-
-			d3ddev->Present(NULL, NULL, NULL, NULL);
-			return;
 		}
+		d3dspt->End();
+		espt->End();
+		d3ddev->EndScene();
+
+		d3ddev->Present(NULL, NULL, NULL, NULL);
+		return;
 	}
 	//스테이지 끝날 경우
 	if (ending == true)
@@ -1501,7 +1575,7 @@ void Game::do_game_logic(void)
 		ingame = false;
 	}
 	timer.move();
-	if (timer.x_pos < 200)
+	if (timer.x_pos < 100)
 	{
 		ingame = false;
 		ending = true;
@@ -1532,6 +1606,11 @@ void Game::do_game_logic(void)
 	{
 		sound.Reload();
 		remainbullet.SetCounter(5);
+	}
+	if (KEY_DOWN(VK_DELETE))
+	{
+		sound.SkillSound();
+		skill = true;
 	}
 	//총아이템 처리
 	if (score.GetNum() == 5)
@@ -1642,26 +1721,77 @@ void Game::do_game_logic(void)
 	//윈도우화면 마우스 좌표
 	ScreenToClient(hWnd, &pt);
 	//마우스 충돌 구현
-	if (remainbullet.GetCounter() > 0)
+	if (machinegun == false)
 	{
-		if (KEY_UP(VK_LBUTTON))
+		if (remainbullet.GetCounter() > 0)
 		{
-			clock_t begin2;
-			begin2 = clock();
-			double i = 100;
-			double j = 1000;
-			double rst = 0.5;
-			if ((begin2 / i) - (begin2 / j) > rst)
+			if (KEY_UP(VK_LBUTTON))
 			{
-				remainbullet.isShooting = false;
+				clock_t begin2;
+				begin2 = clock();
+				double i = 100;
+				double j = 1000;
+				double rst = 0.5;
+				if ((begin2 / i) - (begin2 / j) > rst)
+				{
+					remainbullet.isShooting = false;
+				}
+			}
+			if (KEY_DOWN(VK_LBUTTON) && remainbullet.isShooting == false)
+			{
+				effecting = true;
+				remainbullet.isShooting = true;
+				remainbullet.SetCounter(remainbullet.GetCounter() - 1);
+				sound.Shot();
+				for (int i = 0; i < ENEMY1_NUM - dNum; i++)
+				{
+					if (pt.x >= enemy1[i].x_pos && pt.x <= enemy1[i].x_pos + 60 && pt.y >= enemy1[i].y_pos && pt.y <= enemy1[i].y_pos + 86)
+					{
+						effecting = false;
+						breaking = true;
+						enemy1[i].init((float)(960 + rand() % 100), (float)(300 + rand() % 200));
+						score.SetNum(score.GetNum() + 1);
+					}
+				}
+				for (int i = 0; i < LENEMY1_NUM - dNum; i++)
+				{
+					if (pt.x >= lenemy1[i].x_pos && pt.x <= lenemy1[i].x_pos + 60 && pt.y >= lenemy1[i].y_pos && pt.y <= lenemy1[i].y_pos + 86)
+					{
+						effecting = false;
+						breaking = true;
+						lenemy1[i].init((float)(0 - rand() % 100), (float)(300 + rand() % 200));
+						score.SetNum(score.GetNum() + 1);
+					}
+				}
+				if (pt.x >= summonitem.x_pos && pt.x <= summonitem.x_pos + 64 && pt.y >= summonitem.y_pos && pt.y <= summonitem.y_pos + 64)
+				{
+					summonitem.Appear = false;
+					summonitem.init(600, 950);
+					pistol.pCheck = true;
+					pistol.init(80, 60);
+				}
+				else if (pt.x >= summonitem2.x_pos && pt.x <= summonitem2.x_pos + 64 && pt.y >= summonitem2.y_pos && pt.y <= summonitem2.y_pos + 64)
+				{
+					summonitem2.Appear = false;
+					summonitem2.init(600, 950);
+					summonitem2.Giantization = true;
+				}
+				else if (pt.x >= enemy3.x_pos && pt.x <= enemy3.x_pos + 60 && pt.y >= enemy3.y_pos && pt.y <= enemy3.y_pos + 86)
+				{
+					enemy3.attack = true;
+					enemy3.init((float)(960 + rand() % 100), (float)(300 + rand() % 200));
+				}
+				if (summonitem2.Giantization == true)
+					scale = 2;
 			}
 		}
-		if (KEY_DOWN(VK_LBUTTON)&& remainbullet.isShooting == false)
+	}
+	else if (machinegun == true)
+	{
+		sound.SkillShot();
+		if (KEY_UP(VK_LBUTTON))
 		{
 			effecting = true;
-			remainbullet.isShooting = true;
-			remainbullet.SetCounter(remainbullet.GetCounter() - 1);
-			sound.Shot();
 			for (int i = 0; i < ENEMY1_NUM - dNum; i++)
 			{
 				if (pt.x >= enemy1[i].x_pos && pt.x <= enemy1[i].x_pos + 60 && pt.y >= enemy1[i].y_pos && pt.y <= enemy1[i].y_pos + 86)
@@ -1682,26 +1812,11 @@ void Game::do_game_logic(void)
 					score.SetNum(score.GetNum() + 1);
 				}
 			}
-			if (pt.x >= summonitem.x_pos && pt.x <= summonitem.x_pos + 64 && pt.y >= summonitem.y_pos && pt.y <= summonitem.y_pos + 64)
-			{
-				summonitem.Appear = false;
-				summonitem.init(600, 950);
-				pistol.pCheck = true;
-				pistol.init(80, 60);
-			}
-			else if (pt.x >= summonitem2.x_pos && pt.x <= summonitem2.x_pos + 64 && pt.y >= summonitem2.y_pos && pt.y <= summonitem2.y_pos + 64)
-			{
-				summonitem2.Appear = false;
-				summonitem2.init(600, 950);
-				summonitem2.Giantization = true;
-			}
-			else if (pt.x >= enemy3.x_pos && pt.x <= enemy3.x_pos + 60 && pt.y >= enemy3.y_pos && pt.y <= enemy3.y_pos + 86)
+			if (pt.x >= enemy3.x_pos && pt.x <= enemy3.x_pos + 60 && pt.y >= enemy3.y_pos && pt.y <= enemy3.y_pos + 86)
 			{
 				enemy3.attack = true;
 				enemy3.init((float)(960 + rand() % 100), (float)(300 + rand() % 200));
 			}
-			if (summonitem2.Giantization == true)
-				scale = 2;
 		}
 	}
 }

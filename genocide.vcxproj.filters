@@ -37,7 +37,9 @@
     <ClCompile Include="Enemy2.cpp">
       <Filter>소스파일</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy3.cpp" />
+    <ClCompile Include="Enemy3.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h" />
@@ -80,7 +82,9 @@
     <ClInclude Include="Enemy2.h">
       <Filter>헤더파일</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy3.h" />
+    <ClInclude Include="Enemy3.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Matrices49860489.rc" />
