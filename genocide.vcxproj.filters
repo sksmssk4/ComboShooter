@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico" />
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="헤더파일">

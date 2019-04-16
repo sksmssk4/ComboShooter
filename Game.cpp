@@ -62,10 +62,12 @@ void Game::initD3D(HWND hWnd)
 	D3DXCreateTextureFromFileEx(d3ddev,L"clear.png",D3DX_DEFAULT,D3DX_DEFAULT,D3DX_DEFAULT,NULL,D3DFMT_A8R8G8B8,D3DPOOL_MANAGED,
 		D3DX_DEFAULT,D3DX_DEFAULT,D3DCOLOR_XRGB(255, 0, 255),NULL,NULL,&sprite_ending);
 	//타이머
-	D3DXCreateTextureFromFileEx(d3ddev,L"dz.png",D3DX_DEFAULT,D3DX_DEFAULT,D3DX_DEFAULT,NULL,D3DFMT_A8R8G8B8,D3DPOOL_MANAGED,
+	D3DXCreateTextureFromFileEx(d3ddev,L"dz.png",500,86,D3DX_DEFAULT,NULL,D3DFMT_A8R8G8B8,D3DPOOL_MANAGED,
 		D3DX_DEFAULT,D3DX_DEFAULT,D3DCOLOR_XRGB(255, 0, 255),NULL,NULL,&sprite_dz);
-	D3DXCreateTextureFromFileEx(d3ddev,L"dz2.png",72,59, D3DX_DEFAULT,NULL,D3DFMT_A8R8G8B8,D3DPOOL_MANAGED,
+	D3DXCreateTextureFromFileEx(d3ddev,L"dz2.png",440,22, D3DX_DEFAULT,NULL,D3DFMT_A8R8G8B8,D3DPOOL_MANAGED,
 		D3DX_DEFAULT,D3DX_DEFAULT,D3DCOLOR_XRGB(255, 0, 255),NULL,NULL,&sprite_dz2);
+	D3DXCreateTextureFromFileEx(d3ddev, L"dz3.png", 14, 30, D3DX_DEFAULT, NULL, D3DFMT_A8R8G8B8, D3DPOOL_MANAGED,
+		D3DX_DEFAULT, D3DX_DEFAULT, D3DCOLOR_XRGB(255, 0, 255), NULL, NULL, &sprite_dz3);
 	//스코어
 	D3DXCreateTextureFromFileEx(d3ddev,L"score0.png",25,40,D3DX_DEFAULT,NULL,D3DFMT_A8R8G8B8,D3DPOOL_MANAGED,
 		D3DX_DEFAULT,D3DX_DEFAULT,D3DCOLOR_XRGB(255, 0, 255),NULL,NULL,&sprite_score0);
@@ -472,6 +474,63 @@ void Game::initD3D(HWND hWnd)
 		NULL,
 		NULL,
 		&sprite_attack5);
+	//////////////////////////blind animation
+	D3DXCreateTextureFromFileEx(d3ddev,
+		L"blind1.png",
+		960,
+		640,
+		D3DX_DEFAULT,
+		NULL,
+		D3DFMT_A8R8G8B8,
+		D3DPOOL_MANAGED,
+		D3DX_DEFAULT,
+		D3DX_DEFAULT,
+		D3DCOLOR_XRGB(255, 0, 255),
+		NULL,
+		NULL,
+		&sprite_blind1);
+	D3DXCreateTextureFromFileEx(d3ddev,
+		L"blind2.png",
+		960,
+		640,
+		D3DX_DEFAULT,
+		NULL,
+		D3DFMT_A8R8G8B8,
+		D3DPOOL_MANAGED,
+		D3DX_DEFAULT,
+		D3DX_DEFAULT,
+		D3DCOLOR_XRGB(255, 0, 255),
+		NULL,
+		NULL,
+		&sprite_blind2);
+	D3DXCreateTextureFromFileEx(d3ddev,
+		L"blind3.png",
+		960,
+		640,
+		D3DX_DEFAULT,
+		NULL,
+		D3DFMT_A8R8G8B8,
+		D3DPOOL_MANAGED,
+		D3DX_DEFAULT,
+		D3DX_DEFAULT,
+		D3DCOLOR_XRGB(255, 0, 255),
+		NULL,
+		NULL,
+		&sprite_blind3);
+	D3DXCreateTextureFromFileEx(d3ddev,
+		L"blind4.png",
+		960,
+		640,
+		D3DX_DEFAULT,
+		NULL,
+		D3DFMT_A8R8G8B8,
+		D3DPOOL_MANAGED,
+		D3DX_DEFAULT,
+		D3DX_DEFAULT,
+		D3DCOLOR_XRGB(255, 0, 255),
+		NULL,
+		NULL,
+		&sprite_blind4);
 	//////////////////////////총알갯수판
 	D3DXCreateTextureFromFileEx(d3ddev,
 		L"line.png",
@@ -605,16 +664,22 @@ void Game::render_frame(void)
 
 		//타이머
 		RECT dpart0;
-		SetRect(&dpart0, 0, 0, 312, 62);
+		SetRect(&dpart0, 0, 0, 500, 86);
 		D3DXVECTOR3 dcenter0(0.0f, 0.0f, 0.0f);
-		D3DXVECTOR3 dposition0(50.0f, 50.0f, 0.0f);
+		D3DXVECTOR3 dposition0(50.0f, 30.0f, 0.0f);
 		d3dspt->Draw(sprite_dz, &dpart0, &dcenter0, &dposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-		//타이머(움직이는)
+		//타이머(깎이는)
 		RECT dpart1;
-		SetRect(&dpart1, 0, 0, 72 * scale, 59 * scale);
+		SetRect(&dpart1, 0, 0, 420-(timer.rst1), 22);
 		D3DXVECTOR3 dcenter1(0.0f, 0.0f, 0.0f);
-		D3DXVECTOR3 dposition1((timer.x_pos), 50.0f, 0.0f);
+		D3DXVECTOR3 dposition1(125.0f, 60.0f, 0.0f);
 		d3dspt->Draw(sprite_dz2, &dpart1, &dcenter1, &dposition1, D3DCOLOR_ARGB(255, 255, 255, 255));
+		//타이머(움직이는)
+		RECT dpart2;
+		SetRect(&dpart2, 0, 0, 14, 30);
+		D3DXVECTOR3 dcenter2(0.0f, 0.0f, 0.0f);
+		D3DXVECTOR3 dposition2(timer.x_pos, 55.0f, 0.0f);
+		d3dspt->Draw(sprite_dz3, &dpart2, &dcenter2, &dposition2, D3DCOLOR_ARGB(255, 255, 255, 255));
 		//기본
 		RECT Spart;
 		SetRect(&Spart, 0, 0, 25, 40);
@@ -675,241 +740,47 @@ void Game::render_frame(void)
 		{
 			d3dspt->Draw(sprite_score5, &Bpart, &Bcenter, &Bposition, D3DCOLOR_ARGB(255, 255, 255, 255));
 		}
+		//스코어
+		if (score.GetNum() % 10 == 0)
+			d3dspt->Draw(sprite_score0, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if (score.GetNum() % 10 == 1)
+			d3dspt->Draw(sprite_score1, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if(score.GetNum() % 10 == 2)
+			d3dspt->Draw(sprite_score2, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if (score.GetNum() % 10 == 3)
+			d3dspt->Draw(sprite_score3, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if (score.GetNum() % 10 == 4)
+			d3dspt->Draw(sprite_score4, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if (score.GetNum() % 10 == 5)
+			d3dspt->Draw(sprite_score5, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if (score.GetNum() % 10 == 6)
+			d3dspt->Draw(sprite_score6, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if (score.GetNum() % 10 == 7)
+			d3dspt->Draw(sprite_score7, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if (score.GetNum() % 10 == 8)
+			d3dspt->Draw(sprite_score8, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if (score.GetNum() % 10 == 9)
+			d3dspt->Draw(sprite_score9, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
 
-		switch (score.GetNum())
-		{
-		case 1:
-			d3dspt->Draw(sprite_score1, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 2:
-			d3dspt->Draw(sprite_score2, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 3:
-			d3dspt->Draw(sprite_score3, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 4:
-			d3dspt->Draw(sprite_score4, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 5:
-			d3dspt->Draw(sprite_score5, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 6:
-			d3dspt->Draw(sprite_score6, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 7:
-			d3dspt->Draw(sprite_score7, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 8:
-			d3dspt->Draw(sprite_score8, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 9:
-			d3dspt->Draw(sprite_score9, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 10:
-			d3dspt->Draw(sprite_score0, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+		if (score.GetNum() >= 10 && score.GetNum() < 20)
 			d3dspt->Draw(sprite_score1, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 11:
-			d3dspt->Draw(sprite_score1, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score1, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 12:
-			d3dspt->Draw(sprite_score2, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score1, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 13:
-			d3dspt->Draw(sprite_score3, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score1, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 14:
-			d3dspt->Draw(sprite_score4, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score1, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 15:
-			d3dspt->Draw(sprite_score5, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score1, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 16:
-			d3dspt->Draw(sprite_score6, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score1, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 17:
-			d3dspt->Draw(sprite_score7, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score1, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 18:
-			d3dspt->Draw(sprite_score8, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score1, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 19:
-			d3dspt->Draw(sprite_score9, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score1, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 20:
-			d3dspt->Draw(sprite_score0, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if (score.GetNum() >= 20 && score.GetNum() < 30)
 			d3dspt->Draw(sprite_score2, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 21:
-			d3dspt->Draw(sprite_score1, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score2, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 22:
-			d3dspt->Draw(sprite_score2, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score2, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 23:
-			d3dspt->Draw(sprite_score3, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score2, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 24:
-			d3dspt->Draw(sprite_score4, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score2, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 25:
-			d3dspt->Draw(sprite_score5, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score2, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 26:
-			d3dspt->Draw(sprite_score6, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score2, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 27:
-			d3dspt->Draw(sprite_score7, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score2, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 28:
-			d3dspt->Draw(sprite_score8, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score2, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 29:
-			d3dspt->Draw(sprite_score9, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score2, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 30:
-			d3dspt->Draw(sprite_score0, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if (score.GetNum() >= 30 && score.GetNum() < 40)
 			d3dspt->Draw(sprite_score3, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 31:
-			d3dspt->Draw(sprite_score1, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score3, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 32:
-			d3dspt->Draw(sprite_score2, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score3, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 33:
-			d3dspt->Draw(sprite_score3, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score3, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 34:
-			d3dspt->Draw(sprite_score4, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score3, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 35:
-			d3dspt->Draw(sprite_score5, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score3, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 36:
-			d3dspt->Draw(sprite_score6, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score3, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 37:
-			d3dspt->Draw(sprite_score7, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score3, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 38:
-			d3dspt->Draw(sprite_score8, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score3, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 39:
-			d3dspt->Draw(sprite_score9, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score3, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 40:
-			d3dspt->Draw(sprite_score0, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if (score.GetNum() >= 40 && score.GetNum() < 50)
 			d3dspt->Draw(sprite_score4, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 41:
-			d3dspt->Draw(sprite_score1, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score4, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 42:
-			d3dspt->Draw(sprite_score2, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score4, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 43:
-			d3dspt->Draw(sprite_score3, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score4, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 44:
-			d3dspt->Draw(sprite_score4, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score4, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 45:
-			d3dspt->Draw(sprite_score5, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score4, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 46:
-			d3dspt->Draw(sprite_score6, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score4, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 47:
-			d3dspt->Draw(sprite_score7, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score4, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 48:
-			d3dspt->Draw(sprite_score8, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score4, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 49:
-			d3dspt->Draw(sprite_score9, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score4, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 50:
-			d3dspt->Draw(sprite_score0, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if (score.GetNum() >= 50 && score.GetNum() < 60)
 			d3dspt->Draw(sprite_score5, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 51:
-			d3dspt->Draw(sprite_score1, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score5, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 52:
-			d3dspt->Draw(sprite_score2, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score5, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 53:
-			d3dspt->Draw(sprite_score3, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score5, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 54:
-			d3dspt->Draw(sprite_score4, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score5, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 55:
-			d3dspt->Draw(sprite_score5, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score5, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 56:
-			d3dspt->Draw(sprite_score6, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score5, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 57:
-			d3dspt->Draw(sprite_score7, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score5, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 58:
-			d3dspt->Draw(sprite_score8, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score5, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 59:
-			d3dspt->Draw(sprite_score9, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score5, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		case 60:
-			d3dspt->Draw(sprite_score6, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_score0, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-			break;
-		}
+		else if (score.GetNum() >= 60 && score.GetNum() < 70)
+			d3dspt->Draw(sprite_score6, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if (score.GetNum() >= 70 && score.GetNum() < 80)
+			d3dspt->Draw(sprite_score7, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if (score.GetNum() >= 80 && score.GetNum() < 90)
+			d3dspt->Draw(sprite_score8, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if (score.GetNum() >= 90 && score.GetNum() < 100)
+			d3dspt->Draw(sprite_score9, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
+
 		//is SKill
 		if (skill == true )
 		{
@@ -1115,27 +986,26 @@ void Game::render_frame(void)
 			D3DXVECTOR3 Aposition4(0.0f, 0.0f, 0.0f);
 			static int aAcounter = 0;
 			aAcounter++;
-			if (aAcounter >= 31)
+			if (aAcounter >= 15)
 			{
 				aAcounter = 0;
 				enemy3.attack = false;
+				enemy3.blind = true;
 			}
+			
 			switch (aAcounter)
 			{
-			case 1:case 2:
+			case 1:case 2:case 3:
 				d3dspt->Draw(sprite_attack1, &Apart1, &Acenter, &Aposition1, D3DCOLOR_ARGB(255, 255, 255, 255));
 				break;
-			case 3:case 4:case 5:
+			case 4:case 5:case 6:
 				d3dspt->Draw(sprite_attack2, &Apart2, &Acenter, &Aposition2, D3DCOLOR_ARGB(255, 255, 255, 255));
 				break;
-			case 6:case 7:case 8:
+			case 7:case 8:case 9:
 				d3dspt->Draw(sprite_attack3, &Apart3, &Acenter, &Aposition3, D3DCOLOR_ARGB(255, 255, 255, 255));
 				break;
-			case 9:case 10:case 11:case 12:case 13:
+			case 10:case 11:case 12:case 13:case 14:
 				d3dspt->Draw(sprite_attack4, &Apart4, &Acenter, &Aposition4, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 14:case 15:case 16:case 17:case 18:case 19:case 20:case 21: case 22: case 23: case 24: case 25: case 26: case 27: case 28: case 29: case 30:
-				d3dspt->Draw(sprite_attack5, &Apart4, &Acenter, &Aposition4, D3DCOLOR_ARGB(255, 255, 255, 255));
 				break;
 			}
 		}
@@ -1267,6 +1137,33 @@ void Game::render_frame(void)
 
 			}
 		}
+		if (enemy3.blind == true)
+		{
+			static int aAcounter2 = 0;
+			aAcounter2++;
+			if (aAcounter2 >= 8)
+				aAcounter2 = 0;
+			RECT Apart3;
+			SetRect(&Apart3, 0, 0, 960, 640);
+			D3DXVECTOR3 Acenter(0.0f, 0.0f, 0.0f);
+			D3DXVECTOR3 Aposition3(0.0f, 0.0f, 0.0f);
+			switch (aAcounter2)
+			{
+			case 0: case 1:
+				d3dspt->Draw(sprite_blind1, &Apart3, &Acenter, &Aposition3, D3DCOLOR_ARGB(255, 255, 255, 255));
+				break;
+			case 2: case 3:
+				d3dspt->Draw(sprite_blind2, &Apart3, &Acenter, &Aposition3, D3DCOLOR_ARGB(255, 255, 255, 255));
+				break;
+			case 4: case 5:
+				d3dspt->Draw(sprite_blind3, &Apart3, &Acenter, &Aposition3, D3DCOLOR_ARGB(255, 255, 255, 255));
+				break;
+			case 6: case 7:
+				d3dspt->Draw(sprite_blind4, &Apart3, &Acenter, &Aposition3, D3DCOLOR_ARGB(255, 255, 255, 255));
+				break;
+
+			}
+		}
 		d3dspt->End();
 		espt->End();
 		d3ddev->EndScene();
@@ -1303,240 +1200,47 @@ void Game::render_frame(void)
 		SetRect(&Spart10, 0, 0, 25, 40);
 		D3DXVECTOR3 Scenter10(0.0f, 0.0f, 0.0f);
 		D3DXVECTOR3 Sposition10(500, 400, 0.0f);
-		switch (score.GetNum())
-			{
-			case 1:
-				d3dspt->Draw(sprite_score1, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 2:
-				d3dspt->Draw(sprite_score2, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 3:
-				d3dspt->Draw(sprite_score3, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 4:
-				d3dspt->Draw(sprite_score4, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 5:
-				d3dspt->Draw(sprite_score5, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 6:
-				d3dspt->Draw(sprite_score6, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 7:
-				d3dspt->Draw(sprite_score7, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 8:
-				d3dspt->Draw(sprite_score8, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 9:
-				d3dspt->Draw(sprite_score9, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 10:
-				d3dspt->Draw(sprite_score0, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score1, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 11:
-				d3dspt->Draw(sprite_score1, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score1, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 12:
-				d3dspt->Draw(sprite_score2, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score1, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 13:
-				d3dspt->Draw(sprite_score3, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score1, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 14:
-				d3dspt->Draw(sprite_score4, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score1, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 15:
-				d3dspt->Draw(sprite_score5, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score1, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 16:
-				d3dspt->Draw(sprite_score6, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score1, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 17:
-				d3dspt->Draw(sprite_score7, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score1, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 18:
-				d3dspt->Draw(sprite_score8, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score1, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 19:
-				d3dspt->Draw(sprite_score9, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score1, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 20:
-				d3dspt->Draw(sprite_score0, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score2, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 21:
-				d3dspt->Draw(sprite_score1, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score2, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 22:
-				d3dspt->Draw(sprite_score2, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score2, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 23:
-				d3dspt->Draw(sprite_score3, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score2, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 24:
-				d3dspt->Draw(sprite_score4, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score2, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 25:
-				d3dspt->Draw(sprite_score5, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score2, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 26:
-				d3dspt->Draw(sprite_score6, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score2, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 27:
-				d3dspt->Draw(sprite_score7, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score2, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 28:
-				d3dspt->Draw(sprite_score8, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score2, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 29:
-				d3dspt->Draw(sprite_score9, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score2, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 30:
-				d3dspt->Draw(sprite_score0, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score3, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 31:
-				d3dspt->Draw(sprite_score1, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score3, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 32:
-				d3dspt->Draw(sprite_score2, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score3, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 33:
-				d3dspt->Draw(sprite_score3, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score3, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 34:
-				d3dspt->Draw(sprite_score4, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score3, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 35:
-				d3dspt->Draw(sprite_score5, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score3, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 36:
-				d3dspt->Draw(sprite_score6, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score3, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 37:
-				d3dspt->Draw(sprite_score7, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score3, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 38:
-				d3dspt->Draw(sprite_score8, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score3, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 39:
-				d3dspt->Draw(sprite_score9, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score3, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 40:
-				d3dspt->Draw(sprite_score0, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score4, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 41:
-				d3dspt->Draw(sprite_score1, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score4, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 42:
-				d3dspt->Draw(sprite_score2, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score4, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 43:
-				d3dspt->Draw(sprite_score3, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score4, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 44:
-				d3dspt->Draw(sprite_score4, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score4, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 45:
-				d3dspt->Draw(sprite_score5, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score4, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 46:
-				d3dspt->Draw(sprite_score6, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score4, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 47:
-				d3dspt->Draw(sprite_score7, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score4, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 48:
-				d3dspt->Draw(sprite_score8, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score4, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 49:
-				d3dspt->Draw(sprite_score9, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score4, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 50:
-				d3dspt->Draw(sprite_score0, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score5, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 51:
-				d3dspt->Draw(sprite_score1, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score5, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 52:
-				d3dspt->Draw(sprite_score2, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score5, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 53:
-				d3dspt->Draw(sprite_score3, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score5, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 54:
-				d3dspt->Draw(sprite_score4, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score5, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 55:
-				d3dspt->Draw(sprite_score5, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score5, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 56:
-				d3dspt->Draw(sprite_score6, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score5, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 57:
-				d3dspt->Draw(sprite_score7, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score5, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 58:
-				d3dspt->Draw(sprite_score8, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score5, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 59:
-				d3dspt->Draw(sprite_score9, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score5, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 60:
-				d3dspt->Draw(sprite_score6, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				d3dspt->Draw(sprite_score0, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			}
+		
+		//스코어
+		if (score.GetNum() % 10 == 0)
+			d3dspt->Draw(sprite_score0, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if (score.GetNum() % 10 == 1)
+			d3dspt->Draw(sprite_score1, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if (score.GetNum() % 10 == 2)
+			d3dspt->Draw(sprite_score2, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if (score.GetNum() % 10 == 3)
+			d3dspt->Draw(sprite_score3, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if (score.GetNum() % 10 == 4)
+			d3dspt->Draw(sprite_score4, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if (score.GetNum() % 10 == 5)
+			d3dspt->Draw(sprite_score5, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if (score.GetNum() % 10 == 6)
+			d3dspt->Draw(sprite_score6, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if (score.GetNum() % 10 == 7)
+			d3dspt->Draw(sprite_score7, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if (score.GetNum() % 10 == 8)
+			d3dspt->Draw(sprite_score8, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if (score.GetNum() % 10 == 9)
+			d3dspt->Draw(sprite_score9, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+		if (score.GetNum() >= 10 && score.GetNum() < 20)
+			d3dspt->Draw(sprite_score1, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if (score.GetNum() >= 20 && score.GetNum() < 30)
+			d3dspt->Draw(sprite_score2, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if (score.GetNum() >= 30 && score.GetNum() < 40)
+			d3dspt->Draw(sprite_score3, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if (score.GetNum() >= 40 && score.GetNum() < 50)
+			d3dspt->Draw(sprite_score4, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if (score.GetNum() >= 50 && score.GetNum() < 60)
+			d3dspt->Draw(sprite_score5, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if (score.GetNum() >= 60 && score.GetNum() < 70)
+			d3dspt->Draw(sprite_score6, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if (score.GetNum() >= 70 && score.GetNum() < 80)
+			d3dspt->Draw(sprite_score7, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if (score.GetNum() >= 80 && score.GetNum() < 90)
+			d3dspt->Draw(sprite_score8, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if (score.GetNum() >= 90 && score.GetNum() < 100)
+			d3dspt->Draw(sprite_score9, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
 
 		d3dspt->End();
 
@@ -1575,7 +1279,7 @@ void Game::do_game_logic(void)
 		ingame = false;
 	}
 	timer.move();
-	if (timer.x_pos < 100)
+	if (timer.x_pos < 400)
 	{
 		ingame = false;
 		ending = true;
@@ -1763,14 +1467,17 @@ void Game::do_game_logic(void)
 						score.SetNum(score.GetNum() + 1);
 					}
 				}
-				if (pt.x >= summonitem.x_pos && pt.x <= summonitem.x_pos + 64 && pt.y >= summonitem.y_pos && pt.y <= summonitem.y_pos + 64)
+				for (int i = 0; i < ENEMY2_NUM - dNum2; i++)
 				{
-					summonitem.Appear = false;
-					summonitem.init(600, 950);
-					pistol.pCheck = true;
-					pistol.init(80, 60);
+					if (pt.x >= enemy2[i].x_pos && pt.x <= enemy2[i].x_pos + 60 && pt.y >= enemy2[i].y_pos && pt.y <= enemy2[i].y_pos + 86)
+					{
+						effecting = false;
+						breaking = true;
+						enemy2[i].init((float)(960 + rand() % 100), (float)(300 + rand() % 200));
+						score.SetNum(score.GetNum() + 1);
+					}
 				}
-				else if (pt.x >= summonitem2.x_pos && pt.x <= summonitem2.x_pos + 64 && pt.y >= summonitem2.y_pos && pt.y <= summonitem2.y_pos + 64)
+				if (pt.x >= summonitem2.x_pos && pt.x <= summonitem2.x_pos + 64 && pt.y >= summonitem2.y_pos && pt.y <= summonitem2.y_pos + 64)
 				{
 					summonitem2.Appear = false;
 					summonitem2.init(600, 950);
@@ -1780,6 +1487,19 @@ void Game::do_game_logic(void)
 				{
 					enemy3.attack = true;
 					enemy3.init((float)(960 + rand() % 100), (float)(300 + rand() % 200));
+				}
+				static int HP = 3;
+				if (enemy3.blind == true)
+				{
+					if (pt.x >= 320 && pt.x <= 640 && pt.y >= 0 && pt.y <= 600)
+					{
+						HP -= 1;
+					}
+					if (HP == 0)
+					{
+						enemy3.blind = false;
+						HP = 3;
+					}
 				}
 				if (summonitem2.Giantization == true)
 					scale = 2;
@@ -1816,6 +1536,20 @@ void Game::do_game_logic(void)
 			{
 				enemy3.attack = true;
 				enemy3.init((float)(960 + rand() % 100), (float)(300 + rand() % 200));
+			}
+			
+			if (enemy3.blind == true)
+			{
+				static int HP = 3;
+				if (pt.x >= 320 && pt.x <= 640 && pt.y >= 0 && pt.y <= 600)
+				{
+					HP -= 1;
+				}
+				if (HP == 0)
+				{
+					enemy3.blind = false;
+					HP = 3;
+				}
 			}
 		}
 	}

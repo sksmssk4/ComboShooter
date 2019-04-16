@@ -9,7 +9,7 @@ public:
 
 	void move();
 	void init(float x, float y);
-
+	int rst1 = 0;
 };
 
 #endif 

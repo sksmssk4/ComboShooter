@@ -50,6 +50,7 @@ private:
 
 	LPDIRECT3DTEXTURE9 sprite_dz;
 	LPDIRECT3DTEXTURE9 sprite_dz2;
+	LPDIRECT3DTEXTURE9 sprite_dz3;
 
 	LPDIRECT3DTEXTURE9 sprite_bg; //LP_TEXTURE
 	LPDIRECT3DTEXTURE9 sprite_score0;
@@ -101,6 +102,11 @@ private:
 	LPDIRECT3DTEXTURE9 sprite_attack3;
 	LPDIRECT3DTEXTURE9 sprite_attack4;
 	LPDIRECT3DTEXTURE9 sprite_attack5;
+	//blind animation
+	LPDIRECT3DTEXTURE9 sprite_blind1;
+	LPDIRECT3DTEXTURE9 sprite_blind2;
+	LPDIRECT3DTEXTURE9 sprite_blind3;
+	LPDIRECT3DTEXTURE9 sprite_blind4;
 	//skill animation
 	LPDIRECT3DTEXTURE9 sprite_deathshower1;
 	LPDIRECT3DTEXTURE9 sprite_deathshower2;
@@ -130,15 +136,14 @@ private:
 	Remainbullet remainbullet;
 	HWND hWnd;
 
-	int dNum = 5;
-	int dNum2 = 5;
-	bool effecting = false;
-	bool breaking = false;
-	bool ingame = true;
-	bool ending = false;
-	bool skill = false;
-	bool machinegun = false;
-	
+	int dNum = 5; //오른쪽
+	int dNum2 = 5; //왼쪽
+	bool effecting = false; //이펙트 애니메이션
+	bool breaking = false; //폭발 애니메이션
+	bool ingame = true; //ingame scene1
+	bool ending = false;//ending scene
+	bool skill = false;//스킬 사운드
+	bool machinegun = false;//머신건 모드
 
 public:
 	

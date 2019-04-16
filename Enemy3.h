@@ -8,6 +8,7 @@ public:
 	void init(float x, float y);
 	void move();
 	bool attack = false;
+	bool blind = false;
 };
 
 #endif
