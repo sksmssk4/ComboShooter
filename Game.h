@@ -13,6 +13,7 @@
 #include "Timer.h"
 #include "Remainbullet.h"
 #include "Score.h"
+#include "Combo.h"
 #include "Sound.h"
 #include "SummonItem.h"
 #include "SummonItem2.h"
@@ -52,7 +53,7 @@ private:
 	LPDIRECT3DTEXTURE9 sprite_dz2;
 	LPDIRECT3DTEXTURE9 sprite_dz3;
 
-	LPDIRECT3DTEXTURE9 sprite_bg; //LP_TEXTURE
+	LPDIRECT3DTEXTURE9 sprite_bg; 
 	LPDIRECT3DTEXTURE9 sprite_score0;
 	LPDIRECT3DTEXTURE9 sprite_score1;
 	LPDIRECT3DTEXTURE9 sprite_score2;
@@ -64,18 +65,32 @@ private:
 	LPDIRECT3DTEXTURE9 sprite_score8;
 	LPDIRECT3DTEXTURE9 sprite_score9;
 
+	LPDIRECT3DTEXTURE9 sprite_combo_text;
+	LPDIRECT3DTEXTURE9 sprite_combo0;
+	LPDIRECT3DTEXTURE9 sprite_combo1;
+	LPDIRECT3DTEXTURE9 sprite_combo2;
+	LPDIRECT3DTEXTURE9 sprite_combo3;
+	LPDIRECT3DTEXTURE9 sprite_combo4;
+	LPDIRECT3DTEXTURE9 sprite_combo5;
+	LPDIRECT3DTEXTURE9 sprite_combo6;
+	LPDIRECT3DTEXTURE9 sprite_combo7;
+	LPDIRECT3DTEXTURE9 sprite_combo8;
+	LPDIRECT3DTEXTURE9 sprite_combo9;
+
 	LPDIRECT3DTEXTURE9 sprite;
-	
+	//player idle animation
+	LPDIRECT3DTEXTURE9 sprite_player1;
+	LPDIRECT3DTEXTURE9 sprite_player2;
+	LPDIRECT3DTEXTURE9 sprite_player3;
+	//pistol animation 
 	LPDIRECT3DTEXTURE9 sprite_pistol;   
-	LPDIRECT3DTEXTURE9 sprite_pistol2;	//pistol animation 
-	
-	
+	LPDIRECT3DTEXTURE9 sprite_pistol2;	
 	///////////////////////////enemy1
 	LPDIRECT3DTEXTURE9 sprite_enemy1;
 	LPDIRECT3DTEXTURE9 sprite_enemy2;
 	LPDIRECT3DTEXTURE9 sprite_enemy3;
 	LPDIRECT3DTEXTURE9 sprite_enemy4;
-
+	///////////////////////////왼쪽enemy1
 	LPDIRECT3DTEXTURE9 sprite_lenemy1;
 	LPDIRECT3DTEXTURE9 sprite_lenemy2;
 	LPDIRECT3DTEXTURE9 sprite_lenemy3;
@@ -133,6 +148,7 @@ private:
 	SummonItem summonitem;
 	SummonItem2 summonitem2;
 	Score score;
+	Combo combo;
 	Remainbullet remainbullet;
 	HWND hWnd;
 
@@ -140,6 +156,7 @@ private:
 	int dNum2 = 5; //왼쪽
 	bool effecting = false; //이펙트 애니메이션
 	bool breaking = false; //폭발 애니메이션
+	bool hitCombo = false; //콤보 출현
 	bool ingame = true; //ingame scene1
 	bool ending = false;//ending scene
 	bool skill = false;//스킬 사운드

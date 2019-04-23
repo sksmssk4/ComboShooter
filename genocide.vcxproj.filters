@@ -40,6 +40,9 @@
     <ClCompile Include="Enemy3.cpp">
       <Filter>소스파일</Filter>
     </ClCompile>
+    <ClCompile Include="Combo.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h" />
@@ -85,6 +88,12 @@
     <ClInclude Include="Enemy3.h">
       <Filter>헤더파일</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Combo.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Matrices49860489.rc" />
@@ -92,6 +101,7 @@
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico" />
     <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="헤더파일">

@@ -374,10 +374,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="DXUT\Optional\directx.ico" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Combo.cpp" />
     <ClCompile Include="Enemy1.cpp" />
     <ClCompile Include="Enemy2.cpp" />
     <ClCompile Include="Enemy3.cpp" />
@@ -395,6 +397,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="Combo.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="Enemy1.h" />
     <ClInclude Include="Enemy2.h" />
     <ClInclude Include="Enemy3.h" />

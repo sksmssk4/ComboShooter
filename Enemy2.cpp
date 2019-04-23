@@ -22,7 +22,7 @@ void Enemy2::move2()
 
 void Enemy2::movePattern()
 {
-	if (x_pos < 960)
+	if (x_pos < 950 || x_pos > 50)
 	{
 		clock_t begin2;
 		begin2 = clock();
