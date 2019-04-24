@@ -43,20 +43,23 @@ void Game::initD3D(HWND hWnd)
 		&d3ddev);
 	D3DXCreateSprite(d3ddev, &d3dspt);    // create the Direct3D Sprite object
 	D3DXCreateSprite(d3ddev, &espt);
-	D3DXCreateTextureFromFileEx(d3ddev,    // the device pointer
-		L"bg4.png",    // the file name
-		960,    // default width
-		640,    // default height
-		D3DX_DEFAULT,    // no mip mapping
-		NULL,    // regular usage
-		D3DFMT_A8R8G8B8,    // 32-bit pixels with alpha
-		D3DPOOL_MANAGED,    // typical memory handling
-		D3DX_DEFAULT,    // no filtering
-		D3DX_DEFAULT,    // no mip filtering
-		D3DCOLOR_XRGB(255, 0, 255),    // the hot-pink color key
-		NULL,    // no image info struct
-		NULL,    // not using 256 colors
-		&sprite_bg);    // load to sprite
+	//배경
+	D3DXCreateTextureFromFileEx(d3ddev, // the device pointer
+		L"bg1.png",						// the file name
+		960,							// default width
+		640,							// default height
+		D3DX_DEFAULT,					// no mip mapping
+		NULL,							// regular usage
+		D3DFMT_A8R8G8B8,				// 32-bit pixels with alpha
+		D3DPOOL_MANAGED,				// typical memory handling
+		D3DX_DEFAULT,					// no filtering
+		D3DX_DEFAULT,					// no mip filtering
+		D3DCOLOR_XRGB(255, 0, 255),		// the hot-pink color key
+		NULL,							// no image info struct
+		NULL,							// not using 256 colors
+		&sprite_bg);					// load to sprite
+	D3DXCreateTextureFromFileEx(d3ddev,L"bg2.png",960,640,D3DX_DEFAULT,NULL,D3DFMT_A8R8G8B8,D3DPOOL_MANAGED, 
+		D3DX_DEFAULT,D3DX_DEFAULT,D3DCOLOR_XRGB(255, 0, 255),NULL,NULL,&sprite_bg2);
 
 	//스테이지 종료
 	D3DXCreateTextureFromFileEx(d3ddev,L"clear.png",D3DX_DEFAULT,D3DX_DEFAULT,D3DX_DEFAULT,NULL,D3DFMT_A8R8G8B8,D3DPOOL_MANAGED,
@@ -75,6 +78,9 @@ void Game::initD3D(HWND hWnd)
 		D3DX_DEFAULT, D3DX_DEFAULT, D3DCOLOR_XRGB(255, 0, 255), NULL, NULL, &sprite_player2);
 	D3DXCreateTextureFromFileEx(d3ddev, L"player3.png", 200, 184, D3DX_DEFAULT, NULL, D3DFMT_A8R8G8B8, D3DPOOL_MANAGED,
 		D3DX_DEFAULT, D3DX_DEFAULT, D3DCOLOR_XRGB(255, 0, 255), NULL, NULL, &sprite_player3);
+	//스코어 박스
+	D3DXCreateTextureFromFileEx(d3ddev, L"score_box.png", 300, 60, D3DX_DEFAULT, NULL, D3DFMT_A8R8G8B8, D3DPOOL_MANAGED,
+		D3DX_DEFAULT, D3DX_DEFAULT, D3DCOLOR_XRGB(255, 0, 255), NULL, NULL, &sprite_scorebox);
 	//스코어
 	D3DXCreateTextureFromFileEx(d3ddev,L"score0.png",25,40,D3DX_DEFAULT,NULL,D3DFMT_A8R8G8B8,D3DPOOL_MANAGED,
 		D3DX_DEFAULT,D3DX_DEFAULT,D3DCOLOR_XRGB(255, 0, 255),NULL,NULL,&sprite_score0);
@@ -231,14 +237,26 @@ void Game::render_frame(void)
 		d3dspt->Begin(D3DXSPRITE_ALPHABLEND);
 
 		//배경
-		RECT part0;SetRect(&part0, 0, 0, 960, 640);D3DXVECTOR3 center0(0.0f, 0.0f, 0.0f);D3DXVECTOR3 position0(0.0f, 0.0f, 0.0f);
-		d3dspt->Draw(sprite_bg, &part0, &center0, &position0, D3DCOLOR_ARGB(255, 255, 255, 255));
+		RECT part0; SetRect(&part0, 0, 0, 960, 640); D3DXVECTOR3 center0(0.0f, 0.0f, 0.0f); D3DXVECTOR3 position0(bg.x_pos, bg.y_pos, 0.0f);
+		static int bCounter = 0;
+		bCounter += 1;
+		if (bCounter >= 10) bCounter = 0;
+		switch (bCounter / 5)
+		{
+		case 0:
+			d3dspt->Draw(sprite_bg, &part0, &center0, &position0, D3DCOLOR_ARGB(255, 255, 255, 255));
+			break;
+		case 1:
+			d3dspt->Draw(sprite_bg2, &part0, &center0, &position0, D3DCOLOR_ARGB(255, 255, 255, 255));
+			break;
+		}
+		
+
 		//플레이어 idle
+		RECT Ppart; SetRect(&Ppart, 0, 0, 200, 184); D3DXVECTOR3 Pcenter(0.0f, 0.0f, 0.0f); D3DXVECTOR3 Pposition(390.0f, 500.0f, 0.0f);
 		static int pCounter = 0;
 		pCounter += 1;
 		if (pCounter >= 15) pCounter = 0;
-		
-		RECT Ppart; SetRect(&Ppart, 0, 0, 200, 184); D3DXVECTOR3 Pcenter(0.0f, 0.0f, 0.0f); D3DXVECTOR3 Pposition(390.0f, 500.0f, 0.0f);
 		switch (pCounter/5)
 		{
 		case 0:
@@ -260,6 +278,9 @@ void Game::render_frame(void)
 		//타이머(움직이는)
 		RECT dpart2;SetRect(&dpart2, 0, 0, 14, 30);D3DXVECTOR3 dcenter2(0.0f, 0.0f, 0.0f);D3DXVECTOR3 dposition2(timer.x_pos, 55.0f, 0.0f);
 		d3dspt->Draw(sprite_dz3, &dpart2, &dcenter2, &dposition2, D3DCOLOR_ARGB(255, 255, 255, 255));
+		//스코어 박스
+		RECT Sbpart; SetRect(&Sbpart, 0, 0, 300, 60); D3DXVECTOR3 Sbcenter(0.0f, 0.0f, 0.0f); D3DXVECTOR3 Sbposition(score.x_pos - 220, score.y_pos-10, 0.0f);
+		d3dspt->Draw(sprite_scorebox, &Sbpart, &Sbcenter, &Sbposition, D3DCOLOR_ARGB(255, 255, 255, 255));
 		//스코어 기본
 		RECT Spart;SetRect(&Spart, 0, 0, 25, 40);D3DXVECTOR3 Scenter(0.0f, 0.0f, 0.0f);D3DXVECTOR3 Sposition(score.x_pos + 25, score.y_pos, 0.0f);
 		d3dspt->Draw(sprite_score0, &Spart, &Scenter, &Sposition, D3DCOLOR_ARGB(255, 255, 255, 255));
@@ -536,7 +557,7 @@ void Game::render_frame(void)
 			espt->Draw(sprite_itemP, NULL, NULL, NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
 		}
 		//enemy3_right
-		if (enemy3.attack == false)
+		if (enemy3.attack == false && enemy3.appear == true)
 		{
 			static int eAcounter3 = 0;
 			eAcounter3 += 1;
@@ -592,49 +613,51 @@ void Game::render_frame(void)
 			}
 		}
 		//enemy2_right
-		for (int i = 0; i < ENEMY2_NUM - dNum; i++)
+		for (int i = 0; i < ENEMY2_NUM - dNum2; i++)
 		{
-			static int eAcounter2 = 0;
-			eAcounter2 += 1;
-			if (eAcounter2 >= 2)
-				eAcounter2 = 0;
-			RECT rc;
-			SetRect(&rc, 0, 0, 64, 64);
-
-			D3DXVECTOR2 spriteCenter = D3DXVECTOR2(32, 32);
-			// Screen position of the sprite
-			D3DXVECTOR2 translate = D3DXVECTOR2(enemy2[i].x_pos, enemy2[i].y_pos);
-			// Scaling X,Y
-
-			iTime = timeGetTime() % 500;
-			if (enemy2[i].miss == false)
-				angle = 0;
-			else if (enemy2[i].miss == true)
-				angle = iTime * (2.0f * D3DX_PI) / 500.0f;
-			D3DXVECTOR2 scaling(1, 1);
-			D3DXMATRIX matrix;
-
-			D3DXMatrixTransformation2D(
-				&matrix,                // 행렬
-				NULL,                   // 크기를 조정할 때 기준을 왼쪽 상단으로 유지
-				0.0f,                   // 크기 조정 회전 없음
-				&scaling,               // 크기 조정 값
-				&spriteCenter,          // 회전 중심
-				(float)(angle),			// 회전 각도
-				&translate);            // X,Y위치
-
-			espt->SetTransform(&matrix);
-			// Draw the sprite
-			switch (eAcounter2)
+			if (enemy2[i].appear == true)
 			{
-			case 0:
-				espt->Draw(sprite_enemy2_1, NULL, NULL, NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 1:
-				espt->Draw(sprite_enemy2_2, NULL, NULL, NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			}
+				static int eAcounter2 = 0;
+				eAcounter2 += 1;
+				if (eAcounter2 >= 2)
+					eAcounter2 = 0;
+				RECT rc;
+				SetRect(&rc, 0, 0, 64, 64);
 
+				D3DXVECTOR2 spriteCenter = D3DXVECTOR2(32, 32);
+				// Screen position of the sprite
+				D3DXVECTOR2 translate = D3DXVECTOR2(enemy2[i].x_pos, enemy2[i].y_pos);
+				// Scaling X,Y
+
+				iTime = timeGetTime() % 500;
+				if (enemy2[i].miss == false)
+					angle = 0;
+				else if (enemy2[i].miss == true)
+					angle = iTime * (2.0f * D3DX_PI) / 500.0f;
+				D3DXVECTOR2 scaling(1, 1);
+				D3DXMATRIX matrix;
+
+				D3DXMatrixTransformation2D(
+					&matrix,                // 행렬
+					NULL,                   // 크기를 조정할 때 기준을 왼쪽 상단으로 유지
+					0.0f,                   // 크기 조정 회전 없음
+					&scaling,               // 크기 조정 값
+					&spriteCenter,          // 회전 중심
+					(float)(angle),			// 회전 각도
+					&translate);            // X,Y위치
+
+				espt->SetTransform(&matrix);
+				// Draw the sprite
+				switch (eAcounter2)
+				{
+				case 0:
+					espt->Draw(sprite_enemy2_1, NULL, NULL, NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+					break;
+				case 1:
+					espt->Draw(sprite_enemy2_2, NULL, NULL, NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+					break;
+				}
+			}
 		}
 		static int eAcounter = 0;
 		eAcounter += 1;
@@ -670,7 +693,6 @@ void Game::render_frame(void)
 			SetRect(&Rpart, 0, 0, 60 * (int)scale, 86 * (int)scale);
 			D3DXVECTOR3 center(0.0f, 0.0f, 0.0f);
 			D3DXVECTOR3 position(enemy1[i].x_pos, enemy1[i].y_pos, 0.0f);
-
 			switch (eAcounter)
 			{
 			case 0:
@@ -743,7 +765,6 @@ void Game::render_frame(void)
 			case 6: case 7:
 				d3dspt->Draw(sprite_blind4, &Apart3, &Acenter, &Aposition3, D3DCOLOR_ARGB(255, 255, 255, 255));
 				break;
-
 			}
 		}
 		d3dspt->End();
@@ -757,7 +778,7 @@ void Game::render_frame(void)
 	if (ending == true)
 	{
 		sound.bgmEnd();
-
+		sound.SkillEnd();
 		d3ddev->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 0, 0), -1.0f, 0);
 		d3ddev->BeginScene();
 		d3dspt->Begin(D3DXSPRITE_ALPHABLEND);
@@ -765,53 +786,53 @@ void Game::render_frame(void)
 		RECT ipart;SetRect(&ipart, 0, 0, 960, 640);D3DXVECTOR3 icenter(0.0f, 0.0f, 0.0f);D3DXVECTOR3 iposition(0.0f, 0.0f, 0.0f);
 		d3dspt->Draw(sprite_ending, &ipart, &icenter, &iposition, D3DCOLOR_ARGB(255, 255, 255, 255));
 		//기본
-		RECT Spart;SetRect(&Spart, 0, 0, 25, 40);D3DXVECTOR3 Scenter(0.0f, 0.0f, 0.0f);D3DXVECTOR3 Sposition(550, 400, 0.0f);
-		d3dspt->Draw(sprite_score0, &Spart, &Scenter, &Sposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+		RECT Spart;SetRect(&Spart, 0, 0, 85, 120);D3DXVECTOR3 Scenter(0.0f, 0.0f, 0.0f);D3DXVECTOR3 Sposition(670, 350, 0.0f);
+		d3dspt->Draw(sprite_combo0, &Spart, &Scenter, &Sposition, D3DCOLOR_ARGB(255, 255, 255, 255));
 		//10의자리
-		RECT Spart0;SetRect(&Spart0, 0, 0, 25, 40);D3DXVECTOR3 Scenter0(0.0f, 0.0f, 0.0f);D3DXVECTOR3 Sposition0(525, 400, 0.0f);
+		RECT Spart0;SetRect(&Spart0, 0, 0, 85, 120);D3DXVECTOR3 Scenter0(0.0f, 0.0f, 0.0f);D3DXVECTOR3 Sposition0(585, 350, 0.0f);
 		//100의 자리
-		RECT Spart10;SetRect(&Spart10, 0, 0, 25, 40);D3DXVECTOR3 Scenter10(0.0f, 0.0f, 0.0f);D3DXVECTOR3 Sposition10(500, 400, 0.0f);
+		RECT Spart10;SetRect(&Spart10, 0, 0, 85, 120);D3DXVECTOR3 Scenter10(0.0f, 0.0f, 0.0f);D3DXVECTOR3 Sposition10(500, 350, 0.0f);
 		
 		//스코어
 		if (score.GetNum() % 10 == 0)
-			d3dspt->Draw(sprite_score0, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+			d3dspt->Draw(sprite_combo0, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
 		else if (score.GetNum() % 10 == 1)
-			d3dspt->Draw(sprite_score1, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+			d3dspt->Draw(sprite_combo1, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
 		else if (score.GetNum() % 10 == 2)
-			d3dspt->Draw(sprite_score2, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+			d3dspt->Draw(sprite_combo2, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
 		else if (score.GetNum() % 10 == 3)
-			d3dspt->Draw(sprite_score3, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+			d3dspt->Draw(sprite_combo3, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
 		else if (score.GetNum() % 10 == 4)
-			d3dspt->Draw(sprite_score4, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+			d3dspt->Draw(sprite_combo4, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
 		else if (score.GetNum() % 10 == 5)
-			d3dspt->Draw(sprite_score5, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+			d3dspt->Draw(sprite_combo5, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
 		else if (score.GetNum() % 10 == 6)
-			d3dspt->Draw(sprite_score6, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+			d3dspt->Draw(sprite_combo6, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
 		else if (score.GetNum() % 10 == 7)
-			d3dspt->Draw(sprite_score7, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+			d3dspt->Draw(sprite_combo7, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
 		else if (score.GetNum() % 10 == 8)
-			d3dspt->Draw(sprite_score8, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+			d3dspt->Draw(sprite_combo8, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
 		else if (score.GetNum() % 10 == 9)
-			d3dspt->Draw(sprite_score9, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+			d3dspt->Draw(sprite_combo9, &Spart0, &Scenter0, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
 
 		if (score.GetNum() >= 10 && score.GetNum() < 20)
-			d3dspt->Draw(sprite_score1, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
+			d3dspt->Draw(sprite_combo1, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
 		else if (score.GetNum() >= 20 && score.GetNum() < 30)
-			d3dspt->Draw(sprite_score2, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
+			d3dspt->Draw(sprite_combo2, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
 		else if (score.GetNum() >= 30 && score.GetNum() < 40)
-			d3dspt->Draw(sprite_score3, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
+			d3dspt->Draw(sprite_combo3, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
 		else if (score.GetNum() >= 40 && score.GetNum() < 50)
-			d3dspt->Draw(sprite_score4, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
+			d3dspt->Draw(sprite_combo4, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
 		else if (score.GetNum() >= 50 && score.GetNum() < 60)
-			d3dspt->Draw(sprite_score5, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
+			d3dspt->Draw(sprite_combo5, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
 		else if (score.GetNum() >= 60 && score.GetNum() < 70)
-			d3dspt->Draw(sprite_score6, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
+			d3dspt->Draw(sprite_combo6, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
 		else if (score.GetNum() >= 70 && score.GetNum() < 80)
-			d3dspt->Draw(sprite_score7, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
+			d3dspt->Draw(sprite_combo7, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
 		else if (score.GetNum() >= 80 && score.GetNum() < 90)
-			d3dspt->Draw(sprite_score8, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
+			d3dspt->Draw(sprite_combo8, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
 		else if (score.GetNum() >= 90 && score.GetNum() < 100)
-			d3dspt->Draw(sprite_score9, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
+			d3dspt->Draw(sprite_combo9, &Spart10, &Scenter10, &Sposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
 
 		d3dspt->End();
 
@@ -823,12 +844,14 @@ void Game::render_frame(void)
 }
 void Game::init_game(void)
 {
+	//배경 초기화
+	bg.init(0, 0);
 	//타이머 오브젝트 초기화
 	timer.init(300,50);
 	//스코어 초기화
-	score.init(900, 100);
+	score.init(880, 40);
 	//콤보 초기화
-	combo.init(800, 200);
+	combo.init(800, 100);
 	//P(pistol)아이템 초기화
 	pistol.init(80, 60);
 	//오브젝트 초기화
@@ -837,13 +860,18 @@ void Game::init_game(void)
 	for (int i = 0; i < LENEMY1_NUM - dNum; i++)
 		lenemy1[i].init((float)(0 - rand() % 100), (float)(300 + rand() % 200));
 	for (int i = 0; i < ENEMY2_NUM - dNum2; i++)
-		enemy2[i].init((float)(960 + rand() % 100), (float)(300 + rand() % 200));
-	enemy3.init((float)(960 + rand() % 100), (float)(300 + rand() % 200));
+	{
+		if(enemy2[i].appear == true)
+			enemy2[i].init((float)(950 + rand() % 200), (float)(200 + rand() % 200));
+	}
+	if(enemy3.appear == true)
+		enemy3.init((float)(960 + rand() % 100), (float)(300 + rand() % 200));
+
 	//P(pistol)아이템의 총알
 	bullet.init(pistol.x_pos, pistol.y_pos);
 	//P(pistol) 소환 아이템
 	summonitem.init(600, 750);
-	summonitem2.init(650, 750);
+	//summonitem2.init(650, 750);
 }
 void Game::do_game_logic(void)
 {
@@ -851,203 +879,287 @@ void Game::do_game_logic(void)
 	{
 		ingame = false;
 	}
-	timer.move();
-	//엔딩조건
-	if (timer.x_pos < 400)
+	if (ingame == true)
 	{
-		ingame = false;
-		ending = true;
-	}
-	//콤보
-	if (hitCombo == true)
-		combo.shake();
-	//점수에 따른 오브젝트 갯수변화
-	if (score.GetNum() == 5)
-	{
-		dNum = 4;
-		dNum2 = 4;
-	}
-	else if (score.GetNum() == 30)dNum = 3;
-	else if (score.GetNum() == 50)dNum = 2;
-	else if (score.GetNum() == 70)dNum = 1;
-	else if (score.GetNum() == 90)dNum = 0;
-	//총알 개수 0일 때
-	if (remainbullet.GetCounter() == 0)
-	{
-		if (KEY_DOWN(VK_LBUTTON))
-			sound.Gird();
-	}
-	if (KEY_DOWN(VK_SPACE))
-	{
-		sound.Reload();
-		remainbullet.SetCounter(5);
-	}
-	if (KEY_DOWN(VK_DELETE))
-	{
-		sound.SkillSound();
-		skill = true;
-	}
-	//총아이템 처리
-	if (score.GetNum() == 5)
-	{
-		summonitem.Appear = true;
-	}
-	else if (score.GetNum() == 15)
-	{
-		summonitem.Appear = true;
-		summonitem.init(600, 750);
-	}
-	if (summonitem.Appear == true)
-	{
-		if (summonitem.x_pos < 0 || summonitem.y_pos > 755)
-			summonitem.Appear = false;
-		else
+		timer.move();
+		//엔딩조건
+		if (timer.x_pos < 120)
 		{
-			summonitem.Update(1.0);
-			summonitem.Jump();
+			ingame = false;
+			ending = true;
 		}
-	}
-	//크기증가 아이템 처리
-	if (score.GetNum() == 10)
-		summonitem2.Appear = true;
-	else if (score.GetNum() == 20)
-	{
-		summonitem2.Appear = true;
-		summonitem2.init(650, 750);
-	}
-	if (summonitem2.Appear == true)
-	{
-		if (summonitem2.x_pos < 0 || summonitem2.y_pos > 755)
-			summonitem2.Appear = false;
-		else
+		//콤보
+		if (hitCombo == true)
+			combo.shake();
+		if (quake == true)
+			bg.shake();
+		//점수에 따른 오브젝트 갯수변화
+		if (score.GetNum() == 5)dNum = 4;
+		else if (score.GetNum() == 30)
 		{
-			summonitem2.Update(1.0);
-			summonitem2.Jump();
+			for (int i = 0; i < ENEMY2_NUM - dNum2; i++)
+				enemy2[i].appear = true;
+			dNum2 = 5;
+			dNum = 3;
 		}
-	}
-	//enemy1
-	for (int i = 0; i < ENEMY1_NUM-dNum; i++)
-	{
-		if (enemy1[i].x_pos <= 0 || enemy1[i].y_pos > 755)
-			enemy1[i].init((float)(960 + rand() % 100), (float)(300 + rand() % 200));
-		else
-			enemy1[i].move();
-	}
-	for (int i = 0; i < LENEMY1_NUM - dNum; i++)
-	{
-		if (lenemy1[i].x_pos >= 960 || lenemy1[i].y_pos > 755 || lenemy1[i].x_pos ==0)
-			lenemy1[i].init((float)(1 + rand() % 50), (float)(300 + rand() % 200));
-		else
-			lenemy1[i].move();
-	}
-	//enemy2
-	for (int i = 0; i < ENEMY2_NUM - dNum2; i++)
-	{
-		enemy2[i].movePattern();
-		if (enemy2[i].x_pos <= 0 || enemy2[i].y_pos > 755)
-			enemy2[i].init((float)(960 + rand() % 100), (float)(300 + rand() % 200));
-		else if (enemy2[i].miss == false)
-			enemy2[i].move();
-		else if(enemy2[i].miss == true)
-			enemy2[i].move2();
-	}
-	//enemy3
-	if (enemy3.x_pos <= 0 || enemy3.y_pos > 755)
-		enemy3.init((float)(960 + rand() % 100), (float)(300 + rand() % 200));
-	else
-		enemy3.move();
-	//총아이템 처리
-	if (pistol.pCheck == true)
-	{
-		pistol.move();
-		if (bullet.show() == false)
+		else if (score.GetNum() == 50)
 		{
-			if (KEY_UP(VK_TAB))
+			enemy3.appear = true;
+			dNum2 = 4;
+			dNum = 2;
+		}
+		else if (score.GetNum() == 70)dNum = 1;
+		else if (score.GetNum() == 90)dNum = 0;
+		//총알 개수 0일 때
+		if (remainbullet.GetCounter() == 0)
+		{
+			if (KEY_DOWN(VK_LBUTTON))
+				sound.Gird();
+		}
+		if (KEY_DOWN(VK_SPACE))
+		{
+			sound.Reload();
+			remainbullet.SetCounter(5);
+		}
+		if (KEY_DOWN(VK_DELETE))
+		{
+			sound.SkillSound();
+			skill = true;
+		}
+		//enemy1
+		for (int i = 0; i < ENEMY1_NUM - dNum; i++)
+		{
+			if (enemy1[i].x_pos <= 0 || enemy1[i].y_pos > 755)
+				enemy1[i].init((float)(950 + rand() % 200), (float)(200 + rand() % 300));
+			else
+				enemy1[i].move();
+		}
+		for (int i = 0; i < LENEMY1_NUM - dNum; i++)
+		{
+			if (lenemy1[i].x_pos >= 960 || lenemy1[i].y_pos > 755 || lenemy1[i].x_pos == 0)
+				lenemy1[i].init((float)(1 + rand() % 50), (float)(200 + rand() % 300));
+			else
+				lenemy1[i].move();
+		}
+		//enemy2
+		for (int i = 0; i < ENEMY2_NUM - dNum2; i++)
+		{
+			enemy2[i].movePattern();
+			if (enemy2[i].x_pos <= 0 || enemy2[i].y_pos > 755)
+				enemy2[i].init((float)(950 + rand() % 200), (float)(200 + rand() % 200));
+			else if (enemy2[i].miss == false)
+				enemy2[i].move();
+			else if (enemy2[i].miss == true)
+				enemy2[i].move2();
+		}
+		//enemy3
+		if (enemy3.x_pos <= 0 || enemy3.y_pos > 755)
+			enemy3.init((float)(940 + rand() % 100), (float)(300 + rand() % 100));
+		else
+			enemy3.move();
+		//총아이템 처리
+		if (pistol.pCheck == true)
+		{
+			pistol.move();
+			if (bullet.show() == false)
 			{
-				pistol.pShow = false;
-				bullet.active();
-				bullet.init(pistol.x_pos, pistol.y_pos);
-			}
-		}
-	}
-	if (pistol.y_pos >= 750)
-		pistol.pCheck = false;
-	//총아이템 총알 처리
-	if (bullet.show() == true)
-	{
-		if (bullet.x_pos > SCREEN_WIDTH)
-			bullet.hide();
-		else
-			bullet.move();
-		for (int i = 0; i < ENEMY1_NUM-dNum; i++)
-		{
-			//충돌 처리 
-			if (bullet.check_collision(enemy1[i].x_pos, enemy1[i].y_pos) == true)
-			{
-				sound.HitShot();
-				breaking = true;
-				enemy1[i].init((float)(960 + rand() % 100), (float)(300 + rand() % 200));
-				score.SetNum(score.GetNum() + 1);
-			}
-		}
-	}
-	//마우스 좌표얻기
-	GetCursorPos(&pt);
-	//윈도우화면 마우스 좌표
-	ScreenToClient(hWnd, &pt);
-	//마우스 충돌 구현
-	if (machinegun == false) // gun_mode
-	{
-		if (remainbullet.GetCounter() > 0)
-		{
-			if (KEY_UP(VK_LBUTTON))
-			{
-				clock_t begin2;
-				begin2 = clock();
-				double i = 100;
-				double j = 1000;
-				double rst = 0.5;
-				if ((begin2 / i) - (begin2 / j) > rst)
+				if (KEY_UP(VK_TAB))
 				{
-					remainbullet.isShooting = false;
+					pistol.pShow = false;
+					bullet.active();
+					bullet.init(pistol.x_pos, pistol.y_pos);
 				}
 			}
-			//빗맞추면 콤보 0으로 초기화
-			if (effecting == true)
-				combo.SetNum(0);
-			if (KEY_DOWN(VK_LBUTTON) && remainbullet.isShooting == false)
+		}
+		if (pistol.y_pos >= 750)
+			pistol.pCheck = false;
+		//총아이템 총알 처리
+		if (bullet.show() == true)
+		{
+			if (bullet.x_pos > SCREEN_WIDTH)
+				bullet.hide();
+			else
+				bullet.move();
+			for (int i = 0; i < ENEMY1_NUM - dNum; i++)
 			{
-				hitCombo = false;
+				//충돌 처리 
+				if (bullet.check_collision(enemy1[i].x_pos, enemy1[i].y_pos) == true)
+				{
+					sound.HitShot();
+					breaking = true;
+					enemy1[i].init((float)(960 + rand() % 100), (float)(300 + rand() % 200));
+					score.SetNum(score.GetNum() + 1);
+				}
+			}
+		}
+		//마우스 좌표얻기
+		GetCursorPos(&pt);
+		//윈도우화면 마우스 좌표
+		ScreenToClient(hWnd, &pt);
+		//마우스 충돌 구현
+		if (machinegun == false) // gun_mode
+		{
+			//총아이템 처리
+			if (score.GetNum() == 5)
+			{
+				summonitem.Appear = true;
+			}
+			else if (score.GetNum() == 15)
+			{
+				summonitem.Appear = true;
+				summonitem.init(600, 750);
+			}
+			if (summonitem.Appear == true)
+			{
+				if (summonitem.x_pos < 0 || summonitem.y_pos > 755)
+					summonitem.Appear = false;
+				else
+				{
+					summonitem.Update(1.0);
+					summonitem.Jump();
+				}
+			}
+			if (remainbullet.GetCounter() > 0)
+			{
+				if (KEY_UP(VK_LBUTTON))
+				{
+					clock_t begin2;
+					begin2 = clock();
+					double i = 100;
+					double j = 1000;
+					double rst = 0.5;
+					if ((begin2 / i) - (begin2 / j) > rst)
+					{
+						remainbullet.isShooting = false;
+					}
+				}
+				//빗맞추면 콤보 0으로 초기화
+				if (effecting == true)
+					combo.SetNum(0);
+				if (KEY_DOWN(VK_LBUTTON) && remainbullet.isShooting == false)
+				{
+					hitCombo = false;
+					effecting = true;
+					remainbullet.isShooting = true;
+					remainbullet.SetCounter(remainbullet.GetCounter() - 1);
+					sound.Shot();
+					//enemy1 충돌처리
+					for (int i = 0; i < ENEMY1_NUM - dNum; i++)
+					{
+						if (pt.x >= enemy1[i].x_pos && pt.x <= enemy1[i].x_pos + 60 && pt.y >= enemy1[i].y_pos && pt.y <= enemy1[i].y_pos + 86)
+						{
+							timer.x_pos += 2;
+							sound.HitShot();
+							hitCombo = true;
+							effecting = false;
+							breaking = true;
+							enemy1[i].init((float)(960 + rand() % 100), (float)(300 + rand() % 200));
+							combo.init(800, 100);
+							score.SetNum(score.GetNum() + 1);
+							combo.SetNum(combo.GetNum() + 1);
+						}
+					}
+					//왼쪽enemy1 충돌처리
+					for (int i = 0; i < LENEMY1_NUM - dNum; i++)
+					{
+						if (pt.x >= lenemy1[i].x_pos && pt.x <= lenemy1[i].x_pos + 60 && pt.y >= lenemy1[i].y_pos && pt.y <= lenemy1[i].y_pos + 86)
+						{
+							timer.x_pos += 2;
+							sound.HitShot();
+							hitCombo = true;
+							effecting = false;
+							breaking = true;
+							lenemy1[i].init((float)(0 - rand() % 100), (float)(300 + rand() % 200));
+							combo.init(800, 100);
+							score.SetNum(score.GetNum() + 1);
+							combo.SetNum(combo.GetNum() + 1);
+						}
+					}
+					//enemy2 충돌처리
+					for (int i = 0; i < ENEMY2_NUM - dNum2; i++)
+					{
+						if (pt.x >= enemy2[i].x_pos && pt.x <= enemy2[i].x_pos + 60 && pt.y >= enemy2[i].y_pos && pt.y <= enemy2[i].y_pos + 86)
+						{
+							timer.x_pos += 2;
+							sound.HitShot();
+							hitCombo = true;
+							effecting = false;
+							breaking = true;
+							enemy2[i].init((float)(950 + rand() % 200), (float)(200 + rand() % 200));
+							combo.init(800, 100);
+							score.SetNum(score.GetNum() + 1);
+							combo.SetNum(combo.GetNum() + 1);
+						}
+					}
+					if (pt.x >= summonitem.x_pos && pt.x <= summonitem.x_pos + 64 && pt.y >= summonitem.y_pos && pt.y <= summonitem.y_pos + 64)
+					{
+						summonitem.Appear = false;
+						summonitem.init(600, 750);
+					}
+					//enemy3 충돌처리
+					if (pt.x >= enemy3.x_pos && pt.x <= enemy3.x_pos + 60 && pt.y >= enemy3.y_pos && pt.y <= enemy3.y_pos + 86)
+					{
+						sound.HitShot();
+						enemy3.attack = true;
+						enemy3.init((float)(940 + rand() % 100), (float)(300 + rand() % 100));
+					}
+					static int HP = 3;
+					if (enemy3.blind == true)
+					{
+						sound.HitShot();
+						if (pt.x >= 320 && pt.x <= 640 && pt.y >= 0 && pt.y <= 600)
+						{
+							HP -= 1;
+						}
+						if (HP == 0)
+						{
+							enemy3.blind = false;
+							HP = 3;
+						}
+					}
+				}
+			}
+		}
+		else if (machinegun == true) // machine gun_mode, 아이템 소환 없음
+		{	
+			sound.SkillShot();
+			if (KEY_UP(VK_LBUTTON))
+			{
+				quake = false;
 				effecting = true;
-				remainbullet.isShooting = true;
-				remainbullet.SetCounter(remainbullet.GetCounter() - 1);
-				sound.Shot();
 				//enemy1 충돌처리
 				for (int i = 0; i < ENEMY1_NUM - dNum; i++)
 				{
 					if (pt.x >= enemy1[i].x_pos && pt.x <= enemy1[i].x_pos + 60 && pt.y >= enemy1[i].y_pos && pt.y <= enemy1[i].y_pos + 86)
 					{
+						quake = true;
+						sound.HitShot();
 						hitCombo = true;
 						effecting = false;
 						breaking = true;
 						enemy1[i].init((float)(960 + rand() % 100), (float)(300 + rand() % 200));
-						combo.init(800, 200);
 						score.SetNum(score.GetNum() + 1);
 						combo.SetNum(combo.GetNum() + 1);
+						combo.init(800, 100);
+						bg.init(0, 0);
 					}
+					
 				}
-				//왼쪽enemy1 충돌처리
+				//왼쪽 enemy1 충돌처리
 				for (int i = 0; i < LENEMY1_NUM - dNum; i++)
 				{
 					if (pt.x >= lenemy1[i].x_pos && pt.x <= lenemy1[i].x_pos + 60 && pt.y >= lenemy1[i].y_pos && pt.y <= lenemy1[i].y_pos + 86)
 					{
+						quake = true;
+						sound.HitShot();
 						hitCombo = true;
 						effecting = false;
 						breaking = true;
 						lenemy1[i].init((float)(0 - rand() % 100), (float)(300 + rand() % 200));
-						combo.init(800, 200);
 						score.SetNum(score.GetNum() + 1);
 						combo.SetNum(combo.GetNum() + 1);
+						combo.init(800, 100);
+						bg.init(0, 0);
 					}
 				}
 				//enemy2 충돌처리
@@ -1055,32 +1167,37 @@ void Game::do_game_logic(void)
 				{
 					if (pt.x >= enemy2[i].x_pos && pt.x <= enemy2[i].x_pos + 60 && pt.y >= enemy2[i].y_pos && pt.y <= enemy2[i].y_pos + 86)
 					{
+						quake = true;
+						sound.HitShot();
 						hitCombo = true;
 						effecting = false;
 						breaking = true;
-						enemy2[i].init((float)(960 + rand() % 100), (float)(300 + rand() % 200));
-						combo.init(800, 200);
+						enemy2[i].init((float)(950 + rand() % 200), (float)(200 + rand() % 200));
 						score.SetNum(score.GetNum() + 1);
 						combo.SetNum(combo.GetNum() + 1);
+						combo.init(800, 100);
+						bg.init(0, 0);
 					}
 				}
-				if (pt.x >= summonitem2.x_pos && pt.x <= summonitem2.x_pos + 64 && pt.y >= summonitem2.y_pos && pt.y <= summonitem2.y_pos + 64)
-				{
-					summonitem2.Appear = false;
-					summonitem2.init(600, 950);
-					summonitem2.Giantization = true;
-				}
 				//enemy3 충돌처리
-				else if (pt.x >= enemy3.x_pos && pt.x <= enemy3.x_pos + 60 && pt.y >= enemy3.y_pos && pt.y <= enemy3.y_pos + 86)
+				if (pt.x >= enemy3.x_pos && pt.x <= enemy3.x_pos + 60 && pt.y >= enemy3.y_pos && pt.y <= enemy3.y_pos + 86)
 				{
+					quake = true;
+					sound.HitShot();
 					enemy3.attack = true;
-					enemy3.init((float)(960 + rand() % 100), (float)(300 + rand() % 200));
+					enemy3.init((float)(940 + rand() % 100), (float)(300 + rand() % 100));
+					bg.init(0, 0);
 				}
-				static int HP = 3;
+
 				if (enemy3.blind == true)
 				{
+					
+					sound.HitShot();
+					static int HP = 3;
 					if (pt.x >= 320 && pt.x <= 640 && pt.y >= 0 && pt.y <= 600)
 					{
+						quake = true;
+						bg.init(0, 0);
 						HP -= 1;
 					}
 					if (HP == 0)
@@ -1088,77 +1205,6 @@ void Game::do_game_logic(void)
 						enemy3.blind = false;
 						HP = 3;
 					}
-				}
-				if (summonitem2.Giantization == true)
-					scale = 2;
-			}
-		}
-	}
-	else if (machinegun == true) // machine gun_mode
-	{
-		sound.SkillShot();
-		if (KEY_UP(VK_LBUTTON))
-		{
-			effecting = true;
-			//enemy1 충돌처리
-			for (int i = 0; i < ENEMY1_NUM - dNum; i++)
-			{
-				if (pt.x >= enemy1[i].x_pos && pt.x <= enemy1[i].x_pos + 60 && pt.y >= enemy1[i].y_pos && pt.y <= enemy1[i].y_pos + 86)
-				{
-					hitCombo = true;
-					effecting = false;
-					breaking = true;
-					enemy1[i].init((float)(960 + rand() % 100), (float)(300 + rand() % 200));
-					score.SetNum(score.GetNum() + 1);
-					combo.SetNum(combo.GetNum() + 1);
-					combo.init(800, 200);
-				}
-			}
-			//왼쪽 enemy1 충돌처리
-			for (int i = 0; i < LENEMY1_NUM - dNum; i++)
-			{
-				if (pt.x >= lenemy1[i].x_pos && pt.x <= lenemy1[i].x_pos + 60 && pt.y >= lenemy1[i].y_pos && pt.y <= lenemy1[i].y_pos + 86)
-				{
-					hitCombo = true;
-					effecting = false;
-					breaking = true;
-					lenemy1[i].init((float)(0 - rand() % 100), (float)(300 + rand() % 200));
-					score.SetNum(score.GetNum() + 1);
-					combo.SetNum(combo.GetNum() + 1);
-				}
-			}
-			//enemy2 충돌처리
-			for (int i = 0; i < ENEMY2_NUM - dNum2; i++)
-			{
-				if (pt.x >= enemy2[i].x_pos && pt.x <= enemy2[i].x_pos + 60 && pt.y >= enemy2[i].y_pos && pt.y <= enemy2[i].y_pos + 86)
-				{
-					hitCombo = true;
-					effecting = false;
-					breaking = true;
-					enemy2[i].init((float)(960 + rand() % 100), (float)(300 + rand() % 200));
-					score.SetNum(score.GetNum() + 1);
-					combo.SetNum(combo.GetNum() + 1);
-					combo.init(800, 200);
-				}
-			}
-			//enemy3 충돌처리
-			if (pt.x >= enemy3.x_pos && pt.x <= enemy3.x_pos + 60 && pt.y >= enemy3.y_pos && pt.y <= enemy3.y_pos + 86)
-			{
-				enemy3.attack = true;
-				enemy3.init((float)(960 + rand() % 100), (float)(300 + rand() % 200));
-			}
-			
-			if (enemy3.blind == true)
-			{
-				static int HP = 3;
-				if (pt.x >= 320 && pt.x <= 640 && pt.y >= 0 && pt.y <= 600)
-				{
-					HP -= 1;
-				}
-				if (HP == 0)
-				{
-					enemy3.blind = false;
-					HP = 3;
 				}
 			}
 		}

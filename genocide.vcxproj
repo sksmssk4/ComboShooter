@@ -184,6 +184,7 @@
       <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>WIN32;_DEBUG;DEBUG;PROFILE;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DisableSpecificWarnings>4311;4100;4244;4456;4458;4302</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
@@ -375,9 +376,11 @@
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
     <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
     <None Include="DXUT\Optional\directx.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Bg.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Combo.cpp" />
     <ClCompile Include="Enemy1.cpp" />
@@ -396,6 +399,7 @@
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bg.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Combo.h" />
     <ClInclude Include="Enemy.h" />

@@ -11,6 +11,7 @@ public:
 	virtual void move() override;
 	bool attack = false;
 	bool blind = false;
+	bool appear = false;
 };
 
 #endif

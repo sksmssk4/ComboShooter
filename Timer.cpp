@@ -12,6 +12,6 @@ void Timer::move()
 {
 	clock_t begin;
 	begin = clock();
-	rst1 = (begin / CLOCKS_PER_SEC) * 5;
-	x_pos = 535-((begin / CLOCKS_PER_SEC)*5);
+	rst1 = (begin / CLOCKS_PER_SEC) * 10;
+	x_pos = 535-((begin / CLOCKS_PER_SEC)*10);
 }

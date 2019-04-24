@@ -10,6 +10,7 @@
 #include <time.h>
 #include <stdio.h>
 
+#include "Bg.h"
 #include "Timer.h"
 #include "Remainbullet.h"
 #include "Score.h"
@@ -54,6 +55,8 @@ private:
 	LPDIRECT3DTEXTURE9 sprite_dz3;
 
 	LPDIRECT3DTEXTURE9 sprite_bg; 
+	LPDIRECT3DTEXTURE9 sprite_bg2;
+	LPDIRECT3DTEXTURE9 sprite_scorebox;
 	LPDIRECT3DTEXTURE9 sprite_score0;
 	LPDIRECT3DTEXTURE9 sprite_score1;
 	LPDIRECT3DTEXTURE9 sprite_score2;
@@ -137,6 +140,7 @@ private:
 	UINT iTime;
 	FLOAT angle;
 
+	Bg bg;
 	Timer timer;
 	Pistol pistol;
 	lEnemy1 lenemy1[ENEMY1_NUM];
@@ -157,6 +161,7 @@ private:
 	bool effecting = false; //이펙트 애니메이션
 	bool breaking = false; //폭발 애니메이션
 	bool hitCombo = false; //콤보 출현
+	bool quake = false; // 흔들림
 	bool ingame = true; //ingame scene1
 	bool ending = false;//ending scene
 	bool skill = false;//스킬 사운드

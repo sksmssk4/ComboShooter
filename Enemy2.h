@@ -15,6 +15,7 @@ public:
 	void move2();
 	void movePattern();
 	bool miss = false;
+	bool appear = false;
 };
 
 #endif

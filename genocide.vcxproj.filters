@@ -43,6 +43,7 @@
     <ClCompile Include="Combo.cpp">
       <Filter>소스파일</Filter>
     </ClCompile>
+    <ClCompile Include="Bg.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h" />
@@ -94,6 +95,7 @@
     <ClInclude Include="Combo.h">
       <Filter>헤더파일</Filter>
     </ClInclude>
+    <ClInclude Include="Bg.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Matrices49860489.rc" />
@@ -102,6 +104,7 @@
     <None Include="DXUT\Optional\directx.ico" />
     <None Include="ClassDiagram.cd" />
     <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="헤더파일">

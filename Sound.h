@@ -22,6 +22,7 @@ public:
 	void Shot();
 	void HitShot();
 	void SkillShot();
+	void SkillEnd();
 	void Gird();
 	void Reload();
 	void SkillSound();

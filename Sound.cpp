@@ -19,13 +19,13 @@ void Sound::bgmEnd()
 //허공샷
 void Sound::Shot()
 {
-	sndPlaySoundA("..\\Shooting-Master-master\\sound\\gun2", SND_ASYNC | SND_NODEFAULT | SND_ASYNC);
+	sndPlaySoundA("..\\Shooting-Master-master\\sound\\gun1", SND_ASYNC | SND_NODEFAULT | SND_ASYNC);
 		
 }
 //명중샷
 void Sound::HitShot()
 {	
-	sndPlaySoundA("..\\Shooting-Master-master\\sound\\glass_break", SND_ASYNC | SND_NODEFAULT | SND_ASYNC);
+	sndPlaySoundA("..\\Shooting-Master-master\\sound\\gun2", SND_ASYNC | SND_NODEFAULT | SND_ASYNC);
 }
 //총알 없을 때 발사
 void Sound::Gird()
@@ -48,6 +48,10 @@ void Sound::SkillShot()
 	dwID2 = mci_open2.wDeviceID;
 	mciSendCommand(dwID2, MCI_PLAY, MCI_DGV_PLAY_REPEAT, (DWORD)(LPVOID)&mci_play2); // MCI_DGV_PLAY_REPEAT(루프)
 	//음악재생끄기//mciSendCommand(3, MCI_SEEK, MCI_SEEK_TO_START, (DWORD)(LPVOID)NULL);
+}
+void Sound::SkillEnd()
+{
+	mciSendCommand(dwID2, MCI_SEEK, MCI_SEEK_TO_START, (DWORD)(LPVOID)NULL);
 }
 //스킬발동음
 void Sound::SkillSound()
