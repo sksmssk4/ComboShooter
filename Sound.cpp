@@ -19,13 +19,13 @@ void Sound::bgmEnd()
 //Çã°ø¼¦
 void Sound::Shot()
 {
-	sndPlaySoundA("..\\Shooting-Master-master\\sound\\gun1", SND_ASYNC | SND_NODEFAULT | SND_ASYNC);
+	sndPlaySoundA("..\\Shooting-Master-master\\sound\\gun2", SND_ASYNC | SND_NODEFAULT | SND_ASYNC);
 		
 }
 //¸íÁß¼¦
 void Sound::HitShot()
 {	
-	sndPlaySoundA("..\\Shooting-Master-master\\sound\\gun2", SND_ASYNC | SND_NODEFAULT | SND_ASYNC);
+	sndPlaySoundA("..\\Shooting-Master-master\\sound\\gun1", SND_ASYNC | SND_NODEFAULT | SND_ASYNC);
 }
 //ÃÑ¾Ë ¾øÀ» ¶§ ¹ß»ç
 void Sound::Gird()

@@ -1,31 +1,23 @@
-﻿  Enemy2.cpp
-c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\enemy.h(9): warning C4100: 'y': 참조되지 않은 정식 매개 변수입니다.
-c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\enemy.h(9): warning C4100: 'x': 참조되지 않은 정식 매개 변수입니다.
-  Enemy3.cpp
-c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\enemy.h(9): warning C4100: 'y': 참조되지 않은 정식 매개 변수입니다.
-c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\enemy.h(9): warning C4100: 'x': 참조되지 않은 정식 매개 변수입니다.
-  Game.cpp
+﻿  Game.cpp
 c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\enemy.h(9): warning C4100: 'y': 참조되지 않은 정식 매개 변수입니다.
 c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\enemy.h(9): warning C4100: 'x': 참조되지 않은 정식 매개 변수입니다.
 c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(18): warning C4458: 'hWnd' 선언은 클래스 멤버를 숨깁니다.
-  c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.h(157): note: 'Game::hWnd' 선언을 참조하십시오.
-c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(418): warning C4456: 'Spart' 선언은 이전 로컬 선언을 숨깁니다.
-  c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(285): note: 'Spart' 선언을 참조하십시오.
-c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(418): warning C4456: 'Scenter' 선언은 이전 로컬 선언을 숨깁니다.
-  c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(285): note: 'Scenter' 선언을 참조하십시오.
-c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(418): warning C4456: 'Sposition' 선언은 이전 로컬 선언을 숨깁니다.
-  c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(285): note: 'Sposition' 선언을 참조하십시오.
-c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(458): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(717): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Main.cpp
-c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\enemy.h(9): warning C4100: 'y': 참조되지 않은 정식 매개 변수입니다.
-c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\enemy.h(9): warning C4100: 'x': 참조되지 않은 정식 매개 변수입니다.
-c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\main.cpp(13): warning C4100: 'lpCmdLine': 참조되지 않은 정식 매개 변수입니다.
-c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\main.cpp(12): warning C4100: 'hPrevInstance': 참조되지 않은 정식 매개 변수입니다.
-  Timer.cpp
-c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\timer.cpp(16): warning C4244: '=': 'clock_t'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  코드를 생성하고 있습니다...
-  LINK : C:\Users\이명현\Desktop\졸작파이팅!\Shooting-Master-master\Debug\Matrices49860489.exe을(를) 찾을 수 없거나 마지막 증분 링크에 의해 빌드되지 않았습니다. 전체 링크를 수행하고 있습니다.
-Bg.obj : warning LNK4075: '/EDITANDCONTINUE'이(가) '/SAFESEH' 사양으로 인해 무시됩니다.
+  c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.h(158): note: 'Game::hWnd' 선언을 참조하십시오.
+c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(428): warning C4456: 'Spart' 선언은 이전 로컬 선언을 숨깁니다.
+  c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(295): note: 'Spart' 선언을 참조하십시오.
+c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(428): warning C4456: 'Scenter' 선언은 이전 로컬 선언을 숨깁니다.
+  c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(295): note: 'Scenter' 선언을 참조하십시오.
+c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(428): warning C4456: 'Sposition' 선언은 이전 로컬 선언을 숨깁니다.
+  c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(295): note: 'Sposition' 선언을 참조하십시오.
+c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(468): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(511): warning C4456: 'part1' 선언은 이전 로컬 선언을 숨깁니다.
+  c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(259): note: 'part1' 선언을 참조하십시오.
+c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(511): warning C4456: 'center1' 선언은 이전 로컬 선언을 숨깁니다.
+  c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(259): note: 'center1' 선언을 참조하십시오.
+c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(724): warning C4456: 'part1' 선언은 이전 로컬 선언을 숨깁니다.
+  c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(259): note: 'part1' 선언을 참조하십시오.
+c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(726): warning C4456: 'center1' 선언은 이전 로컬 선언을 숨깁니다.
+  c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(259): note: 'center1' 선언을 참조하십시오.
+c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(727): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   genocide.vcxproj -> C:\Users\이명현\Desktop\졸작파이팅!\Shooting-Master-master\Debug\Matrices49860489.exe
   genocide.vcxproj -> C:\Users\이명현\Desktop\졸작파이팅!\Shooting-Master-master\Debug\Matrices49860489.pdb (Full PDB)

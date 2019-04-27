@@ -56,6 +56,7 @@ private:
 
 	LPDIRECT3DTEXTURE9 sprite_bg; 
 	LPDIRECT3DTEXTURE9 sprite_bg2;
+	LPDIRECT3DTEXTURE9 sprite_scaffolding;
 	LPDIRECT3DTEXTURE9 sprite_scorebox;
 	LPDIRECT3DTEXTURE9 sprite_score0;
 	LPDIRECT3DTEXTURE9 sprite_score1;
@@ -140,7 +141,7 @@ private:
 	UINT iTime;
 	FLOAT angle;
 
-	Bg bg;
+	Bg bg[BG_NUM];
 	Timer timer;
 	Pistol pistol;
 	lEnemy1 lenemy1[ENEMY1_NUM];
