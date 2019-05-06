@@ -1,4 +1,3 @@
-
 #include "Game.h"
 
 
@@ -13,6 +12,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	LPSTR lpCmdLine,
 	int nCmdShow)
 {
+	
 	HWND hWnd;
 	WNDCLASSEX wc;
 
@@ -22,7 +22,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	wc.style = CS_HREDRAW | CS_VREDRAW;
 	wc.lpfnWndProc = (WNDPROC)WindowProc;
 	wc.hInstance = hInstance;
-	wc.hCursor = LoadCursorFromFileA("..\\Shooting-Master-master\\aim.ani"); //커서 파일위치
+	wc.hCursor = LoadCursorFromFileA("..\\Genocide\\aim.ani"); //커서 파일위치
 
 	wc.lpszClassName = L"WindowClass";
 	RegisterClassEx(&wc);
@@ -58,7 +58,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 		game.do_game_logic();
 		
 		game.render_frame();
-
+		
 		// check the 'escape' key
 		if (KEY_DOWN(VK_ESCAPE))
 			PostMessage(hWnd, WM_DESTROY, 0, 0);

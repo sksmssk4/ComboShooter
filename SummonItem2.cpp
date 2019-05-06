@@ -20,9 +20,11 @@ void SummonItem2::Jump()
 	if (jump)
 	{
 		velocityX = -2.0;
-		velocityY = -13.0;
+		velocityY = -11.0;
 		jump = false;
 	}
+	if (y_pos > 576)
+		jump = true;
 
 }
 

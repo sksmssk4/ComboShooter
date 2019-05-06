@@ -375,46 +375,69 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
-    <None Include="ClassDiagram1.cd" />
-    <None Include="ClassDiagram2.cd" />
     <None Include="DXUT\Optional\directx.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Back.cpp" />
+    <ClCompile Include="Bazooka.cpp" />
     <ClCompile Include="Bg.cpp" />
+    <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="BulletMove.cpp" />
     <ClCompile Include="Combo.cpp" />
     <ClCompile Include="Enemy1.cpp" />
     <ClCompile Include="Enemy2.cpp" />
     <ClCompile Include="Enemy3.cpp" />
+    <ClCompile Include="Front.cpp" />
     <ClCompile Include="lEnemy1.cpp" />
+    <ClCompile Include="lEnemy2.cpp" />
+    <ClCompile Include="lEnemy3.cpp" />
+    <ClCompile Include="LockMove.cpp" />
+    <ClCompile Include="LockMove2.cpp" />
+    <ClCompile Include="LockMove3.cpp" />
+    <ClCompile Include="Soldier2.cpp" />
     <ClCompile Include="SummonItem2.cpp" />
+    <ClCompile Include="SummonItem3.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Score.cpp" />
     <ClCompile Include="SummonItem.cpp" />
-    <ClCompile Include="Pistol.cpp" />
+    <ClCompile Include="Soldier.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Sound.cpp" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Back.h" />
+    <ClInclude Include="Bazooka.h" />
     <ClInclude Include="Bg.h" />
+    <ClInclude Include="Boss.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="BulletMove.h" />
     <ClInclude Include="Combo.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Enemy1.h" />
     <ClInclude Include="Enemy2.h" />
     <ClInclude Include="Enemy3.h" />
+    <ClInclude Include="Front.h" />
     <ClInclude Include="lEnemy1.h" />
+    <ClInclude Include="lEnemy2.h" />
+    <ClInclude Include="lEnemy3.h" />
+    <ClInclude Include="LockMove.h" />
+    <ClInclude Include="LockMove2.h" />
+    <ClInclude Include="LockMove3.h" />
+    <ClInclude Include="Remaingrenade.h" />
+    <ClInclude Include="Soldier2.h" />
     <ClInclude Include="SummonItem2.h" />
+    <ClInclude Include="SummonItem3.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Remainbullet.h" />
     <ClInclude Include="Score.h" />
     <ClInclude Include="SummonItem.h" />
-    <ClInclude Include="Pistol.h" />
+    <ClInclude Include="Soldier.h" />
     <CLInclude Include="resource.h" />
     <ClInclude Include="Sound.h" />
     <ResourceCompile Include="Matrices49860489.rc" />

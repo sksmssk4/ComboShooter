@@ -1,5 +1,3 @@
-#pragma once
-
 #include "Entity.h"
 #ifndef BULLET_H
 #define BULLET_H

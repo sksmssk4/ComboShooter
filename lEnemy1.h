@@ -1,6 +1,5 @@
 #ifndef LENEMY1_H
 #define LENEMY1_H
-#define LENEMY1_NUM 6
 
 #include "Enemy.h"
 

@@ -10,7 +10,6 @@ public:
 	virtual void init(float x, float y) override;
 	virtual void move() override;
 	bool attack = false;
-	bool blind = false;
 	bool appear = false;
 };
 

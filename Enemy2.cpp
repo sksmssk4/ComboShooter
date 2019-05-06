@@ -10,14 +10,13 @@ void Enemy2::init(float x, float y)
 void Enemy2::move()
 {
 	y_pos -= 2;
-	x_pos -= 6;
+	x_pos -= 9;
 	
 }
 
 void Enemy2::move2()
 {
-	y_pos -= 2;
-	x_pos += 2;
+	x_pos += 3;
 }
 
 void Enemy2::movePattern()

@@ -10,7 +10,7 @@ void Bg::init(float x, float y)
 void Bg::move()
 {
 	y_pos -= 5.0f;
-	if (y_pos <= -640) y_pos = 640;
+	if (y_pos <= -720) y_pos = 720;
 }
 
 void Bg::shake()

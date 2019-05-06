@@ -6,7 +6,6 @@
 class Timer :public Entity {
 
 public:
-
 	void move();
 	void init(float x, float y);
 	int rst1 = 0;

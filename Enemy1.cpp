@@ -10,6 +10,6 @@ void Enemy1::init(float x, float y)
 void Enemy1::move()
 {
 	y_pos -= 2;
-	x_pos -= 6;
+	x_pos -= 8;
 }
 

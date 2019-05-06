@@ -1,23 +1,85 @@
 ﻿  Game.cpp
-c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\enemy.h(9): warning C4100: 'y': 참조되지 않은 정식 매개 변수입니다.
-c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\enemy.h(9): warning C4100: 'x': 참조되지 않은 정식 매개 변수입니다.
-c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(18): warning C4458: 'hWnd' 선언은 클래스 멤버를 숨깁니다.
-  c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.h(158): note: 'Game::hWnd' 선언을 참조하십시오.
-c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(428): warning C4456: 'Spart' 선언은 이전 로컬 선언을 숨깁니다.
-  c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(295): note: 'Spart' 선언을 참조하십시오.
-c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(428): warning C4456: 'Scenter' 선언은 이전 로컬 선언을 숨깁니다.
-  c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(295): note: 'Scenter' 선언을 참조하십시오.
-c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(428): warning C4456: 'Sposition' 선언은 이전 로컬 선언을 숨깁니다.
-  c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(295): note: 'Sposition' 선언을 참조하십시오.
-c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(468): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(511): warning C4456: 'part1' 선언은 이전 로컬 선언을 숨깁니다.
-  c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(259): note: 'part1' 선언을 참조하십시오.
-c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(511): warning C4456: 'center1' 선언은 이전 로컬 선언을 숨깁니다.
-  c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(259): note: 'center1' 선언을 참조하십시오.
-c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(724): warning C4456: 'part1' 선언은 이전 로컬 선언을 숨깁니다.
-  c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(259): note: 'part1' 선언을 참조하십시오.
-c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(726): warning C4456: 'center1' 선언은 이전 로컬 선언을 숨깁니다.
-  c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(259): note: 'center1' 선언을 참조하십시오.
-c:\users\이명현\desktop\졸작파이팅!\shooting-master-master\game.cpp(727): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  genocide.vcxproj -> C:\Users\이명현\Desktop\졸작파이팅!\Shooting-Master-master\Debug\Matrices49860489.exe
-  genocide.vcxproj -> C:\Users\이명현\Desktop\졸작파이팅!\Shooting-Master-master\Debug\Matrices49860489.pdb (Full PDB)
+c:\users\이명현\desktop\졸작파이팅!\genocide\enemy.h(11): warning C4100: 'y': 참조되지 않은 정식 매개 변수입니다.
+c:\users\이명현\desktop\졸작파이팅!\genocide\enemy.h(11): warning C4100: 'x': 참조되지 않은 정식 매개 변수입니다.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(14): warning C4458: 'hWnd' 선언은 클래스 멤버를 숨깁니다.
+  c:\users\이명현\desktop\졸작파이팅!\genocide\game.h(228): note: 'Game::hWnd' 선언을 참조하십시오.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(197): warning C4244: '인수': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(199): warning C4244: '인수': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(201): warning C4244: '인수': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(203): warning C4244: '인수': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(206): warning C4244: '인수': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(208): warning C4244: '인수': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(210): warning C4244: '인수': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(212): warning C4244: '인수': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(215): warning C4244: '인수': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(217): warning C4244: '인수': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(220): warning C4244: '인수': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(222): warning C4244: '인수': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(235): warning C4244: '인수': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(237): warning C4244: '인수': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(239): warning C4244: '인수': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(241): warning C4244: '인수': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(305): warning C4002: 'D3DCOLOR_XRGB' 매크로의 실제 매개 변수가 너무 많습니다.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(737): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(741): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(756): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(771): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(788): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(984): warning C4456: 'Spart' 선언은 이전 로컬 선언을 숨깁니다.
+  c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(799): note: 'Spart' 선언을 참조하십시오.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(984): warning C4456: 'Scenter' 선언은 이전 로컬 선언을 숨깁니다.
+  c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(799): note: 'Scenter' 선언을 참조하십시오.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(984): warning C4456: 'Sposition' 선언은 이전 로컬 선언을 숨깁니다.
+  c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(799): note: 'Sposition' 선언을 참조하십시오.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(1024): warning C4456: 'Gpart1' 선언은 이전 로컬 선언을 숨깁니다.
+  c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(808): note: 'Gpart1' 선언을 참조하십시오.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(1024): warning C4456: 'Gpart2' 선언은 이전 로컬 선언을 숨깁니다.
+  c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(808): note: 'Gpart2' 선언을 참조하십시오.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(1024): warning C4456: 'Gpart3' 선언은 이전 로컬 선언을 숨깁니다.
+  c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(808): note: 'Gpart3' 선언을 참조하십시오.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(1026): warning C4456: 'Gcenter' 선언은 이전 로컬 선언을 숨깁니다.
+  c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(809): note: 'Gcenter' 선언을 참조하십시오.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(1026): warning C4456: 'Gposition' 선언은 이전 로컬 선언을 숨깁니다.
+  c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(809): note: 'Gposition' 선언을 참조하십시오.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(1026): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(1065): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(1091): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(1202): warning C4456: 'part1' 선언은 이전 로컬 선언을 숨깁니다.
+  c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(491): note: 'part1' 선언을 참조하십시오.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(1202): warning C4456: 'center1' 선언은 이전 로컬 선언을 숨깁니다.
+  c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(491): note: 'center1' 선언을 참조하십시오.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(1209): warning C4456: 'part1' 선언은 이전 로컬 선언을 숨깁니다.
+  c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(491): note: 'part1' 선언을 참조하십시오.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(1209): warning C4456: 'part2' 선언은 이전 로컬 선언을 숨깁니다.
+  c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(734): note: 'part2' 선언을 참조하십시오.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(1209): warning C4456: 'part3' 선언은 이전 로컬 선언을 숨깁니다.
+  c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(737): note: 'part3' 선언을 참조하십시오.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(1273): warning C4456: 'part1' 선언은 이전 로컬 선언을 숨깁니다.
+  c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(491): note: 'part1' 선언을 참조하십시오.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(1273): warning C4456: 'center1' 선언은 이전 로컬 선언을 숨깁니다.
+  c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(491): note: 'center1' 선언을 참조하십시오.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(1343): warning C4456: 'part1' 선언은 이전 로컬 선언을 숨깁니다.
+  c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(491): note: 'part1' 선언을 참조하십시오.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(1343): warning C4456: 'part2' 선언은 이전 로컬 선언을 숨깁니다.
+  c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(734): note: 'part2' 선언을 참조하십시오.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(1343): warning C4456: 'part3' 선언은 이전 로컬 선언을 숨깁니다.
+  c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(737): note: 'part3' 선언을 참조하십시오.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(1400): warning C4456: 'Gpart1' 선언은 이전 로컬 선언을 숨깁니다.
+  c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(808): note: 'Gpart1' 선언을 참조하십시오.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(1400): warning C4456: 'Gpart2' 선언은 이전 로컬 선언을 숨깁니다.
+  c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(808): note: 'Gpart2' 선언을 참조하십시오.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(1400): warning C4456: 'Gpart3' 선언은 이전 로컬 선언을 숨깁니다.
+  c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(808): note: 'Gpart3' 선언을 참조하십시오.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(1402): warning C4456: 'Gcenter' 선언은 이전 로컬 선언을 숨깁니다.
+  c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(809): note: 'Gcenter' 선언을 참조하십시오.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(1402): warning C4456: 'Gposition' 선언은 이전 로컬 선언을 숨깁니다.
+  c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(809): note: 'Gposition' 선언을 참조하십시오.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(1402): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(1446): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(1486): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(1578): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(1619): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(1757): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\이명현\desktop\졸작파이팅!\genocide\game.cpp(1893): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  genocide.vcxproj -> C:\Users\이명현\Desktop\졸작파이팅!\Genocide\Debug\Matrices49860489.exe
+  genocide.vcxproj -> C:\Users\이명현\Desktop\졸작파이팅!\Genocide\Debug\Matrices49860489.pdb (Full PDB)
