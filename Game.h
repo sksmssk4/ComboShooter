@@ -23,6 +23,7 @@
 #include "Remainbullet.h"
 #include "Score.h"
 #include "Combo.h"
+#include "Combo2.h"
 #include "Sound.h"
 #include "SummonItem.h"
 #include "SummonItem2.h"
@@ -65,11 +66,19 @@ private:
 	LPDIRECT3DTEXTURE9 sprite_opening;
 	LPDIRECT3DTEXTURE9 sprite_bgEffect;
 	LPDIRECT3DTEXTURE9 sprite_play;
+	LPDIRECT3DTEXTURE9 sprite_tuto;
 	LPDIRECT3DTEXTURE9 sprite_quit;
 
 	LPDIRECT3DTEXTURE9 sprite_ending;
 	LPDIRECT3DTEXTURE9 sprite_gomain;
 	LPDIRECT3DTEXTURE9 sprite_nextstage;
+	//tutorial
+	LPDIRECT3DTEXTURE9 sprite_tuto_bg;
+	LPDIRECT3DTEXTURE9 sprite_tuto_ui;
+	LPDIRECT3DTEXTURE9 sprite_quest1;
+	LPDIRECT3DTEXTURE9 sprite_quest2;
+	LPDIRECT3DTEXTURE9 sprite_quest3;
+	LPDIRECT3DTEXTURE9 sprite_quest4;
 
 	LPDIRECT3DTEXTURE9 sprite_dz;
 	LPDIRECT3DTEXTURE9 sprite_dz2;
@@ -222,6 +231,7 @@ private:
 	SummonItem3 summonitem3;
 	Score score;
 	Combo combo;
+	Combo2 combo2;
 	BulletMove bulletmove;
 	Remainbullet remainbullet;
 	Remaingrenade remaingrenade;
@@ -241,6 +251,11 @@ private:
 	bool support2 = false;
 	bool opening = true; //opening scene
 	bool ingame = false; //ingame scene1
+	bool tutorial = false; //tutorial scene
+	bool quest1 = true;
+	bool quest2 = false;
+	bool quest3 = false;
+	bool quest4 = false;
 	bool ending = false;//ending scene
 public:
 

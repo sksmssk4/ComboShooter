@@ -11,7 +11,7 @@ public:
 	float y_pos;
 	int status;
 	int HP;
-	float velocityX;
+	float velocityX = 0.0f;
 	float velocityY = 0.0f;
 	float gravity = 0.15f;
 

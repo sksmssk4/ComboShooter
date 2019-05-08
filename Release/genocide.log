@@ -1,0 +1,16 @@
+﻿Game.obj : error LNK2001: __imp__GetCursorPos@4 외부 기호를 확인할 수 없습니다.
+Game.obj : error LNK2001: __imp__PostQuitMessage@4 외부 기호를 확인할 수 없습니다.
+Game.obj : error LNK2001: __imp__SetRect@20 외부 기호를 확인할 수 없습니다.
+Game.obj : error LNK2001: __imp__GetAsyncKeyState@4 외부 기호를 확인할 수 없습니다.
+Game.obj : error LNK2001: __imp__ScreenToClient@8 외부 기호를 확인할 수 없습니다.
+Main.obj : error LNK2001: __imp__TranslateMessage@4 외부 기호를 확인할 수 없습니다.
+Main.obj : error LNK2001: __imp__PeekMessageW@20 외부 기호를 확인할 수 없습니다.
+Main.obj : error LNK2001: __imp__DispatchMessageW@4 외부 기호를 확인할 수 없습니다.
+Main.obj : error LNK2001: __imp__ShowWindow@8 외부 기호를 확인할 수 없습니다.
+Main.obj : error LNK2001: __imp__RegisterClassExW@4 외부 기호를 확인할 수 없습니다.
+Main.obj : error LNK2001: __imp__CreateWindowExW@48 외부 기호를 확인할 수 없습니다.
+Main.obj : error LNK2001: __imp__LoadCursorFromFileA@4 외부 기호를 확인할 수 없습니다.
+Main.obj : error LNK2001: __imp__PostMessageW@16 외부 기호를 확인할 수 없습니다.
+Main.obj : error LNK2001: __imp__DefWindowProcW@16 외부 기호를 확인할 수 없습니다.
+MSVCRT.lib(exe_wwinmain.obj) : error LNK2001: _wWinMain@16 외부 기호를 확인할 수 없습니다.
+C:\Users\이명현\Desktop\졸작파이팅!\Genocide\Release\Matrices49860489.exe : fatal error LNK1120: 15개의 확인할 수 없는 외부 참조입니다.

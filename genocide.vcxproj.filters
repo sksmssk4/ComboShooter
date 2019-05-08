@@ -52,16 +52,37 @@
     <ClCompile Include="lEnemy3.cpp">
       <Filter>소스파일</Filter>
     </ClCompile>
-    <ClCompile Include="LockMove.cpp" />
-    <ClCompile Include="LockMove2.cpp" />
-    <ClCompile Include="LockMove3.cpp" />
-    <ClCompile Include="BulletMove.cpp" />
-    <ClCompile Include="SummonItem3.cpp" />
-    <ClCompile Include="Back.cpp" />
-    <ClCompile Include="Front.cpp" />
-    <ClCompile Include="Soldier2.cpp" />
-    <ClCompile Include="Bazooka.cpp" />
-    <ClCompile Include="Boss.cpp" />
+    <ClCompile Include="Back.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Bazooka.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletMove.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Front.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
+    <ClCompile Include="LockMove.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
+    <ClCompile Include="LockMove2.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
+    <ClCompile Include="LockMove3.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Soldier2.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
+    <ClCompile Include="SummonItem3.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Combo2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h" />
@@ -122,24 +143,46 @@
     <ClInclude Include="lEnemy3.h">
       <Filter>헤더파일</Filter>
     </ClInclude>
-    <ClInclude Include="LockMove.h" />
-    <ClInclude Include="LockMove2.h" />
-    <ClInclude Include="LockMove3.h" />
-    <ClInclude Include="Remaingrenade.h" />
-    <ClInclude Include="BulletMove.h" />
-    <ClInclude Include="SummonItem3.h" />
-    <ClInclude Include="Back.h" />
-    <ClInclude Include="Front.h" />
-    <ClInclude Include="Soldier2.h" />
-    <ClInclude Include="Bazooka.h" />
-    <ClInclude Include="Boss.h" />
+    <ClInclude Include="Back.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Bazooka.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletMove.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Front.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="LockMove.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="LockMove2.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="LockMove3.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Soldier2.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="SummonItem3.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Combo2.h" />
+    <ClInclude Include="Remaingrenade.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Matrices49860489.rc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico" />
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="헤더파일">

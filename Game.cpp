@@ -1,6 +1,6 @@
 #include "Game.h"
 POINT pt; //마우스 포인트
-
+static int hp = 10;
 bool sphere_collision_check(float x0, float y0, float size0, float x1, float y1, float size1);
 
 bool sphere_collision_check(float x0, float y0, float size0, float x1, float y1, float size1)
@@ -34,6 +34,27 @@ void Game::initD3D(HWND hWnd)
 		&d3ddev);
 	D3DXCreateSprite(d3ddev, &d3dspt);    // create the Direct3D Sprite object
 	D3DXCreateSprite(d3ddev, &espt);
+	//튜토리얼
+	///배경
+	D3DXCreateTextureFromFileEx(d3ddev, L"bg4.png", 960, 640, D3DX_DEFAULT, NULL, D3DFMT_A8R8G8B8, D3DPOOL_MANAGED,
+		D3DX_DEFAULT, D3DX_DEFAULT, D3DCOLOR_XRGB(255, 0, 255), NULL, NULL, &sprite_tuto_bg);
+	///하단UI
+	D3DXCreateTextureFromFileEx(d3ddev, L"tuto_ui.png", 960, 80, D3DX_DEFAULT, NULL, D3DFMT_A8R8G8B8, D3DPOOL_MANAGED,
+		D3DX_DEFAULT, D3DX_DEFAULT, D3DCOLOR_XRGB(255, 0, 255), NULL, NULL, &sprite_tuto_ui);
+	D3DXCreateTextureFromFileEx(d3ddev, L"lock.png", 40, 40, D3DX_DEFAULT, NULL, D3DFMT_A8R8G8B8, D3DPOOL_MANAGED,
+		D3DX_DEFAULT, D3DX_DEFAULT, D3DCOLOR_XRGB(255, 0, 255), NULL, NULL, &sprite_lock);
+	D3DXCreateTextureFromFileEx(d3ddev, L"combo_gage.png", 400, 38, D3DX_DEFAULT, NULL, D3DFMT_A8R8G8B8, D3DPOOL_MANAGED,
+		D3DX_DEFAULT, D3DX_DEFAULT, D3DCOLOR_XRGB(255, 0, 255), NULL, NULL, &sprite_combo_gage);
+	///퀘스트
+	D3DXCreateTextureFromFileEx(d3ddev, L"quest1.png", 500, 80, D3DX_DEFAULT, NULL, D3DFMT_A8R8G8B8, D3DPOOL_MANAGED,
+		D3DX_DEFAULT, D3DX_DEFAULT, D3DCOLOR_XRGB(255, 0, 255), NULL, NULL, &sprite_quest1);
+	D3DXCreateTextureFromFileEx(d3ddev, L"quest2.png", 500, 80, D3DX_DEFAULT, NULL, D3DFMT_A8R8G8B8, D3DPOOL_MANAGED,
+		D3DX_DEFAULT, D3DX_DEFAULT, D3DCOLOR_XRGB(255, 0, 255), NULL, NULL, &sprite_quest2);
+	D3DXCreateTextureFromFileEx(d3ddev, L"quest3.png", 500, 80, D3DX_DEFAULT, NULL, D3DFMT_A8R8G8B8, D3DPOOL_MANAGED,
+		D3DX_DEFAULT, D3DX_DEFAULT, D3DCOLOR_XRGB(255, 0, 255), NULL, NULL, &sprite_quest3);
+	D3DXCreateTextureFromFileEx(d3ddev, L"quest4.png", 500, 80, D3DX_DEFAULT, NULL, D3DFMT_A8R8G8B8, D3DPOOL_MANAGED,
+		D3DX_DEFAULT, D3DX_DEFAULT, D3DCOLOR_XRGB(255, 0, 255), NULL, NULL, &sprite_quest4);
+
 	//배경
 	D3DXCreateTextureFromFileEx(d3ddev, // the device pointer
 		L"bg1.png",						// the file name
@@ -72,15 +93,15 @@ void Game::initD3D(HWND hWnd)
 		D3DX_DEFAULT, D3DX_DEFAULT, D3DCOLOR_XRGB(255, 0, 255), NULL, NULL, &sprite_bgEffect);
 	D3DXCreateTextureFromFileEx(d3ddev, L"Play.png", 120, 80, D3DX_DEFAULT, NULL, D3DFMT_A8R8G8B8, D3DPOOL_MANAGED,
 		D3DX_DEFAULT, D3DX_DEFAULT, D3DCOLOR_XRGB(255, 0, 255), NULL, NULL, &sprite_play);
+	D3DXCreateTextureFromFileEx(d3ddev, L"Tutorial.png", 240, 80, D3DX_DEFAULT, NULL, D3DFMT_A8R8G8B8, D3DPOOL_MANAGED,
+		D3DX_DEFAULT, D3DX_DEFAULT, D3DCOLOR_XRGB(255, 0, 255), NULL, NULL, &sprite_tuto);
 	D3DXCreateTextureFromFileEx(d3ddev, L"Quit.png", 120, 80, D3DX_DEFAULT, NULL, D3DFMT_A8R8G8B8, D3DPOOL_MANAGED,
 		D3DX_DEFAULT, D3DX_DEFAULT, D3DCOLOR_XRGB(255, 0, 255), NULL, NULL, &sprite_quit);
 	//스테이지 종료
-	D3DXCreateTextureFromFileEx(d3ddev,L"clear.png",D3DX_DEFAULT,D3DX_DEFAULT,D3DX_DEFAULT,NULL,D3DFMT_A8R8G8B8,D3DPOOL_MANAGED,
+	D3DXCreateTextureFromFileEx(d3ddev,L"clear.png",960,720,D3DX_DEFAULT,NULL,D3DFMT_A8R8G8B8,D3DPOOL_MANAGED,
 		D3DX_DEFAULT,D3DX_DEFAULT,D3DCOLOR_XRGB(255, 0, 255),NULL,NULL,&sprite_ending);
 	D3DXCreateTextureFromFileEx(d3ddev, L"gomain.png",300, 60, D3DX_DEFAULT, NULL, D3DFMT_A8R8G8B8, D3DPOOL_MANAGED,
 		D3DX_DEFAULT, D3DX_DEFAULT, D3DCOLOR_XRGB(255, 0, 255), NULL, NULL, &sprite_gomain);
-	D3DXCreateTextureFromFileEx(d3ddev, L"nextstage.png", 300, 60, D3DX_DEFAULT, NULL, D3DFMT_A8R8G8B8, D3DPOOL_MANAGED,
-		D3DX_DEFAULT, D3DX_DEFAULT, D3DCOLOR_XRGB(255, 0, 255), NULL, NULL, &sprite_nextstage);
 	//타이머
 	D3DXCreateTextureFromFileEx(d3ddev,L"dz.png",500,86,D3DX_DEFAULT,NULL,D3DFMT_A8R8G8B8,D3DPOOL_MANAGED,
 		D3DX_DEFAULT,D3DX_DEFAULT,D3DCOLOR_XRGB(255, 0, 255),NULL,NULL,&sprite_dz);
@@ -297,6 +318,9 @@ void Game::render_frame(void)
 		ScreenToClient(hWnd, &pt);
 		//배경음악 켜기
 		sound.startBgm();
+		sound.bgmEnd();
+		sound.clearBgmEnd();
+		sound.CytusEnd();
 		d3ddev->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 0, 0), -1.0f, 0);
 		d3ddev->BeginScene();
 		d3dspt->Begin(D3DXSPRITE_ALPHABLEND);
@@ -305,11 +329,15 @@ void Game::render_frame(void)
 		d3dspt->Draw(sprite_opening, &part, &center, &position, D3DCOLOR_XRGB(255, 255, 255, 255));
 		//Play,Quit
 		RECT bPart; SetRect(&bPart, 0, 0, 120, 80); 
-		D3DXVECTOR3 bPosition1(420.0f, 410.0f, 0.0f); D3DXVECTOR3 bPosition2(420.0f, 510.0f, 0.0f); D3DXVECTOR3 bPosition3(410.0f, 410.0f, 0.0f); D3DXVECTOR3 bPosition4(410.0f, 510.0f, 0.0f);	
-		if (pt.x >= 420 && pt.x <= 540 && pt.y >= 410 && pt.y <= 490)
+		D3DXVECTOR3 bPosition1(420.0f, 350.0f, 0.0f); D3DXVECTOR3 bPosition2(360.0f, 450.0f, 0.0f); D3DXVECTOR3 bPosition5(420.0f, 550.0f, 0.0f);
+		D3DXVECTOR3 bPosition3(410.0f, 350.0f, 0.0f); D3DXVECTOR3 bPosition4(350.0f, 450.0f, 0.0f); D3DXVECTOR3 bPosition6(410.0f, 550.0f, 0.0f);
+		RECT tPart; SetRect(&tPart, 0, 0, 240, 80);
+		//Play
+		if (pt.x >= 420 && pt.x <= 540 && pt.y >= 350 && pt.y <= 430)
 		{
 			sound.Cursor();
-			d3dspt->Draw(sprite_quit, &bPart, &center, &bPosition2, D3DCOLOR_ARGB(255, 255, 255, 255));
+			d3dspt->Draw(sprite_quit, &bPart, &center, &bPosition5, D3DCOLOR_ARGB(255, 255, 255, 255));
+			d3dspt->Draw(sprite_tuto, &tPart, &center, &bPosition2, D3DCOLOR_ARGB(255, 255, 255, 255));
 			d3dspt->Draw(sprite_play, &bPart, &center, &bPosition3, D3DCOLOR_ARGB(255, 255, 255, 255));
 			if (KEY_DOWN(VK_LBUTTON))
 			{
@@ -318,12 +346,27 @@ void Game::render_frame(void)
 				ingame = true;
 			}
 		}
-
-		else if (pt.x >= 420 && pt.x <= 540 && pt.y >= 510 && pt.y <= 590)
+		//Tutorial
+		else if (pt.x >= 360 && pt.x <= 600 && pt.y >= 450 && pt.y <= 530)
 		{
 			sound.Cursor();
 			d3dspt->Draw(sprite_play, &bPart, &center, &bPosition1, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_quit, &bPart, &center, &bPosition4, D3DCOLOR_ARGB(255, 255, 255, 255));
+			d3dspt->Draw(sprite_tuto, &tPart, &center, &bPosition4, D3DCOLOR_ARGB(255, 255, 255, 255));
+			d3dspt->Draw(sprite_quit, &bPart, &center, &bPosition5, D3DCOLOR_ARGB(255, 255, 255, 255));
+			if (KEY_DOWN(VK_LBUTTON))
+			{
+				sound.Decision();
+				opening = false;
+				tutorial = true;
+			}
+		}
+		//Quit
+		else if (pt.x >= 420 && pt.x <= 540 && pt.y >= 550 && pt.y <= 630)
+		{
+			sound.Cursor();
+			d3dspt->Draw(sprite_play, &bPart, &center, &bPosition1, D3DCOLOR_ARGB(255, 255, 255, 255));
+			d3dspt->Draw(sprite_tuto, &tPart, &center, &bPosition2, D3DCOLOR_ARGB(255, 255, 255, 255));
+			d3dspt->Draw(sprite_quit, &bPart, &center, &bPosition6, D3DCOLOR_ARGB(255, 255, 255, 255));
 			if (KEY_DOWN(VK_LBUTTON))
 			{
 				sound.Decision();
@@ -333,7 +376,8 @@ void Game::render_frame(void)
 		else
 		{
 			d3dspt->Draw(sprite_play, &bPart, &center, &bPosition1, D3DCOLOR_ARGB(255, 255, 255, 255));
-			d3dspt->Draw(sprite_quit, &bPart, &center, &bPosition2, D3DCOLOR_ARGB(255, 255, 255, 255));
+			d3dspt->Draw(sprite_tuto, &tPart, &center, &bPosition2, D3DCOLOR_ARGB(255, 255, 255, 255));
+			d3dspt->Draw(sprite_quit, &bPart, &center, &bPosition5, D3DCOLOR_ARGB(255, 255, 255, 255));
 		}
 		//이펙트
 		RECT part1; SetRect(&part1, 0, 0, 40, 150); RECT part2; SetRect(&part2, 40, 0, 80, 150); RECT part3; SetRect(&part3, 80, 0, 120, 150); RECT part4; SetRect(&part4, 120, 0, 160, 150);
@@ -427,74 +471,68 @@ void Game::render_frame(void)
 		d3ddev->EndScene();
 		d3ddev->Present(NULL, NULL, NULL, NULL);
 	}
-	else if (ingame == true)
+	else if (tutorial == true)
 	{
-		sound.startBgmEnd();
-		//배경음악 켜기
-		sound.Bgm();
 		//마우스 좌표얻기
 		GetCursorPos(&pt);
 		//윈도우화면 마우스 좌표
 		ScreenToClient(hWnd, &pt);
-
-		// clear the window to a deep blue
+		sound.startBgmEnd();
+		sound.bgmEnd();
+		sound.clearBgm();
 		d3ddev->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 0, 0), -1.0f, 0);
 		d3ddev->BeginScene();
 		espt->Begin(D3DXSPRITE_ALPHABLEND);
 		d3dspt->Begin(D3DXSPRITE_ALPHABLEND);
-		//뒷배경
-		RECT part00; SetRect(&part00, 0, 0, 960, 500); D3DXVECTOR3 center00(0.0f, 0.0f, 0.0f);
-		static int bCounter = 0;
-		bCounter += 1;
-		if (bCounter >= 8) bCounter = 0;
-		for (int i = 0; i < BACK_NUM; i++)
+		// clear 배경
+		RECT ipart; SetRect(&ipart, 0, 0, 960, 640); D3DXVECTOR3 icenter(0.0f, 0.0f, 0.0f); D3DXVECTOR3 iposition(0.0f, 0.0f, 0.0f);
+		d3dspt->Draw(sprite_tuto_bg, &ipart, &icenter, &iposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+		//퀘스트 문장
+		RECT qpart; SetRect(&qpart, 0, 0, 500, 80); D3DXVECTOR3 qcenter(0.0f, 0.0f, 0.0f); D3DXVECTOR3 qposition(200.0f, 100.0f, 0.0f);
+		if(quest1 == true)
+			d3dspt->Draw(sprite_quest1, &qpart, &qcenter, &qposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if(quest2 == true)
+			d3dspt->Draw(sprite_quest2, &qpart, &qcenter, &qposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if (quest3 == true)
+			d3dspt->Draw(sprite_quest3, &qpart, &qcenter, &qposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if (quest4 == true)
+			d3dspt->Draw(sprite_quest4, &qpart, &qcenter, &qposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+		//하단 ui
+		RECT part2; SetRect(&part2, 0, 0, 960, 80); D3DXVECTOR3 center2(0.0f, 0.0f, 0.0f); D3DXVECTOR3 position2(0.0f, 640.0f, 0.0f);
+		d3dspt->Draw(sprite_tuto_ui, &part2, &center2, &position2, D3DCOLOR_ARGB(255, 255, 255, 255));
+		//하단 콤보게이지
+		RECT part3; SetRect(&part3, 0, 0, 0 + ((combo2.GetNum())*40), 38); D3DXVECTOR3 center3(0.0f, 0.0f, 0.0f); D3DXVECTOR3 position3(111.0f, 663.0f, 0.0f); //수정
+		d3dspt->Draw(sprite_combo_gage, &part3, &center3, &position3, D3DCOLOR_ARGB(255, 255, 255, 255));
+		//잠금(데스샤워)
+		RECT lock1; SetRect(&lock1, 0, 0, 40, 40);
+		RECT shower; SetRect(&shower, 0, 0, 40, 0 + (lockmove.y_pos)); D3DXVECTOR3 lcenter1(0.0f, 0.0f, 0.0f); D3DXVECTOR3 lposition1(715.0f, 660.0f, 0.0f);
+		if (machinegun == false)
+			d3dspt->Draw(sprite_lock, &lock1, &lcenter1, &lposition1, D3DCOLOR_ARGB(200, 255, 255, 255));
+		else if (machinegun == true && skill == false)
 		{
-			D3DXVECTOR3 position00(back[i].x_pos, back[i].y_pos, 0.0f);
-
-			switch (bCounter / 4)
+			d3dspt->Draw(sprite_lock, &shower, &lcenter1, &lposition1, D3DCOLOR_ARGB(200, 255, 255, 255));
+			lockmove.move();
+			if (lockmove.y_pos >= 40)
 			{
-			case 0:
-				d3dspt->Draw(sprite_backbg, &part00, &center00, &position00, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 1:
-				d3dspt->Draw(sprite_backbg2, &part00, &center00, &position00, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
+				machinegun = false;
+				lockmove.y_pos = 0;
 			}
 		}
-		//배경
-		RECT part0; SetRect(&part0, 0, 0, 960, 720); D3DXVECTOR3 center0(0.0f, 0.0f, 0.0f);
-		static int bCounter2 = 0;
-		bCounter2 += 1;
-		if (bCounter2 >= 10) bCounter2 = 0;
-		for (int i = 0; i < BG_NUM; i++)
+		if (combo2.GetNum() >= 12)
 		{
-			D3DXVECTOR3 position0(bg[i].x_pos, bg[i].y_pos, 0.0f);
-			
-			switch (bCounter2 / 5)
+			//메인화면으로
+			RECT ipart3; SetRect(&ipart3, 0, 0, 300, 60); D3DXVECTOR3 icenter3(0.0f, 0.0f, 0.0f); D3DXVECTOR3 iposition3(600.0f, 580.0f, 0.0f);
+			d3dspt->Draw(sprite_gomain, &ipart3, &icenter3, &iposition3, D3DCOLOR_ARGB(255, 255, 255, 255));
+			if (pt.x >= 600 && pt.x <= 900 && pt.y >= 580 && pt.y <= 640)
 			{
-			case 0:
-				d3dspt->Draw(sprite_bg, &part0, &center0, &position0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
-			case 1:
-				d3dspt->Draw(sprite_bg2, &part0, &center0, &position0, D3DCOLOR_ARGB(255, 255, 255, 255));
-				break;
+				if (KEY_DOWN(VK_LBUTTON))
+				{
+					sound.Decision();
+					tutorial = false;
+					opening = true;
+				}
 			}
 		}
-		//front_bg
-		RECT part01; SetRect(&part01, 0, 0, 960, 720); D3DXVECTOR3 center01(0.0f, 0.0f, 0.0f);
-		for (int i = 0; i < FRONT_NUM; i++)
-		{
-			D3DXVECTOR3 position01(front[i].x_pos, front[i].y_pos, 0.0f);
-			d3dspt->Draw(sprite_frontbg, &part01, &center01, &position01, D3DCOLOR_ARGB(255, 255, 255, 255));
-		}
-		//발판
-		RECT part1; SetRect(&part1, 0, 0, 960, 140); D3DXVECTOR3 center1(0.0f, 0.0f, 0.0f);
-		for (int i = 0; i < BG_NUM; i++)
-		{
-			D3DXVECTOR3 position1(bg[i].x_pos, 500.0f, 0.0f);
-			d3dspt->Draw(sprite_scaffolding, &part1, &center1, &position1, D3DCOLOR_ARGB(255, 255, 255, 255));
-		}
-		
 		if (pt.x >= 0 && pt.x < 320)
 		{
 			RECT lPlpart; SetRect(&lPlpart, 0, 0, 240, 291);
@@ -507,8 +545,8 @@ void Game::render_frame(void)
 					//플레이어 idle
 					static int pCounter = 0;
 					pCounter += 1;
-					if (pCounter >= 12) pCounter = 0;
-					switch (pCounter / 4)
+					if (pCounter >= 15) pCounter = 0;
+					switch (pCounter / 5)
 					{
 					case 0:
 						d3dspt->Draw(sprite_lplayer_idle1, &lPlpart, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
@@ -587,8 +625,8 @@ void Game::render_frame(void)
 					//플레이어 idle
 					static int pCounter = 0;
 					pCounter += 1;
-					if (pCounter >= 8) pCounter = 0;
-					switch (pCounter / 4)
+					if (pCounter >= 10) pCounter = 0;
+					switch (pCounter / 5)
 					{
 					case 0:
 						d3dspt->Draw(sprite_player_idle1, &Plpart, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
@@ -663,8 +701,684 @@ void Game::render_frame(void)
 					//플레이어 idle
 					static int pCounter = 0;
 					pCounter += 1;
-					if (pCounter >= 12) pCounter = 0;
-					switch (pCounter / 4)
+					if (pCounter >= 15) pCounter = 0;
+					switch (pCounter / 5)
+					{
+					case 0:
+						d3dspt->Draw(sprite_rplayer_idle1, &rPlpart, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+						break;
+					case 1:
+						d3dspt->Draw(sprite_rplayer_idle2, &rPlpart, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+						break;
+					case 2:
+						d3dspt->Draw(sprite_rplayer_idle3, &rPlpart, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+						break;
+					}
+				}
+				//플레이어 shot
+				else if (KEY_DOWN(VK_LBUTTON))
+				{
+					static int pCounter2 = 0;
+					pCounter2 += 1;
+					if (pCounter2 >= 5) pCounter2 = 0;
+					switch (pCounter2)
+					{
+					case 0:
+						d3dspt->Draw(sprite_rplayer_shot, &Ppart, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+						break;
+					case 1:
+						d3dspt->Draw(sprite_rplayer_shot, &Ppart2, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+						break;
+					case 2:
+						d3dspt->Draw(sprite_rplayer_shot, &Ppart3, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+						break;
+					case 3:
+						d3dspt->Draw(sprite_rplayer_shot, &Ppart4, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+						break;
+					case 4:
+						d3dspt->Draw(sprite_rplayer_shot, &Ppart5, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+						break;
+					}
+				}
+			}
+			//플레이어 스킬
+			else if (machinegun == true)
+			{
+				//플레이어 skill
+				static int pCounter = 0;
+				pCounter += 1;
+				if (pCounter >= 9) pCounter = 0;
+				switch (pCounter / 2)
+				{
+				case 0:
+					d3dspt->Draw(sprite_rplayer_skill, &Ppart, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+					break;
+				case 1:
+					d3dspt->Draw(sprite_rplayer_skill, &Ppart2, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+					break;
+				case 2:
+					d3dspt->Draw(sprite_rplayer_skill, &Ppart3, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+					break;
+				case 3:
+					d3dspt->Draw(sprite_rplayer_skill, &Ppart4, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+					break;
+				case 4:
+					d3dspt->Draw(sprite_rplayer_skill, &Ppart5, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+					break;
+				}
+			}
+		}
+		//수류탄 갯수
+		RECT Gpart0; SetRect(&Gpart0, 0, 0, 30, 30); RECT Gpart1; SetRect(&Gpart1, 30, 0, 60, 30); RECT Gpart2; SetRect(&Gpart2, 60, 0, 90, 30); RECT Gpart3; SetRect(&Gpart3, 90, 0, 120, 30);
+		D3DXVECTOR3 Gcenter(0.0f, 0.0f, 0.0f); D3DXVECTOR3 Gposition(640, 663, 0.0f);
+		if (remaingrenade.GetCounter() == 0)
+			d3dspt->Draw(sprite_grenade_num, &Gpart0, &Gcenter, &Gposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if (remaingrenade.GetCounter() == 1)
+			d3dspt->Draw(sprite_grenade_num, &Gpart1, &Gcenter, &Gposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if (remaingrenade.GetCounter() == 2)
+			d3dspt->Draw(sprite_grenade_num, &Gpart2, &Gcenter, &Gposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+		else if (remaingrenade.GetCounter() == 3)
+			d3dspt->Draw(sprite_grenade_num, &Gpart3, &Gcenter, &Gposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+		//총알갯수
+		RECT Bpart1; SetRect(&Bpart1, 0, 0, 20, 40); RECT Bpart2; SetRect(&Bpart2, 0, 0, 40, 40); RECT Bpart3; SetRect(&Bpart3, 0, 0, 60, 40); RECT Bpart4; SetRect(&Bpart4, 0, 0, 80, 40); RECT Bpart5; SetRect(&Bpart5, 0, 0, 100, 40);
+		D3DXVECTOR3 Bcenter(0.0f, 0.0f, 0.0f); D3DXVECTOR3 Bposition(430, 600, 0.0f); D3DXVECTOR3 Bcenter1(0.0f, 0.0f, 0.0f); D3DXVECTOR3 Bposition1(bulletmove.x_pos, bulletmove.y_pos, 0.0f);
+		//Remain bullet
+		if (machinegun == false)
+		{
+			if (remainbullet.GetCounter() == 0)
+			{
+				d3dspt->Draw(sprite_bullet_empty, &Bpart5, &Bcenter, &Bposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+			}
+			else if (remainbullet.GetCounter() == 1)
+			{
+				d3dspt->Draw(sprite_bullet_empty, &Bpart5, &Bcenter, &Bposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+				d3dspt->Draw(sprite_bullet_full, &Bpart1, &Bcenter, &Bposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+			}
+			else if (remainbullet.GetCounter() == 2)
+			{
+				d3dspt->Draw(sprite_bullet_empty, &Bpart5, &Bcenter, &Bposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+				d3dspt->Draw(sprite_bullet_full, &Bpart2, &Bcenter, &Bposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+			}
+			else if (remainbullet.GetCounter() == 3)
+			{
+				d3dspt->Draw(sprite_bullet_empty, &Bpart5, &Bcenter, &Bposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+				d3dspt->Draw(sprite_bullet_full, &Bpart3, &Bcenter, &Bposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+			}
+			else if (remainbullet.GetCounter() == 4)
+			{
+				d3dspt->Draw(sprite_bullet_empty, &Bpart5, &Bcenter, &Bposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+				d3dspt->Draw(sprite_bullet_full, &Bpart4, &Bcenter, &Bposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+			}
+			else if (remainbullet.GetCounter() == 5)
+			{
+				d3dspt->Draw(sprite_bullet_empty, &Bpart5, &Bcenter, &Bposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+				d3dspt->Draw(sprite_bullet_full, &Bpart5, &Bcenter, &Bposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+			}
+			if (KEY_DOWN(VK_SPACE))	bulletmove.init(430, 400);
+			if (bulletmove.show == true)
+			{
+				d3dspt->Draw(sprite_bullet_full, &Bpart5, &Bcenter1, &Bposition1, D3DCOLOR_ARGB(255, 255, 255, 255));
+				bulletmove.move();
+			}
+		}
+		else if (machinegun == true)
+		{
+			d3dspt->Draw(sprite_bullet_empty, &Bpart5, &Bcenter, &Bposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+			d3dspt->Draw(sprite_infinity, &Bpart5, &Bcenter, &Bposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+		}
+		if (machinegun == true)
+		{
+			RECT Mpart; SetRect(&Mpart, 0, 0, 960, 640); D3DXVECTOR3 Mcenter(0.0f, 0.0f, 0.0f); D3DXVECTOR3 Mposition(0.0f, 0.0f, 0.0f);
+			d3dspt->Draw(sprite_attack5, &Mpart, &Mcenter, &Mposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+		}
+		if (hitCombo == true)
+		{
+			//콤보 기본
+			RECT Cpart; SetRect(&Cpart, 0, 0, 250, 80); D3DXVECTOR3 Ccenter(0.0f, 0.0f, 0.0f); D3DXVECTOR3 Cposition(combo2.x_pos - 110, combo2.y_pos + 120, 0.0f);
+			d3dspt->Draw(sprite_combo_text, &Cpart, &Ccenter, &Cposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+			//콤보 1의자리
+			RECT Cpart0; SetRect(&Cpart0, 0, 0, 85, 120); D3DXVECTOR3 Ccenter0(0.0f, 0.0f, 0.0f); D3DXVECTOR3 Cposition0(combo2.x_pos, combo2.y_pos, 0.0f);
+			//콤보 10의 자리
+			RECT Cpart10; SetRect(&Cpart10, 0, 0, 85, 120); D3DXVECTOR3 Ccenter10(0.0f, 0.0f, 0.0f); D3DXVECTOR3 Cposition10(combo2.x_pos - 85, combo2.y_pos, 0.0f);
+			//콤보 100의 자리
+			RECT Cpart100; SetRect(&Cpart100, 0, 0, 85, 120); D3DXVECTOR3 Ccenter100(0.0f, 0.0f, 0.0f); D3DXVECTOR3 Cposition100(combo2.x_pos - 170, combo2.y_pos, 0.0f);
+			if (combo2.GetNum() % 10 == 0)
+				d3dspt->Draw(sprite_combo0, &Cpart0, &Ccenter0, &Cposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+			else if (combo2.GetNum() % 10 == 1)
+				d3dspt->Draw(sprite_combo1, &Cpart0, &Ccenter0, &Cposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+			else if (combo2.GetNum() % 10 == 2)
+				d3dspt->Draw(sprite_combo2, &Cpart0, &Ccenter0, &Cposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+			else if (combo2.GetNum() % 10 == 3)
+				d3dspt->Draw(sprite_combo3, &Cpart0, &Ccenter0, &Cposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+			else if (combo2.GetNum() % 10 == 4)
+				d3dspt->Draw(sprite_combo4, &Cpart0, &Ccenter0, &Cposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+			else if (combo2.GetNum() % 10 == 5)
+				d3dspt->Draw(sprite_combo5, &Cpart0, &Ccenter0, &Cposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+			else if (combo2.GetNum() % 10 == 6)
+				d3dspt->Draw(sprite_combo6, &Cpart0, &Ccenter0, &Cposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+			else if (combo2.GetNum() % 10 == 7)
+				d3dspt->Draw(sprite_combo7, &Cpart0, &Ccenter0, &Cposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+			else if (combo2.GetNum() % 10 == 8)
+				d3dspt->Draw(sprite_combo8, &Cpart0, &Ccenter0, &Cposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+			else if (combo2.GetNum() % 10 == 9)
+				d3dspt->Draw(sprite_combo9, &Cpart0, &Ccenter0, &Cposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+			if (((combo2.GetNum() / 10) % 10 == 0) && combo2.GetNum() >= 100)
+				d3dspt->Draw(sprite_combo0, &Cpart10, &Ccenter10, &Cposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
+			else if ((combo2.GetNum() / 10) % 10 == 1)
+				d3dspt->Draw(sprite_combo1, &Cpart10, &Ccenter10, &Cposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
+			else if ((combo2.GetNum() / 10) % 10 == 2)
+				d3dspt->Draw(sprite_combo2, &Cpart10, &Ccenter10, &Cposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
+			else if ((combo2.GetNum() / 10) % 10 == 3)
+				d3dspt->Draw(sprite_combo3, &Cpart10, &Ccenter10, &Cposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
+			else if ((combo2.GetNum() / 10) % 10 == 4)
+				d3dspt->Draw(sprite_combo4, &Cpart10, &Ccenter10, &Cposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
+			else if ((combo2.GetNum() / 10) % 10 == 5)
+				d3dspt->Draw(sprite_combo5, &Cpart10, &Ccenter10, &Cposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
+			else if ((combo2.GetNum() / 10) % 10 == 6)
+				d3dspt->Draw(sprite_combo6, &Cpart10, &Ccenter10, &Cposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
+			else if ((combo2.GetNum() / 10) % 10 == 7)
+				d3dspt->Draw(sprite_combo7, &Cpart10, &Ccenter10, &Cposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
+			else if ((combo2.GetNum() / 10) % 10 == 8)
+				d3dspt->Draw(sprite_combo8, &Cpart10, &Ccenter10, &Cposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
+			else if ((combo2.GetNum() / 10) % 10 == 9)
+				d3dspt->Draw(sprite_combo9, &Cpart10, &Ccenter10, &Cposition10, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+			if (combo2.GetNum() >= 100 && combo2.GetNum() < 200)
+				d3dspt->Draw(sprite_combo1, &Cpart100, &Ccenter100, &Cposition100, D3DCOLOR_ARGB(255, 255, 255, 255));
+			else if (combo2.GetNum() >= 200 && combo.GetNum() < 300)
+				d3dspt->Draw(sprite_combo2, &Cpart100, &Ccenter100, &Cposition100, D3DCOLOR_ARGB(255, 255, 255, 255));
+		}
+		//is SKill
+		if (skill == true)
+		{
+			RECT Spart; SetRect(&Spart, 0, 0, 400, 400); D3DXVECTOR3 Scenter(0.0f, 0.0f, 0.0f); D3DXVECTOR3 Sposition(260.0f, 0.0f, 0.0f);
+			static int sEcounter = 0;
+			sEcounter++;
+			if (sEcounter >= 50)
+			{
+				sEcounter = 0;
+				skill = false;
+				machinegun = true;
+			}
+			switch (sEcounter)
+			{
+			case 1:case 5:
+				d3dspt->Draw(sprite_deathshower1, &Spart, &Scenter, &Sposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+				break;
+			case 10:case 15:
+				d3dspt->Draw(sprite_deathshower2, &Spart, &Scenter, &Sposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+				break;
+			case 20:case 25:
+				d3dspt->Draw(sprite_deathshower1, &Spart, &Scenter, &Sposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+				break;
+			case 30:case 35:
+				d3dspt->Draw(sprite_deathshower2, &Spart, &Scenter, &Sposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+				break;
+			case 40:case 45:
+				d3dspt->Draw(sprite_deathshower1, &Spart, &Scenter, &Sposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+				break;
+			case 46:case 49:
+				d3dspt->Draw(sprite_deathshower2, &Spart, &Scenter, &Sposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+			}
+
+		}
+		//수류탄 애니메이션
+		if (grenading == true)
+		{
+			RECT Gpart1; SetRect(&Gpart1, 0, 0, 360, 360); RECT Gpart2; SetRect(&Gpart2, 360, 0, 720, 360); RECT Gpart3; SetRect(&Gpart3, 720, 0, 1080, 360); RECT Gpart4; SetRect(&Gpart4, 1080, 0, 1440, 360);
+			RECT Gpart5; SetRect(&Gpart5, 1440, 0, 1800, 360); RECT Gpart6; SetRect(&Gpart6, 1800, 0, 2160, 360); RECT Gpart7; SetRect(&Gpart7, 2160, 0, 2520, 360); RECT Gpart8; SetRect(&Gpart8, 2520, 0, 2880, 360);
+			D3DXVECTOR3 Gcenter(0.0f, 0.0f, 0.0f); D3DXVECTOR3 Gposition(pt.x - 130, pt.y - 175, 0.0f);
+			static int gcounter = 0;
+			gcounter++;
+			if (gcounter >= 15)
+			{
+				gcounter = 0;
+				grenading = false;
+			}
+			switch (gcounter / 2)
+			{
+			case 0:
+				d3dspt->Draw(sprite_grenade, &Gpart1, &Gcenter, &Gposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+				break;
+			case 1:
+				d3dspt->Draw(sprite_grenade, &Gpart2, &Gcenter, &Gposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+				break;
+			case 2:
+				d3dspt->Draw(sprite_grenade, &Gpart3, &Gcenter, &Gposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+				break;
+			case 3:
+				d3dspt->Draw(sprite_grenade, &Gpart4, &Gcenter, &Gposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+				break;
+			case 4:
+				d3dspt->Draw(sprite_grenade, &Gpart5, &Gcenter, &Gposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+				break;
+			case 5:
+				d3dspt->Draw(sprite_grenade, &Gpart6, &Gcenter, &Gposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+				break;
+			case 6:
+				d3dspt->Draw(sprite_grenade, &Gpart7, &Gcenter, &Gposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+				break;
+			case 7:
+				d3dspt->Draw(sprite_grenade, &Gpart8, &Gcenter, &Gposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+				break;
+			}
+		}
+		//이펙트 애니메이션
+		if (effecting == true)
+		{
+			RECT Epart; SetRect(&Epart, 0, 0, 150, 150); D3DXVECTOR3 Ecenter(0.0f, 0.0f, 0.0f); D3DXVECTOR3 Eposition(pt.x - 60, pt.y - 75, 0.0f);
+			static int ecounter = 0;
+			ecounter++;
+			if (ecounter >= 8)
+			{
+				ecounter = 0;
+				effecting = false;
+			}
+			switch (ecounter / 2)
+			{
+			case 0:
+				d3dspt->Draw(sprite_effect1, &Epart, &Ecenter, &Eposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+				break;
+			case 1:
+				d3dspt->Draw(sprite_effect2, &Epart, &Ecenter, &Eposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+				break;
+			case 2:
+				d3dspt->Draw(sprite_effect3, &Epart, &Ecenter, &Eposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+				break;
+			case 3:
+				d3dspt->Draw(sprite_effect4, &Epart, &Ecenter, &Eposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+				break;
+			}
+		}
+		if (effecting2 == true)
+		{
+			RECT Epart; SetRect(&Epart, 0, 0, 150, 150); D3DXVECTOR3 Ecenter(0.0f, 0.0f, 0.0f); D3DXVECTOR3 Eposition(pt.x - 60, pt.y - 75, 0.0f);
+			static int ecounter = 0;
+			ecounter++;
+			if (ecounter >= 4)
+			{
+				ecounter = 0;
+				effecting = false;
+			}
+			switch (ecounter)
+			{
+			case 0:
+				d3dspt->Draw(sprite_effect1, &Epart, &Ecenter, &Eposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+				break;
+			case 1:
+				d3dspt->Draw(sprite_effect2, &Epart, &Ecenter, &Eposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+				break;
+			case 2:
+				d3dspt->Draw(sprite_effect3, &Epart, &Ecenter, &Eposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+				break;
+			case 3:
+				d3dspt->Draw(sprite_effect4, &Epart, &Ecenter, &Eposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+				break;
+			}
+		}
+		//수류탄 아이템 등장
+		if (summonitem.Appear == true)
+		{
+			RECT rc; SetRect(&rc, 0, 0, 64, 64); D3DXVECTOR2 spriteCenter = D3DXVECTOR2(32, 32); D3DXVECTOR2 translate = D3DXVECTOR2(summonitem.x_pos, summonitem.y_pos);
+			//회전 속도
+			iTime = timeGetTime() % 1000;
+			angle = iTime * (2.0f * D3DX_PI) / 1000.0f;
+			D3DXVECTOR2 scaling(1, 1); D3DXMATRIX matrix;
+			D3DXMatrixTransformation2D(
+				&matrix,                // 행렬
+				NULL,                   // 크기를 조정할 때 기준을 왼쪽 상단으로 유지
+				0.0f,                   // 크기 조정 회전 없음
+				&scaling,               // 크기 조정 값
+				&spriteCenter,          // 회전 중심
+				(float)(angle),			// 회전 각도
+				&translate);            // X,Y위치
+
+			espt->SetTransform(&matrix);
+			// Draw the sprite
+			espt->Draw(sprite_itemG, NULL, NULL, NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+		}
+		static int eAcounter = 0;
+		eAcounter += 1;
+		if (eAcounter >= 4)
+			eAcounter = 0;
+		////lenemy1_left
+		for (int i = 0; i < ENEMY1_NUM - dNum; i++)
+		{
+			RECT rc;
+			SetRect(&rc, 0, 0, 60 * (float)scale, 86 * (float)scale);
+			D3DXVECTOR2 spriteCenter = D3DXVECTOR2(30 * (float)scale, 43 * (float)scale);
+			// Screen position of the sprite
+			D3DXVECTOR2 translate = D3DXVECTOR2(lenemy1[i].x_pos, lenemy1[i].y_pos);
+			// Scaling X,Y
+			angle = 0;
+			D3DXVECTOR2 scaling((float)scale, (float)scale);
+			D3DXMATRIX matrix;
+
+			D3DXMatrixTransformation2D(
+				&matrix,                // 행렬
+				NULL,                   // 크기를 조정할 때 기준을 왼쪽 상단으로 유지
+				0.0f,                   // 크기 조정 회전 없음
+				&scaling,               // 크기 조정 값
+				&spriteCenter,          // 회전 중심
+				(float)(angle),			// 회전 각도
+				&translate);            // X,Y위치
+
+			espt->SetTransform(&matrix);
+			// Draw the sprite
+			switch (eAcounter)
+			{
+			case 0:
+				espt->Draw(sprite_lenemy1, NULL, NULL, NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+				break;
+			case 1:
+				espt->Draw(sprite_lenemy2, NULL, NULL, NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+				break;
+			case 2:
+				espt->Draw(sprite_lenemy3, NULL, NULL, NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+				break;
+			case 3:
+				espt->Draw(sprite_lenemy4, NULL, NULL, NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+				break;
+			}
+		}
+		//lenemy1_breaking animation;
+		for (int i = 0; i < ENEMY1_NUM - dNum; i++)
+		{
+			RECT rc2;
+			SetRect(&rc2, 0, 0, 150 * (float)scale, 150 * (float)scale);
+			D3DXVECTOR2 spriteCenter2 = D3DXVECTOR2(30 * (float)scale, 43 * (float)scale);
+			if (lenemy1[i].breaking == true && effecting == false)
+			{
+				// Screen position of the sprite
+				D3DXVECTOR2 translate2 = D3DXVECTOR2(pt.x - (60 * (float)scale), pt.y - (75 * (float)scale));//애니메이션 좌표 = 마우스좌표
+																											 // Scaling X,Y
+				angle = 0;
+				D3DXVECTOR2 scaling((float)scale, (float)scale);
+				D3DXMATRIX matrix;
+
+				D3DXMatrixTransformation2D(
+					&matrix,                // 행렬
+					NULL,                   // 크기를 조정할 때 기준을 왼쪽 상단으로 유지
+					0.0f,                   // 크기 조정 회전 없음
+					&scaling,               // 크기 조정 값
+					&spriteCenter2,          // 회전 중심
+					(float)(angle),			// 회전 각도
+					&translate2);            // X,Y위치
+
+				espt->SetTransform(&matrix);
+				// Draw the sprite
+				static int acounter = 0;
+				acounter++;
+				if (acounter >= 8)
+				{
+					acounter = 0;
+					lenemy1[i].breaking = false;
+				}
+				switch (acounter / 2)
+				{
+				case 0:
+					espt->Draw(sprite_bBreak, NULL, NULL, NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+					break;
+				case 1:
+					espt->Draw(sprite_bBreak2, NULL, NULL, NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+					break;
+				case 2:
+					espt->Draw(sprite_bBreak3, NULL, NULL, NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+					break;
+				case 3:
+					espt->Draw(sprite_bBreak4, NULL, NULL, NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+					break;
+				}
+			}
+		}
+		d3dspt->End();
+		espt->End();
+		d3ddev->EndScene();
+
+		d3ddev->Present(NULL, NULL, NULL, NULL);
+		return;
+	}
+	else if (ingame == true)
+	{
+		sound.startBgmEnd();
+		sound.clearBgmEnd();
+		sound.CytusEnd();
+		//배경음악 켜기
+		sound.Bgm();
+		//마우스 좌표얻기
+		GetCursorPos(&pt);
+		//윈도우화면 마우스 좌표
+		ScreenToClient(hWnd, &pt);
+
+		// clear the window to a deep blue
+		d3ddev->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 0, 0), -1.0f, 0);
+		d3ddev->BeginScene();
+		espt->Begin(D3DXSPRITE_ALPHABLEND);
+		d3dspt->Begin(D3DXSPRITE_ALPHABLEND);
+		//뒷배경
+		RECT part00; SetRect(&part00, 0, 0, 960, 500); D3DXVECTOR3 center00(0.0f, 0.0f, 0.0f);
+		static int bCounter = 0;
+		bCounter += 1;
+		if (bCounter >= 8) bCounter = 0;
+		for (int i = 0; i < BACK_NUM; i++)
+		{
+			D3DXVECTOR3 position00(back[i].x_pos, back[i].y_pos, 0.0f);
+
+			switch (bCounter / 4)
+			{
+			case 0:
+				d3dspt->Draw(sprite_backbg, &part00, &center00, &position00, D3DCOLOR_ARGB(255, 255, 255, 255));
+				break;
+			case 1:
+				d3dspt->Draw(sprite_backbg2, &part00, &center00, &position00, D3DCOLOR_ARGB(255, 255, 255, 255));
+				break;
+			}
+		}
+		//배경
+		RECT part0; SetRect(&part0, 0, 0, 960, 720); D3DXVECTOR3 center0(0.0f, 0.0f, 0.0f);
+		static int bCounter2 = 0;
+		bCounter2 += 1;
+		if (bCounter2 >= 10) bCounter2 = 0;
+		for (int i = 0; i < BG_NUM; i++)
+		{
+			D3DXVECTOR3 position0(bg[i].x_pos, bg[i].y_pos, 0.0f);
+			
+			switch (bCounter2 / 5)
+			{
+			case 0:
+				d3dspt->Draw(sprite_bg, &part0, &center0, &position0, D3DCOLOR_ARGB(255, 255, 255, 255));
+				break;
+			case 1:
+				d3dspt->Draw(sprite_bg2, &part0, &center0, &position0, D3DCOLOR_ARGB(255, 255, 255, 255));
+				break;
+			}
+		}
+		//front_bg
+		RECT part01; SetRect(&part01, 0, 0, 960, 720); D3DXVECTOR3 center01(0.0f, 0.0f, 0.0f);
+		for (int i = 0; i < FRONT_NUM; i++)
+		{
+			D3DXVECTOR3 position01(front[i].x_pos, front[i].y_pos, 0.0f);
+			d3dspt->Draw(sprite_frontbg, &part01, &center01, &position01, D3DCOLOR_ARGB(255, 255, 255, 255));
+		}
+		//발판
+		RECT part1; SetRect(&part1, 0, 0, 960, 140); D3DXVECTOR3 center1(0.0f, 0.0f, 0.0f);
+		for (int i = 0; i < BG_NUM; i++)
+		{
+			D3DXVECTOR3 position1(bg[i].x_pos, 500.0f, 0.0f);
+			d3dspt->Draw(sprite_scaffolding, &part1, &center1, &position1, D3DCOLOR_ARGB(255, 255, 255, 255));
+		}
+		
+		if (pt.x >= 0 && pt.x < 320)
+		{
+			RECT lPlpart; SetRect(&lPlpart, 0, 0, 240, 291);
+			RECT Ppart; SetRect(&Ppart, 0, 0, 280, 291); RECT Ppart2; SetRect(&Ppart2, 280, 0, 560, 291); RECT Ppart3; SetRect(&Ppart3, 560, 0, 840, 291); RECT Ppart4; SetRect(&Ppart4, 840, 0, 1120, 291); RECT Ppart5; SetRect(&Ppart5, 1120, 0, 1400, 291);
+			D3DXVECTOR3 Pcenter(0.0f, 0.0f, 0.0f); D3DXVECTOR3 Pposition(390.0f, 350.0f, 0.0f);
+			if (machinegun == false)
+			{
+				if (KEY_UP(VK_LBUTTON))
+				{
+					//플레이어 idle
+					static int pCounter = 0;
+					pCounter += 1;
+					if (pCounter >= 15) pCounter = 0;
+					switch (pCounter / 5)
+					{
+					case 0:
+						d3dspt->Draw(sprite_lplayer_idle1, &lPlpart, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+						break;
+					case 1:
+						d3dspt->Draw(sprite_lplayer_idle2, &lPlpart, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+						break;
+					case 2:
+						d3dspt->Draw(sprite_lplayer_idle3, &lPlpart, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+						break;
+					}
+				}
+				//플레이어 shot
+				else if (KEY_DOWN(VK_LBUTTON))
+				{
+					static int pCounter2 = 0;
+					pCounter2 += 1;
+					if (pCounter2 >= 5) pCounter2 = 0;
+					switch (pCounter2)
+					{
+					case 0:
+						d3dspt->Draw(sprite_lplayer_shot, &Ppart5, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+						break;
+					case 1:
+						d3dspt->Draw(sprite_lplayer_shot, &Ppart4, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+						break;
+					case 2:
+						d3dspt->Draw(sprite_lplayer_shot, &Ppart3, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+						break;
+					case 3:
+						d3dspt->Draw(sprite_lplayer_shot, &Ppart2, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+						break;
+					case 4:
+						d3dspt->Draw(sprite_lplayer_shot, &Ppart, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+						break;
+					}
+				}
+			}
+			//플레이어 스킬
+			else if (machinegun == true)
+			{
+				//플레이어 skill
+				static int pCounter = 0;
+				pCounter += 1;
+				if (pCounter >= 9) pCounter = 0;
+				switch (pCounter / 2)
+				{
+				case 0:
+					d3dspt->Draw(sprite_lplayer_skill, &Ppart5, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+					break;
+				case 1:
+					d3dspt->Draw(sprite_lplayer_skill, &Ppart4, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+					break;
+				case 2:
+					d3dspt->Draw(sprite_lplayer_skill, &Ppart3, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+					break;
+				case 3:
+					d3dspt->Draw(sprite_lplayer_skill, &Ppart2, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+					break;
+				case 4:
+					d3dspt->Draw(sprite_lplayer_skill, &Ppart, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+					break;
+				}
+			}
+		}
+		else if (pt.x >= 320 && pt.x <= 640)
+		{
+			RECT Plpart; SetRect(&Plpart, 0, 0, 152, 293);
+			RECT Ppart; SetRect(&Ppart, 0, 0, 152, 293); RECT Ppart2; SetRect(&Ppart2, 152, 0, 304, 293); RECT Ppart3; SetRect(&Ppart3, 304, 0, 456, 293); RECT Ppart4; SetRect(&Ppart4, 456, 0, 608, 293); RECT Ppart5; SetRect(&Ppart5, 608, 0, 760, 293);
+			D3DXVECTOR3 Pcenter(0.0f, 0.0f, 0.0f); D3DXVECTOR3 Pposition(400.0f, 350.0f, 0.0f);
+			if (machinegun == false)
+			{
+
+				if (KEY_UP(VK_LBUTTON))
+				{
+					//플레이어 idle
+					static int pCounter = 0;
+					pCounter += 1;
+					if (pCounter >= 10) pCounter = 0;
+					switch (pCounter / 5)
+					{
+					case 0:
+						d3dspt->Draw(sprite_player_idle1, &Plpart, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+						break;
+					case 1:
+						d3dspt->Draw(sprite_player_idle2, &Plpart, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+						break;
+					}
+				}
+				//플레이어 shot
+				else if (KEY_DOWN(VK_LBUTTON))
+				{
+					static int pCounter2 = 0;
+					pCounter2 += 1;
+					if (pCounter2 >= 5) pCounter2 = 0;
+					switch (pCounter2)
+					{
+					case 0:
+						d3dspt->Draw(sprite_player_shot, &Ppart, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+						break;
+					case 1:
+						d3dspt->Draw(sprite_player_shot, &Ppart2, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+						break;
+					case 2:
+						d3dspt->Draw(sprite_player_shot, &Ppart3, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+						break;
+					case 3:
+						d3dspt->Draw(sprite_player_shot, &Ppart4, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+						break;
+					case 4:
+						d3dspt->Draw(sprite_player_shot, &Ppart5, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+						break;
+					}
+				}
+			}
+			//플레이어 스킬
+			else if (machinegun == true)
+			{
+				//플레이어 skill
+				static int pCounter = 0;
+				pCounter += 1;
+				if (pCounter >= 9) pCounter = 0;
+				switch (pCounter / 2)
+				{
+				case 0:
+					d3dspt->Draw(sprite_player_skill, &Ppart, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+					break;
+				case 1:
+					d3dspt->Draw(sprite_player_skill, &Ppart2, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+					break;
+				case 2:
+					d3dspt->Draw(sprite_player_skill, &Ppart3, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+					break;
+				case 3:
+					d3dspt->Draw(sprite_player_skill, &Ppart4, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+					break;
+				case 4:
+					d3dspt->Draw(sprite_player_skill, &Ppart5, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
+					break;
+				}
+			}
+		}
+		else if (pt.x > 640)
+		{
+			RECT rPlpart; SetRect(&rPlpart, 0, 0, 240, 291);
+			RECT Ppart; SetRect(&Ppart, 0, 0, 280, 291); RECT Ppart2; SetRect(&Ppart2, 280, 0, 560, 291); RECT Ppart3; SetRect(&Ppart3, 560, 0, 840, 291); RECT Ppart4; SetRect(&Ppart4, 840, 0, 1120, 291); RECT Ppart5; SetRect(&Ppart5, 1120, 0, 1400, 291);
+			D3DXVECTOR3 Pcenter(0.0f, 0.0f, 0.0f); D3DXVECTOR3 Pposition(380.0f, 350.0f, 0.0f);
+			if (machinegun == false)
+			{
+				if (KEY_UP(VK_LBUTTON))
+				{
+					//플레이어 idle
+					static int pCounter = 0;
+					pCounter += 1;
+					if (pCounter >= 15) pCounter = 0;
+					switch (pCounter / 5)
 					{
 					case 0:
 						d3dspt->Draw(sprite_rplayer_idle1, &rPlpart, &Pcenter, &Pposition, D3DCOLOR_ARGB(255, 255, 255, 255));
@@ -1439,7 +2153,7 @@ void Game::render_frame(void)
 		eAcounter += 1;
 		if (eAcounter >= 4)
 			eAcounter = 0;
-		////enemy1_left
+		////lenemy1_left
 		for (int i = 0; i < ENEMY1_NUM - dNum; i++)
 		{	
 			RECT rc;
@@ -2100,20 +2814,19 @@ void Game::render_frame(void)
 		GetCursorPos(&pt);
 		//윈도우화면 마우스 좌표
 		ScreenToClient(hWnd, &pt);
-
+		sound.startBgmEnd();
 		sound.bgmEnd();
 		sound.SkillEnd();
+		sound.Cytus();
 		d3ddev->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 0, 0), -1.0f, 0);
 		d3ddev->BeginScene();
 		d3dspt->Begin(D3DXSPRITE_ALPHABLEND);
 		// clear 배경
 		RECT ipart;SetRect(&ipart, 0, 0, 960, 720);D3DXVECTOR3 icenter(0.0f, 0.0f, 0.0f);D3DXVECTOR3 iposition(0.0f, 0.0f, 0.0f);
 		d3dspt->Draw(sprite_ending, &ipart, &icenter, &iposition, D3DCOLOR_ARGB(255, 255, 255, 255));
-		RECT ipart2; SetRect(&ipart2, 0, 0, 300, 60); D3DXVECTOR3 icenter2(0.0f, 0.0f, 0.0f); D3DXVECTOR3 iposition2(350.0f, 500.0f, 0.0f);
-		d3dspt->Draw(sprite_nextstage, &ipart2, &icenter2, &iposition2, D3DCOLOR_ARGB(255, 255, 255, 255));
-		RECT ipart3; SetRect(&ipart3, 0, 0, 300, 60); D3DXVECTOR3 icenter3(0.0f, 0.0f, 0.0f); D3DXVECTOR3 iposition3(350.0f, 600.0f, 0.0f);
+		RECT ipart3; SetRect(&ipart3, 0, 0, 300, 60); D3DXVECTOR3 icenter3(0.0f, 0.0f, 0.0f); D3DXVECTOR3 iposition3(450.0f, 650.0f, 0.0f);
 		d3dspt->Draw(sprite_gomain, &ipart3, &icenter3, &iposition3, D3DCOLOR_ARGB(255, 255, 255, 255));
-		if (pt.x >= 350 && pt.x <= 650 && pt.y >= 600 && pt.y <= 660)
+		if (pt.x >=450 && pt.x <= 750 && pt.y >= 650 && pt.y <= 710)
 		{
 			if (KEY_DOWN(VK_LBUTTON))
 			{
@@ -2123,14 +2836,14 @@ void Game::render_frame(void)
 		}
 
 		//기본
-		RECT Spart;SetRect(&Spart, 0, 0, 85, 120);D3DXVECTOR3 Scenter(0.0f, 0.0f, 0.0f);D3DXVECTOR3 Sposition(755, 330, 0.0f);
+		RECT Spart;SetRect(&Spart, 0, 0, 85, 120);D3DXVECTOR3 Scenter(0.0f, 0.0f, 0.0f);D3DXVECTOR3 Sposition(620, 330, 0.0f);
 		d3dspt->Draw(sprite_combo0, &Spart, &Scenter, &Sposition, D3DCOLOR_ARGB(255, 255, 255, 255));
 		//10의자리
-		RECT Spart0;SetRect(&Spart0, 0, 0, 85, 120);D3DXVECTOR3 Scenter0(0.0f, 0.0f, 0.0f);D3DXVECTOR3 Sposition0(670, 330, 0.0f);
+		RECT Spart0;SetRect(&Spart0, 0, 0, 85, 120);D3DXVECTOR3 Scenter0(0.0f, 0.0f, 0.0f);D3DXVECTOR3 Sposition0(535, 330, 0.0f);
 		//100의 자리
-		RECT Spart10;SetRect(&Spart10, 0, 0, 85, 120);D3DXVECTOR3 Scenter10(0.0f, 0.0f, 0.0f);D3DXVECTOR3 Sposition10(585, 330, 0.0f);
+		RECT Spart10;SetRect(&Spart10, 0, 0, 85, 120);D3DXVECTOR3 Scenter10(0.0f, 0.0f, 0.0f);D3DXVECTOR3 Sposition10(450, 330, 0.0f);
 		//1000의자리
-		RECT Spart100; SetRect(&Spart100, 0, 0, 85, 120); D3DXVECTOR3 Scenter100(0.0f, 0.0f, 0.0f); D3DXVECTOR3 Sposition100(500, 330, 0.0f);
+		RECT Spart100; SetRect(&Spart100, 0, 0, 85, 120); D3DXVECTOR3 Scenter100(0.0f, 0.0f, 0.0f); D3DXVECTOR3 Sposition100(365, 330, 0.0f);
 		//스코어
 		if (score.GetNum() % 10 == 0)
 			d3dspt->Draw(sprite_combo0, &Spart10, &Scenter10, &Sposition0, D3DCOLOR_ARGB(255, 255, 255, 255));
@@ -2236,6 +2949,210 @@ void Game::init_game(void)
 }
 void Game::do_game_logic(void)
 {
+	if (opening == true)
+	{
+		timer.x_pos = 535;
+		score.SetNum(0);
+		combo.SetNum(0);
+		soldier.Show = false;
+		soldier2.Show = false;
+		boss.Appear = false;
+		summonitem.Appear = false;
+		summonitem2.Appear = false;
+		summonitem3.Appear = false;
+		enemy3.appear = false;
+		lenemy3.appear = false;
+		for (int i = 0; i < ENEMY2_NUM - dNum2; i++)
+		{
+			enemy2[i].appear = false;
+			enemy2[i].appear = false;
+		}
+	}
+	if (tutorial == true)
+	{
+		//콤보
+		if (hitCombo == true) combo2.shake();
+		//총알 개수 0일 때
+		if (remainbullet.GetCounter() == 0)
+		{
+			if (KEY_DOWN(VK_LBUTTON))
+				sound.Gird();
+		}
+		if (KEY_DOWN(VK_SPACE))
+		{
+			if (bulletmove.show == true)
+				remainbullet.SetCounter(0);
+		}
+		if (bulletmove.y_pos == 600)
+		{
+			sound.Reload();
+			remainbullet.SetCounter(5);
+		}
+		for (int i = 0; i < ENEMY1_NUM - dNum; i++)
+		{
+			if (lenemy1[i].x_pos >= 960 || lenemy1[i].y_pos > 755)
+				lenemy1[i].init((float)(0 - rand() % 100), (float)(250 + rand() % 300));
+			else
+				lenemy1[i].move();
+		}
+		if (quest2 == true)
+			summonitem.Appear = true;
+		//10콤보 스킬발동
+		if (combo2.GetNum() == 10)
+		{
+			sound.SkillSound();
+			skill = true;
+		}
+		if (combo2.GetNum() == 12)
+		{
+			quest4 = false;
+		}
+		if (remaingrenade.GetCounter() > 0)
+		{
+			if (KEY_UP(VK_RBUTTON))
+			{
+				clock_t begin2;
+				begin2 = clock();
+				double i = 100;
+				double j = 1000;
+				double rst = 0.5;
+				if ((begin2 / i) - (begin2 / j) > rst)
+				{
+					remaingrenade.isShooting = false;
+				}
+			}
+			//튜토_수류탄 충돌처리
+			if (KEY_DOWN(VK_RBUTTON) && remaingrenade.isShooting == false)
+			{
+				grenading = true;
+				remaingrenade.isShooting = true;
+				remaingrenade.SetCounter(remaingrenade.GetCounter() - 1);
+				sound.Grenade();
+				//enemy1 충돌처리
+				for (int i = 0; i < ENEMY1_NUM - dNum; i++)
+				{
+					if (pt.x >= (lenemy1[i].x_pos - 180) && pt.x <= (lenemy1[i].x_pos + 240) && pt.y >= (lenemy1[i].y_pos - 180) && pt.y <= (lenemy1[i].y_pos + 266))
+					{
+						hitCombo = true;
+						effecting = false;
+						lenemy1[i].init((float)(0 - rand() % 100), (float)(250 + rand() % 300));
+						combo2.init(800, 100);
+						combo2.SetNum(combo2.GetNum() + 1);
+						quest3 = false;
+						quest4 = true;
+					}
+				}
+			}
+		}
+		if (summonitem.Appear == true)
+		{
+			if (summonitem.x_pos <= 0 || summonitem.y_pos > 765)
+				summonitem.Appear = false;
+			else
+			{
+				summonitem.Update(1.0);
+				summonitem.Jump();
+			}
+		}
+		
+		//마우스 좌표얻기
+		GetCursorPos(&pt);
+		//윈도우화면 마우스 좌표
+		ScreenToClient(hWnd, &pt);
+		//마우스 충돌 구현
+		if (machinegun == false) // gun_mode
+		{
+			effecting2 = false;
+			sound.SkillEnd();
+			if (remainbullet.GetCounter() > 0)
+			{
+				if (KEY_UP(VK_LBUTTON))
+				{
+					clock_t begin2;
+					begin2 = clock();
+					double i = 100;
+					double j = 1000;
+					double rst = 0.5;
+					if ((begin2 / i) - (begin2 / j) > rst)
+					{
+						remainbullet.isShooting = false;
+					}
+				}
+				//빗맞추면 콤보 0으로 초기화
+				if (effecting == true)
+				{
+					soldier.Show = false;
+					soldier2.Show = false;
+					combo2.SetNum(0);
+				}
+				if (KEY_DOWN(VK_LBUTTON) && remainbullet.isShooting == false)
+				{
+					hitCombo = false;
+					effecting = true;
+					remainbullet.isShooting = true;
+					remainbullet.SetCounter(remainbullet.GetCounter() - 1);
+					sound.Shot();
+					//enemy1 충돌처리
+					for (int i = 0; i < ENEMY1_NUM - dNum; i++)
+					{
+						if (pt.x >= lenemy1[i].x_pos && pt.x <= lenemy1[i].x_pos + (60 * (float)scale) && pt.y >= lenemy1[i].y_pos && pt.y <= lenemy1[i].y_pos + (86 * (float)scale))
+						{
+							sound.HitShot();
+							hitCombo = true;
+							effecting = false;
+							lenemy1[i].breaking = true;
+							lenemy1[i].init((float)(960 + rand() % 100), (float)(250 + rand() % 300));
+							combo2.init(800, 100);
+							combo2.SetNum(combo2.GetNum() + 1);
+							quest1 = false;
+							if(quest3 == false && quest4 == false)
+								quest2 = true;
+						}
+					}
+					//수류탄 아이템 충돌처리
+					if (pt.x >= summonitem.x_pos && pt.x <= summonitem.x_pos + 64 && pt.y >= summonitem.y_pos && pt.y <= summonitem.y_pos + 64)
+					{
+						sound.GrenadeGet();
+						hitCombo = true;
+						effecting = false;
+						summonitem.Appear = false;
+						summonitem.init(-10, 755);
+						combo2.init(800, 100);
+						combo2.SetNum(combo2.GetNum() + 1);
+						remaingrenade.SetCounter(remaingrenade.GetCounter() + 1);
+						quest2 = false;
+						quest3 = true;
+					}
+				}
+			}
+		}
+		else if (machinegun == true) // machine gun_mode, 아이템 소환 없음
+		{
+			sound.SkillSoundEnd();
+			summonitem.Appear = false;
+			summonitem2.Appear = false;
+			summonitem3.Appear = false;
+			sound.SkillShot();
+			if (KEY_UP(VK_LBUTTON))
+			{
+				effecting2 = true;
+				//enemy1 충돌처리
+				for (int i = 0; i < ENEMY1_NUM - dNum; i++)
+				{
+					if (pt.x >= lenemy1[i].x_pos && pt.x <= lenemy1[i].x_pos + (60 * (float)scale) && pt.y >= lenemy1[i].y_pos && pt.y <= lenemy1[i].y_pos + (86 * (float)scale))
+					{
+						sound.HitShot();
+						hitCombo = true;
+						effecting = false;
+						lenemy1[i].breaking = true;
+						lenemy1[i].init((float)(0 - rand() % 100), (float)(250 + rand() % 300));
+						combo2.SetNum(combo2.GetNum() + 1);
+						combo2.init(800, 100);
+					}
+				}
+			}
+		}
+	}
 	if (ingame == true)
 	{
 		
@@ -2433,7 +3350,7 @@ void Game::do_game_logic(void)
 
 		if (soldier2.Show == true) // 바주카병 소환시
 		{
-			//sound.SupportShoot();
+			sound.SupportShoot();
 			if (bazooka.show() == false) // 바주카볼이 없을떄
 			{
 				if (soldier2.Fire == true)// 바주카병 파이어일때
@@ -2443,7 +3360,7 @@ void Game::do_game_logic(void)
 				}
 			}
 		}
-		//if (soldier2.Show == false)sound.SupportShootEnd();
+		if (soldier2.Show == false)sound.SupportShootEnd();
 		//solider2의 바주카볼 처리
 		if (bazooka.show() == true)
 		{
@@ -2586,9 +3503,10 @@ void Game::do_game_logic(void)
 				lenemy2[i].appear = true;
 			}
 		}
-		else if (score.GetNum() >= 61)enemy3.appear = true;
-		else if (score.GetNum() >= 91)lenemy3.appear = true;
-		else if (score.GetNum() == 30)boss.Appear = true;
+		if (score.GetNum() >= 61)enemy3.appear = true;
+		if (score.GetNum() >= 91)lenemy3.appear = true;	
+		if(score.GetNum() == 121)boss.Appear = true;
+
 		//마우스 좌표얻기
 		GetCursorPos(&pt);
 		//윈도우화면 마우스 좌표
@@ -2821,11 +3739,9 @@ void Game::do_game_logic(void)
 						lenemy3.attack = true;
 						lenemy3.init((float)(0 - rand() % 100), (float)(300 + rand() % 100));
 					}
-					static int hp = 10;
 					//보스충돌
 					if (pt.x >= boss.x_pos && pt.x <= boss.x_pos + 100 && pt.y >= boss.y_pos && pt.y <= boss.y_pos + 96)
 					{
-						
 						hitCombo = true;
 						effecting = false;
 						sound.PlayerHit();
@@ -2837,7 +3753,7 @@ void Game::do_game_logic(void)
 						{
 							boss.init(-100, 0);
 							timer.x_pos += 30;
-							sound.Grenade();
+							sound.PlayerHit();
 							boss.breaking = true;
 							boss.Appear = false;
 						}
@@ -2928,6 +3844,25 @@ void Game::do_game_logic(void)
 					sound.Enemy3();
 					lenemy3.attack = true;
 					lenemy3.init((float)(940 + rand() % 100), (float)(300 + rand() % 100));
+				}
+				//보스충돌
+				if (pt.x >= boss.x_pos && pt.x <= boss.x_pos + 100 && pt.y >= boss.y_pos && pt.y <= boss.y_pos + 96)
+				{
+					hitCombo = true;
+					effecting = false;
+					sound.PlayerHit();
+					hp -= 1;
+					boss.hit = true;
+					combo.init(800, 100);
+					combo.SetNum(combo.GetNum() + 1);
+					if (hp == 0)
+					{
+						boss.init(-100, 0);
+						timer.x_pos += 30;
+						sound.PlayerHit();
+						boss.breaking = true;
+						boss.Appear = false;
+					}
 				}
 			}
 		}

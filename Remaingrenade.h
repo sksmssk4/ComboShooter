@@ -3,7 +3,7 @@
 class Remaingrenade
 {
 private:
-	int gCounter = 30;
+	int gCounter = 0;
 
 public:
 	bool isShooting = false;

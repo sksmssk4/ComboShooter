@@ -32,6 +32,37 @@ void Sound::bgmEnd()
 {
 	mciSendCommand(dwID, MCI_SEEK, MCI_SEEK_TO_START, (DWORD)(LPVOID)NULL);
 }
+//클리어 배경음
+void Sound::clearBgm()
+{
+	//배경음
+	mci_open6.lpstrElementName = L"Clear.mp3";
+	mci_open6.lpstrDeviceType = L"MPEGvideo";//wav 파일일 경우 WaveAudio
+											//배경음 재생
+	mciSendCommand(NULL, MCI_OPEN, MCI_OPEN_ELEMENT | MCI_OPEN_TYPE, (DWORD)(LPVOID)&mci_open6);
+	dwID6 = mci_open6.wDeviceID;
+	mciSendCommand(dwID6, MCI_PLAY, MCI_DGV_PLAY_REPEAT, (DWORD)(LPVOID)&mci_play6); // MCI_NOTIFY (루프하지않음)																			   //음악재생끄기//mciSendCommand(3, MCI_SEEK, MCI_SEEK_TO_START, (DWORD)(LPVOID)NULL);
+}
+void Sound::clearBgmEnd()
+{
+	mciSendCommand(dwID6, MCI_SEEK, MCI_SEEK_TO_START, (DWORD)(LPVOID)NULL);
+}
+
+void Sound::Cytus()
+{
+	//배경음
+	mci_open7.lpstrElementName = L"Cytus.mp3";
+	mci_open7.lpstrDeviceType = L"MPEGvideo";//wav 파일일 경우 WaveAudio
+											 //배경음 재생
+	mciSendCommand(NULL, MCI_OPEN, MCI_OPEN_ELEMENT | MCI_OPEN_TYPE, (DWORD)(LPVOID)&mci_open7);
+	dwID7 = mci_open7.wDeviceID;
+	mciSendCommand(dwID7, MCI_PLAY, MCI_DGV_PLAY_REPEAT, (DWORD)(LPVOID)&mci_play7); // MCI_NOTIFY (루프하지않음)																			   //음악재생끄기//mciSendCommand(3, MCI_SEEK, MCI_SEEK_TO_START, (DWORD)(LPVOID)NULL);
+}
+void Sound::CytusEnd()
+{
+	mciSendCommand(dwID7, MCI_SEEK, MCI_SEEK_TO_START, (DWORD)(LPVOID)NULL);
+}
+
 //허공샷
 void Sound::Shot()
 {

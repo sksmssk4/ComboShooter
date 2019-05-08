@@ -27,11 +27,21 @@ private:
 	MCI_PLAY_PARMS mci_play5; // 지원사격
 	int dwID5; // 지원사격
 
+	MCI_OPEN_PARMS mci_open6; // 클리어배경음
+	MCI_PLAY_PARMS mci_play6; // 클리어배경음
+	int dwID6; // 클리어배경음
+
+	MCI_OPEN_PARMS mci_open7; 
+	MCI_PLAY_PARMS mci_play7; 
+	int dwID7; 
+
 public:
 	void startBgm();
 	void startBgmEnd();
 	void Bgm();
 	void bgmEnd();
+	void clearBgm();
+	void clearBgmEnd();
 	void Enemy3();
 	void Shot();
 	void HitShot();
@@ -51,6 +61,7 @@ public:
 	void GrenadeGet();
 	void SupportShoot();
 	void SupportShootEnd();
-	
+	void Cytus();
+	void CytusEnd();
 };
 #endif
